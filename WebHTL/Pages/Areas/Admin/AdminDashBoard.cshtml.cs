@@ -5,8 +5,13 @@ namespace WebHTL.Pages.Areas.Admin
 {
     public class AdminDashBoardModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("./SignIn");
+            }
+            return Page();
         }
     }
 }
