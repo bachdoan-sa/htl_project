@@ -1,4 +1,8 @@
 using Repository.ApplicationDbContext;
+using Repository.Repositories;
+using Repository.Repositories.IRepositories;
+using Repository.Services;
+using Repository.Services.IServices;
 
 namespace WebHTL
 {
@@ -9,8 +13,11 @@ namespace WebHTL
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<AppDbContext>();
             builder.Services.AddSession();
             builder.Services.AddRazorPages(options => options.Conventions.AddPageRoute("/HomePage", ""));
+            builder.Services.AddScoped<IRoadmapService, RoadmapService>();
+            builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

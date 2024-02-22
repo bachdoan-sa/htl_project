@@ -1,7 +1,7 @@
 ﻿@page
-@model WebHTL.Pages.Areas.Admin.UserManagerModel
-
-
+@model WebHTL.Pages.Areas.Admin.RoadMapManagerModel
+@{
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,7 +110,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                                    aria-expanded="false">
-                                    <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
+                                    <img src="~/assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                                     <div class="message-body">
@@ -138,7 +138,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">User Manager</h5>
+                        <h5 class="card-title fw-semibold mb-4">Roadmap Manager</h5>
                     </div>
                 </div>
 
@@ -148,21 +148,28 @@
                             <table id="myTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Gender</th>
-                                        <th>Age</th>
+                                        <th>Title</th>
+                                        <th>RoadmapGoal</th>
+                                        <th>RoadmapType</th>
+                                        <th>Language</th>
+                                        <th></th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>male</td>
-                                        <td>61</td>
-
-                                    </tr>
+                                    @foreach (var roadmap in Model.Roadmaps)
+                                    {
+                                        <tr>
+                                            <td>@roadmap.Title</td>
+                                            <td>@roadmap.RoadmapGoal</td>
+                                            <td>@roadmap.RoadmapType</td>
+                                            <td>@roadmap.Language</td>
+                                            
+                                            <td>
+                                                <a asp-page="./Update" asp-route-id="@roadmap.Id">Update</a>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
