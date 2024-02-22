@@ -12,10 +12,12 @@ namespace Repository.Services.IServices
     {
         // Repo template: Chỉ nhận về model hoặc biến và trả về entity hoặc biến
         // Nếu dùng model thì phải chuyển về model trước khi vào repo
+        
         Task<AccountModel> GetById(string id);
         Task<List<AccountModel>> GetAll();
         Task<AccountModel> Add(AccountModel model);
         Task<AccountModel> Update(AccountModel model);
         Task<string> Delete(string id);
+        Task<Account> Login(string username, string password);
     }
 }

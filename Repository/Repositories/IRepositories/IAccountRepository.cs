@@ -1,4 +1,5 @@
 ﻿using Repository.Entities;
+using Repository.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Repository.Repositories.IRepositories
     {
         // Repo template: Chỉ nhận về entity hoặc biến và trả về entity hoặc biến
         // Nếu dùng model thì phải chuyển về model trước khi vào repo
+        Task<Account> GetByEmail(string email);
         Task<Account> GetById(string id);
         Task<List<Account>> GetAll();
         Task<Account> Add(Account roadmap);

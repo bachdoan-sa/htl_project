@@ -1,4 +1,5 @@
-﻿using Microsoft.Identity.Client;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using Repository.ApplicationDbContext;
 using Repository.Entities;
 using Repository.Repositories.IRepositories;
@@ -19,11 +20,17 @@ namespace Repository.Repositories
         }
         public Task<Account> GetById(string id)
         {
-            throw new NotImplementedException();
+            var acc = _context.Accounts.Where(_ => _.Id == id).FirstOrDefaultAsync();
+            if(acc.Result != null)
+            {
+                return acc;
+                
+            }
+            throw new Exception("NotFound!");
         }
         public Task<List<Account>> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Accounts.ToListAsync();
         }
         public Task<Account> Add(Account account)
         {
@@ -50,6 +57,16 @@ namespace Repository.Repositories
 
             return Task.FromResult(entity.Id);
         }
-        
+
+        public Task<Account> GetByEmail(string email)
+        {
+            var acc = _context.Accounts.Where(_ => _.Email == email).FirstOrDefaultAsync().Result;
+            if (acc != null)
+            {
+                return Task.FromResult(acc);
+
+            }
+            throw new Exception("NotFound!");
+        }
     }
 }
