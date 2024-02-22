@@ -50,5 +50,15 @@ namespace Repository.Services
         {
             return _accountRepository.Delete(id);
         }
+
+        public Task<Account> Login(string email, string password)
+        {
+            var acc = _accountRepository.GetByEmail(email).Result;
+            if(acc.Password != password)
+            {
+                throw new Exception("Invalid Email or Password.");
+            }
+            return Task.FromResult(acc);
+        }
     }
 }

@@ -1,14 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Repository.Services.IServices;
 
 namespace WebHTL.Pages
 {
     public class SignInModel : PageModel
     {
+        private readonly IAccountService _accountService;
         public readonly IConfiguration _config;
-        public SignInModel(IConfiguration config)
+        public SignInModel(IConfiguration config, IAccountService accountService)
         {
             _config = config;
+            _accountService = accountService;
         }
         public void OnGet()
         {
@@ -17,6 +20,8 @@ namespace WebHTL.Pages
         public string email { get; set; } = default!;
         [BindProperty]
         public string password { get; set; } = default!;
+        [BindProperty]
+        public string Message { get; set; } = default!;
         public IActionResult OnPost()
         {
             var adminAcc = _config["AdminAccount:Admin"];
@@ -26,6 +31,16 @@ namespace WebHTL.Pages
                 HttpContext.Session.SetString("Admin", email);
                 return RedirectToPage("./Areas/Admin/AdminDashBoard");
             }
+            try
+            {
+                _accountService.Login(email, password);
+            }
+            catch (Exception ex)
+            {
+                return Page();
+                Message = ex.Message;
+            }
+
             return Page();
         }
 
