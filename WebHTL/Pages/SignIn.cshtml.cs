@@ -34,14 +34,15 @@ namespace WebHTL.Pages
             try
             {
                 _accountService.Login(email, password);
+                HttpContext.Session.SetString("Customer", email);
+                return RedirectToPage("./HomePage");
             }
             catch (Exception ex)
             {
-                return Page();
                 Message = ex.Message;
+                return Page();
+                
             }
-
-            return Page();
         }
 
     }
