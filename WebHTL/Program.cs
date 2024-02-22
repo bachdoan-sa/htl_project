@@ -3,6 +3,7 @@ using Repository.Repositories;
 using Repository.Repositories.IRepositories;
 using Repository.Services;
 using Repository.Services.IServices;
+using WebHTL.Extensions;
 
 namespace WebHTL
 {
@@ -15,9 +16,18 @@ namespace WebHTL
             // Add services to the container.
             builder.Services.AddDbContext<AppDbContext>();
             builder.Services.AddSession();
-            builder.Services.AddRazorPages(options => options.Conventions.AddPageRoute("/HomePage", ""));
-            builder.Services.AddScoped<IRoadmapService, RoadmapService>();
+            // Add AutoMapper
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
+            builder.Services.AddAutoMapperServices();
+
+            builder.Services.AddRazorPages(options => options.Conventions.AddPageRoute("/HomePage", "")); 
+            
             builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
+            builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+
+            builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<IRoadmapService, RoadmapService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
