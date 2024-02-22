@@ -40,14 +40,17 @@ namespace Repository.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(string id)
+        public Task DeleteAsync(string id)
         {
-            var roadmap = await GetByIdAsync(id);
-            if (roadmap != null)
+            var entity = _context.Roadmaps.Where(_ => _.Id.Equals(id)).FirstOrDefault();
+            if (entity == null)
             {
-                _context.Roadmaps.Remove(roadmap);
-                await _context.SaveChangesAsync();
+                throw new Exception("Not Found!");
             }
+            entity.DeleteDate = DateTime.Now;
+            _context.SaveChanges();
+
+            return Task.FromResult(entity.Id);
         }
     }
 }
