@@ -15,12 +15,8 @@ namespace Repository.Entities
         public string OrderStatus { get; set; }
 
         [Required]
-        public string OrderDetailId { get; set; }
-        [Required]
         public string AccountId { get; set; }
 
-        [ForeignKey(nameof(OrderDetailId))]
-        public virtual OrderDetail OrderDetail { get; set; }
         [ForeignKey(nameof(AccountId))]
         public virtual Account Account { get; set; }
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
