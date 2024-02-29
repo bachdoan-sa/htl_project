@@ -24,9 +24,11 @@ namespace WebHTL
             
             builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
             builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+            builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IRoadmapService, RoadmapService>();
+            builder.Services.AddScoped<ICourseService, CourseService>();
 
             var app = builder.Build();
 

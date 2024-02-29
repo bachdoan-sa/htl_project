@@ -158,18 +158,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var roadmap in Model.Roadmaps)
+                                    @if (Model.Roadmaps == null || !Model.Roadmaps.Any())
                                     {
                                         <tr>
-                                            <td>@roadmap.Title</td>
-                                            <td>@roadmap.RoadmapGoal</td>
-                                            <td>@roadmap.RoadmapType</td>
-                                            <td>@roadmap.Language</td>
-                                            
-                                            <td>
-                                                <a asp-page="./Update" asp-route-id="@roadmap.Id">Update</a>
-                                            </td>
+                                            <td colspan="6">No Roadmaps available.</td>
                                         </tr>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var roadmap in Model.Roadmaps)
+                                        {
+                                            <tr>
+                                                <td>@roadmap.Title</td>
+                                                <td>@roadmap.RoadmapGoal</td>
+                                                <td>@roadmap.RoadmapType</td>
+                                                <td>@roadmap.Language</td>
+                                                <td>
+                                                    <a asp-page="./View" asp-route-id="@roadmap.Id">View</a> |
+                                                    <a asp-page="./Update" asp-route-id="@roadmap.Id">Update</a> |
+                                                    <a  asp-route-id="@roadmap.Id">Delete</a>
+                                                </td>
+
+                                            </tr>
+                                        }
                                     }
                                 </tbody>
                             </table>

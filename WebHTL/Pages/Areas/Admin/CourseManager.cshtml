@@ -151,20 +151,40 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Loại</th>
-                                        <th>Thông tin khóa học</th>
-                                        <th>Trạng thái</th>
+                                        <th>Type</th>
+                                        <th>Type Of Learning</th>
+                                        <th>Created Time</th>
+                                        <th>Last Update</th>
+                                        <th></th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td> Giáo viên I</td>
-                                        <td>Video</td>
-                                        <td>khóa học căn bản Giáo viên I</td>
-                                        <td>Hiện</td>
-
-                                    </tr>
+                                    @if (Model.Courses == null || !Model.Courses.Any())
+                                    {
+                                        <tr>
+                                            <td colspan="6">No courses available.</td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var course in Model.Courses)
+                                        {
+                                            <tr>
+                                                <td>@course.CourseName</td>
+                                                <td>@course.Type</td>
+                                                <td>@course.TypeOfLearning</td>
+                                                <td>@course.CreatedTime</td>
+                                                <td>@course.LastUpdated</td>
+                                                
+                                                <td>
+                                                    <a asp-page="./View" asp-route-id="@course.Id">View</a> |
+                                                    <a asp-page="./Update" asp-route-id="@course.Id">Update</a> |
+                                                    <a asp-route-id="@course.Id">Delete</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
                                 </tbody>
                             </table>
                         </div>

@@ -18,36 +18,47 @@ namespace Repository.Repositories
         { 
             _context = context;
         }
-        public async Task<Roadmap> GetByIdAsync(string id)
+        public Task<Roadmap> GetById(string id)
         {
-            return await _context.Roadmaps.FindAsync(id);
+            var acc = _context.Roadmaps.Where(_ => _.Id == id).FirstOrDefaultAsync();
+            if (acc.Result != null)
+            {
+                return acc;
+
+            }
+            throw new Exception("NotFound!");
         }
 
-        public async Task<List<Roadmap>> GetAllAsync()
+        public  Task<List<Roadmap>> GetAll()
         {
-            return await _context.Roadmaps.ToListAsync();
+            return _context.Roadmaps.ToListAsync();
         }
 
-        public async Task AddAsync(Roadmap roadmap)
+        public  Task<Roadmap> Add(Roadmap roadmap)
         {
             _context.Roadmaps.Add(roadmap);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
+            return Task.FromResult(roadmap);
         }
 
-        public async Task UpdateAsync(Roadmap roadmap)
+        public Task<Roadmap> Update(Roadmap roadmap)
         {
-            _context.Entry(roadmap).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            _context.Roadmaps.Update(roadmap);
+            _context.SaveChanges();
+            return Task.FromResult(roadmap);
         }
 
-        public async Task DeleteAsync(string id)
+        public Task Delete(string id)
         {
-            var roadmap = await GetByIdAsync(id);
-            if (roadmap != null)
+            var entity = _context.Roadmaps.Where(_ => _.Id.Equals(id)).FirstOrDefault();
+            if (entity == null)
             {
-                _context.Roadmaps.Remove(roadmap);
-                await _context.SaveChangesAsync();
+                throw new Exception("Not Found!");
             }
+            entity.DeleteDate = DateTime.Now;
+            _context.SaveChanges();
+
+            return Task.FromResult(entity.Id);
         }
     }
 }

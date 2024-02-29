@@ -1,0 +1,24 @@
+﻿@page
+@model WebHTL.Pages.Areas.Admin.OrderDetail.CreateModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="card">
+        <div class="card-title">
+            <h4>Create Role</h4>
+        </div>
+        <div class="card-body">
+            <div class="basic-form">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="RoleName">Role Name</label>
+                        <input asp-for="RoleName" type="text" class="form-control" placeholder="Role Name">
+                    </div>
+                    <input class="btn btn-default" value="Submit" type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
