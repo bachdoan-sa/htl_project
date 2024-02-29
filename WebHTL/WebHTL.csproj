@@ -58,8 +58,6 @@
 		<None Include="wwwroot\lib\jquery\dist\jquery.js" />
 		<None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
 		<None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
-		<Folder Include="Pages\Areas\Admin\" />		
-		<Folder Include="Pages\Areas\" />
 	</ItemGroup>
 
 </Project>
