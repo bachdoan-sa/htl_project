@@ -313,10 +313,6 @@ namespace Repository.Migrations
                     b.Property<DateTimeOffset>("LastUpdated")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("OrderDetailId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("OrderStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -327,8 +323,6 @@ namespace Repository.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");
-
-                    b.HasIndex("OrderDetailId");
 
                     b.ToTable("Orders");
                 });
@@ -356,16 +350,17 @@ namespace Repository.Migrations
 
                     b.Property<string>("OrderDetailStatus")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DriverId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderDetailStatus");
 
                     b.ToTable("OrderDetails");
                 });
@@ -538,15 +533,7 @@ namespace Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Repository.Entities.OrderDetail", "OrderDetail")
-                        .WithMany()
-                        .HasForeignKey("OrderDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Account");
-
-                    b.Navigation("OrderDetail");
                 });
 
             modelBuilder.Entity("Repository.Entities.OrderDetail", b =>
@@ -557,11 +544,15 @@ namespace Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Repository.Entities.Order", null)
+                    b.HasOne("Repository.Entities.Order", "Order")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("OrderDetailStatus")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Driver");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Repository.Entities.Roadmap", b =>

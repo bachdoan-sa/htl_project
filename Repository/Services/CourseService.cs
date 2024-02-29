@@ -1,4 +1,6 @@
-﻿using Repository.Entities;
+﻿using AutoMapper;
+using Repository.Entities;
+using Repository.Model;
 using Repository.Repositories;
 using Repository.Repositories.IRepositories;
 using Repository.Services.IServices;
@@ -13,35 +15,44 @@ namespace Repository.Services
     public class CourseService : ICourseService
     {
         private readonly ICourseRepository _courseRepository;
-
-        public CourseService(ICourseRepository courseRepository)
+        private readonly IMapper _mapper;
+        public CourseService(ICourseRepository courseRepository,IMapper mapper)
         {
             _courseRepository = courseRepository;
+            _mapper = mapper;
         }
 
-        public Task<Course> Add(Course course)
+        public Task<CourseModel> Add(CourseModel model)
         {
-            throw new NotImplementedException();
+            var entity = _mapper.Map<Course>(model);
+            var result = _mapper.Map<CourseModel>(_courseRepository.Add(entity).Result);
+
+            return Task.FromResult(result);
         }
 
         public Task<string> Delete(string id)
         {
-            throw new NotImplementedException();
+            return _courseRepository.Delete(id);
         }
 
-        public Task<List<Course>> GetAll()
+        public Task<List<CourseModel>> GetAll()
         {
-            return _courseRepository.GetAll();
+            var list = _courseRepository.GetAll().Result;
+            return Task.FromResult(_mapper.Map<List<CourseModel>>(list));
         }
 
-        public Task<Course> GetById(string id)
+        public Task<CourseModel> GetById(string id)
         {
-            throw new NotImplementedException();
+            var list = _courseRepository.GetById(id).Result;
+            return Task.FromResult(_mapper.Map<CourseModel>(list));
         }
 
-        public Task<Course> Update(Course model)
+        public Task<CourseModel> Update(CourseModel model)
         {
-            throw new NotImplementedException();
+            var entity = _mapper.Map<Course>(model);
+            var result = _mapper.Map<CourseModel>(_courseRepository.Update(entity).Result);
+
+            return Task.FromResult(result);
         }
     }
 }

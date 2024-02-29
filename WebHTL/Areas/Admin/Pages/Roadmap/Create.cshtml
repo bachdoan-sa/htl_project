@@ -1,0 +1,45 @@
+﻿@page
+@model WebHTL.Pages.Areas.Admin.Roadmap.CreateModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="card">
+        <div class="card-title">
+            <h4>Create Role</h4>
+        </div>
+        <div class="card-body">
+            <div class="basic-form">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="NewRoadmap.Title"></label>
+                        <input asp-for="NewRoadmap.Title" class="form-control" required />
+                        <span asp-validation-for="NewRoadmap.Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewRoadmap.RoadmapGoal"></label>
+                        <input asp-for="NewRoadmap.RoadmapGoal" class="form-control" required />
+                        <span asp-validation-for="NewRoadmap.RoadmapGoal" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewRoadmap.RoadmapType"></label>
+                        <input asp-for="NewRoadmap.RoadmapType" class="form-control" required />
+                        <span asp-validation-for="NewRoadmap.RoadmapType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewRoadmap.Language"></label>
+                        <input asp-for="NewRoadmap.Language" class="form-control" required />
+                        <span asp-validation-for="NewRoadmap.Language" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewRoadmap.CareerId"></label>
+                        <input asp-for="NewRoadmap.CareerId" class="form-control" required />
+                        <span asp-validation-for="NewRoadmap.CareerId" class="text-danger"></span>
+                    </div>
+                    <input class="btn btn-default" value="Submit" type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

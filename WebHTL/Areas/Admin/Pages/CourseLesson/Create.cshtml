@@ -1,0 +1,35 @@
+﻿@page
+@model WebHTL.Pages.Areas.Admin.CourseLesson.CreateModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="card">
+        <div class="card-title">
+            <h4>Create Role</h4>
+        </div>
+        <div class="card-body">
+            <div class="basic-form">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="NewLesson.LessonName"></label>
+                        <input asp-for="NewLesson.LessonName" class="form-control" required />
+                        <span asp-validation-for="NewLesson.LessonName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewLesson.LessonTarget"></label>
+                        <input asp-for="NewLesson.LessonTarget" class="form-control" required />
+                        <span asp-validation-for="NewLesson.LessonTarget" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewLesson.LessonURL"></label>
+                        <input asp-for="NewLesson.LessonURL" class="form-control" required />
+                        <span asp-validation-for="NewLesson.LessonURL" class="text-danger"></span>
+                    </div>
+                    <input class="btn btn-default" value="Submit" type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

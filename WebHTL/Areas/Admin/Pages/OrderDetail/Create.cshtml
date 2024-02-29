@@ -1,0 +1,35 @@
+﻿@page
+@model WebHTL.Pages.Areas.Admin.OrderDetail.CreateModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="card">
+        <div class="card-title">
+            <h4>Create Role</h4>
+        </div>
+        <div class="card-body">
+            <div class="basic-form">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="NewOrderDetail.OrderDetailStatus"></label>
+                        <input asp-for="NewOrderDetail.OrderDetailStatus" class="form-control" required />
+                        <span asp-validation-for="NewOrderDetail.OrderDetailStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewOrderDetail.Cost"></label>
+                        <input asp-for="NewOrderDetail.Cost" class="form-control" required />
+                        <span asp-validation-for="NewOrderDetail.Cost" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewOrderDetail.DriverId"></label>
+                        <input asp-for="NewOrderDetail.DriverId" class="form-control" required />
+                        <span asp-validation-for="NewOrderDetail.DriverId" class="text-danger"></span>
+                    </div>
+                    <input class="btn btn-default" value="Submit" type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

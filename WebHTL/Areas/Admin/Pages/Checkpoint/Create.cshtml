@@ -1,0 +1,45 @@
+﻿@page
+@model WebHTL.Pages.Areas.Admin.Checkpoint.CreateModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="card">
+        <div class="card-title">
+            <h4>Create Role</h4>
+        </div>
+        <div class="card-body">
+            <div class="basic-form">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="NewCheckpoint.Titel"></label>
+                        <input asp-for="NewCheckpoint.Titel" class="form-control" required />
+                        <span asp-validation-for="NewCheckpoint.Titel" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCheckpoint.Position"></label>
+                        <input asp-for="NewCheckpoint.Position" class="form-control" required />
+                        <span asp-validation-for="NewCheckpoint.Position" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCheckpoint.Date"></label>
+                        <input asp-for="NewCheckpoint.Date" type="date" class="form-control" required />
+                        <span asp-validation-for="NewCheckpoint.Date" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCheckpoint.LearningTime"></label>
+                        <input asp-for="NewCheckpoint.LearningTime" class="form-control" required />
+                        <span asp-validation-for="NewCheckpoint.LearningTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCheckpoint.DriverId"></label>
+                        <input asp-for="NewCheckpoint.DriverId" class="form-control" required />
+                        <span asp-validation-for="NewCheckpoint.DriverId" class="text-danger"></span>
+                    </div>
+                    <input class="btn btn-default" value="Submit" type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

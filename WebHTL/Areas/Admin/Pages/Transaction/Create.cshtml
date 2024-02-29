@@ -1,0 +1,40 @@
+﻿@page
+@model WebHTL.Pages.Areas.Admin.Transaction.CreateModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="card">
+        <div class="card-title">
+            <h4>Create Role</h4>
+        </div>
+        <div class="card-body">
+            <div class="basic-form">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="NewTransaction.PaymentMethod"></label>
+                        <input asp-for="NewTransaction.PaymentMethod" class="form-control" required />
+                        <span asp-validation-for="NewTransaction.PaymentMethod" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewTransaction.Amount"></label>
+                        <input asp-for="NewTransaction.Amount" class="form-control" required />
+                        <span asp-validation-for="NewTransaction.Amount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewTransaction.TransactionStatus"></label>
+                        <input asp-for="NewTransaction.TransactionStatus" class="form-control" required />
+                        <span asp-validation-for="NewTransaction.TransactionStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewTransaction.Message"></label>
+                        <input asp-for="NewTransaction.Message" class="form-control" required />
+                        <span asp-validation-for="NewTransaction.Message" class="text-danger"></span>
+                    </div>
+                    <input class="btn btn-default" value="Submit" type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

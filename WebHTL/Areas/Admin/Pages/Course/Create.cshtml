@@ -1,0 +1,55 @@
+﻿@page
+@model WebHTL.Pages.Areas.Admin.Course.CreateModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="card">
+        <div class="card-title">
+            <h4>Create Role</h4>
+        </div>
+        <div class="card-body">
+            <div class="basic-form">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="NewCourse.CourseName"></label>
+                        <input asp-for="NewCourse.CourseName" class="form-control" required />
+                        <span asp-validation-for="NewCourse.CourseName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCourse.TypeOfLearning"></label>
+                        <input asp-for="NewCourse.TypeOfLearning" class="form-control" required />
+                        <span asp-validation-for="NewCourse.TypeOfLearning" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCourse.Type"></label>
+                        <input asp-for="NewCourse.Type" class="form-control" required />
+                        <span asp-validation-for="NewCourse.Type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCourse.CourseInformation"></label>
+                        <input asp-for="NewCourse.CourseInformation" class="form-control" required />
+                        <span asp-validation-for="NewCourse.CourseInformation" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCourse.CourseStatus"></label>
+                        <input asp-for="NewCourse.CourseStatus" class="form-control" required />
+                        <span asp-validation-for="NewCourse.CourseStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCourse.DefaultImage"></label>
+                        <input asp-for="NewCourse.DefaultImage" class="form-control" required />
+                        <span asp-validation-for="NewCourse.DefaultImage" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCourse.Level"></label>
+                        <input asp-for="NewCourse.Level" class="form-control" required />
+                        <span asp-validation-for="NewCourse.Level" class="text-danger"></span>
+                    </div>
+                    <input class="btn btn-default" value="Submit" type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
