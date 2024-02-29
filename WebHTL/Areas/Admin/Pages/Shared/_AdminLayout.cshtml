@@ -1,8 +1,6 @@
-﻿@using Microsoft.AspNetCore.Http.Extensions;
+﻿<!DOCTYPE html>
 
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,13 +9,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/admin/assets/images/favicon.png">
-    <title>Ela - Bootstrap Admin Dashboard Template</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="~/admin/assets/images/favicon.png">
+    <title>@ViewBag.Title</title>
     <!-- Bootstrap Core CSS -->
-    <link href="/admin/assets/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="~/admin/assets/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="/admin/assets/css/helper.css" rel="stylesheet">
-    <link href="/admin/assets/css/style.css" rel="stylesheet">
+    @RenderSection("head",false)
+    <link href="~/admin/assets/css/helper.css" rel="stylesheet">
+    <link href="~/admin/assets/css/style.css" rel="stylesheet">
+
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
@@ -25,15 +27,13 @@
         <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
-<body class="fix-sidebar">
+<body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
         </svg>
     </div>
-    <!-- Main wrapper  -->
     <div id="main-wrapper">
         <!-- header header  -->
         <div class="header">
@@ -42,10 +42,10 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo icon -->
-                        <b><img src="/admin/assets/images/logo.png" alt="homepage" class="dark-logo" /></b>
+                        <b><img src="~/admin/assets/images/logo.png" alt="homepage" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="/admin/assets/images/logo-text.png" alt="homepage" class="dark-logo" /></span>
+                        <span><img src="~/admin/assets/images/logo-text.png" alt="homepage" class="dark-logo" /></span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -191,28 +191,28 @@
                                         <div class="message-center">
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="/admin/assets/images/users/5.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                                                <div class="user-img"> <img src="~/admin/assets/images/users/5.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
                                                 <div class="mail-contnet">
                                                     <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span>
                                                 </div>
                                             </a>
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="/admin/assets/images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
+                                                <div class="user-img"> <img src="~/admin/assets/images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
                                                 <div class="mail-contnet">
                                                     <h5>John Doe</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span>
                                                 </div>
                                             </a>
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="/admin/assets/images/users/3.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
+                                                <div class="user-img"> <img src="~/admin/assets/images/users/3.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
                                                 <div class="mail-contnet">
                                                     <h5>Mr. John</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
                                                 </div>
                                             </a>
                                             <!-- Message -->
                                             <a href="#">
-                                                <div class="user-img"> <img src="/admin/assets/images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
+                                                <div class="user-img"> <img src="~/admin/assets/images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
                                                 <div class="mail-contnet">
                                                     <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
                                                 </div>
@@ -228,7 +228,9 @@
                         <!-- End Messages -->
                         <!-- Profile -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/5.jpg" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="~/admin/assets/images/users/5.jpg" alt="user" class="profile-pic" />
+                            </a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
                                     <li><a href="#"><i class="ti-user"></i> Profile</a></li>
@@ -284,52 +286,59 @@
                         </li>
                         <li class="nav-label">Features</li>
                         <li>
-                            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Bootstrap UI <span class="label label-rouded label-warning pull-right">6</span></span></a>
+                            <a class="has-arrow  " href="#" aria-expanded="false">
+                                <i class="fa fa-user"></i>
+                                <span class="hide-menu">
+                                    Accounts
+                                    @*<span class="label label-rouded label-warning pull-right">
+                                    6
+                                    </span>*@
+                                </span>
+                            </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="ui-alert.html">Alert</a></li>
-                                <li><a href="ui-button.html">Button</a></li>
-                                <li><a href="ui-dropdown.html">Dropdown</a></li>
-                                <li><a href="ui-progressbar.html">Progressbar</a></li>
-                                <li><a href="ui-tab.html">Tab</a></li>
-                                <li><a href="ui-typography.html">Typography</a></li>
+                                <li><a href="~/Admin/Account/Index">User</a></li>
+                                <li><a href="~/Admin/Transaction/Index">Transaction</a></li>
+                                <li><a href="~/Admin/Wallet/Index">Wallet</a></li>
+                                <li><a href="~/Admin/Role/Index">Role</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Components <span class="label label-rouded label-danger pull-right">6</span></span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false">
+                                <i class="fa fa-suitcase"></i>
+                                <span>
+                                    Auctions
+                                </span>
+                            </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="uc-calender.html">Calender</a></li>
-                                <li><a href="uc-datamap.html">Datamap</a></li>
-                                <li><a href="uc-nestedable.html">Nestedable</a></li>
-                                <li><a href="uc-sweetalert.html">Sweetalert</a></li>
-                                <li><a href="uc-toastr.html">Toastr</a></li>
-                                <li><a href="uc-weather.html">Weather</a></li>
+                                <li><a href="~/Admin/AuctionEvent/Index">Auction Event</a></li>
+                                <li><a href="~/Admin/AuctionState/Index">Auction State</a></li>
+                                <li><a href="~/Admin/DealHanger/Index">Deal Hanger</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false">
+                                <i class="fa fa-money"></i>
+                                <span>
+                                    Orders
+                                </span>
+                            </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="form-basic.html">Basic Forms</a></li>
-                                <li><a href="form-layout.html">Form Layout</a></li>
-                                <li><a href="form-validation.html">Form Validation</a></li>
-                                <li><a href="form-editor.html">Editor</a></li>
-                                <li><a href="form-dropzone.html">Dropzone</a></li>
+                                <li><a href="~/Admin/AuctionEvent/Index">Order</a></li>
+                                <li><a href="~/Admin/AuctionState/Index">Order Detail</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
+                            <a class="has-arrow" href="#" aria-expanded="false">
+                                <i class="fa fa-tree"></i>
+                                <span>
+                                    Orchids
+                                </span>
+                            </a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="table-bootstrap.html">Basic Tables</a></li>
-                                <li><a href="table-datatable.html">Data Tables</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-label">Layout</li>
-                        <li>
-                            <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-columns"></i><span class="hide-menu">Layout</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="layout-blank.html">Blank</a></li>
-                                <li><a href="layout-boxed.html">Boxed</a></li>
-                                <li><a href="layout-fix-header.html">Fix Header</a></li>
-                                <li><a href="layout-fix-sidebar.html">Fix Sidebar</a></li>
+                                <li><a href="~/Admin/Orchid/Index">Orchid</a></li>
+                                <li><a href="~/Admin/OrchidCategory/Index">Orchid Category</a></li>
+                                <li><a href="~/Admin/OrchidMutation/Index">Orchid Mutation</a></li>
+                                <li><a href="~/Admin/Mutation/Index">Mutation</a></li>
                             </ul>
                         </li>
                         <li class="nav-label">EXTRA</li>
@@ -389,27 +398,48 @@
         </div>
         <!-- End Left Sidebar  -->
         <!-- Page wrapper  -->
-        <div class="container-fluid">
-            @RenderBody();
+        <div class="page-wrapper" style="height:1200px;">
+            <!-- Bread crumb -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-primary">Dashboard</h3>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- End Bread crumb -->
+            <!-- Container fluid  -->
+            <div class="container-fluid">
+                <!-- Start Page Content -->
+                @RenderBody()
+                <!-- End PAge Content -->
+            </div>
+            <!-- End Container fluid  -->
+            <!-- footer -->
+            <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+            <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->
     </div>
-    @RenderSection("scripts",required:false)
-    <!-- End Wrapper -->
+
     <!-- All Jquery -->
-    <script src="/admin/assets/js/lib/jquery/jquery.min.js"></script>
+    <script src="~/admin/assets/js/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="/admin/assets/js/lib/bootstrap/js/popper.min.js"></script>
-    <script src="/admin/assets/js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/admin/assets/js/lib/bootstrap/js/popper.min.js"></script>
+    <script src="~/admin/assets/js/lib/bootstrap/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="/admin/assets/js/jquery.slimscroll.js"></script>
+    <script src="~/admin/assets/js/jquery.slimscroll.js"></script>
     <!--Menu sidebar -->
-    <script src="/admin/assets/js/sidebarmenu.js"></script>
+    <script src="~/admin/assets/js/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="/admin/assets/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="~/admin/assets/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <!--Custom JavaScript -->
-    <script src="/admin/assets/js/custom.min.js"></script>
-
+    <script src="~/admin/assets/js/custom.min.js"></script>
+    <!--Addition JavaScript-->
+    @RenderSection("scripts",false)
 </body>
-
 </html>
