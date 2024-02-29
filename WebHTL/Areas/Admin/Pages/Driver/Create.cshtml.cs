@@ -35,7 +35,7 @@ namespace WebHTL.Pages.Areas.Admin.Driver
                 if (result != null)
                 {
                     // Redirect to a success page or another page as needed
-                    return RedirectToPage("/Admin/Driver/Index");
+                    return Redirect("/Admin/Driver/Index");
                 }
                 else
                 {

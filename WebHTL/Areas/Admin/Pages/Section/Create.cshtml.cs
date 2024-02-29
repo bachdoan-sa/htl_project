@@ -35,7 +35,7 @@ namespace WebHTL.Pages.Areas.Admin.Section
                 if (result != null)
                 {
                     // Redirect to a success page or another page as needed
-                    return RedirectToPage("/Admin/Section/Index");
+                    return Redirect("/Admin/Section/Index");
                 }
                 else
                 {

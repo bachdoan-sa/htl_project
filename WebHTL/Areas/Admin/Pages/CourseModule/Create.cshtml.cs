@@ -35,7 +35,7 @@ namespace WebHTL.Pages.Areas.Admin.CourseModule
                 if (result != null)
                 {
                     // Redirect to a success page or another page as needed
-                    return RedirectToPage("/Index");
+                    return Redirect("/Admin/CourseModule/Index");
                 }
                 else
                 {

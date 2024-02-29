@@ -35,7 +35,7 @@ namespace WebHTL.Pages.Areas.Admin.CourseLesson
                 if (result != null)
                 {
                     // Redirect to a success page or another page as needed
-                    return RedirectToPage("/Admin/CourseLesson/Index");
+                    return Redirect("/Admin/CourseLesson/Index");
                 }
                 else
                 {

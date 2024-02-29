@@ -35,7 +35,7 @@ namespace WebHTL.Pages.Areas.Admin.Transaction
                 if (result != null)
                 {
                     // Redirect to a success page or another page as needed
-                    return RedirectToPage("/Admin/Transaction/Index");
+                    return Redirect("/Admin/Transaction/Index");
                 }
                 else
                 {

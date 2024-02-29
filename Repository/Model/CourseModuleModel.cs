@@ -12,7 +12,6 @@ namespace Repository.Model
         public int? Position { get; set; }
         public string? ModuleName { get; set; }
         public string? ModuleTarget { get; set; }
-        [Required]
         public string? CourseId { get; set; }
         public DateTimeOffset CreatedTime { get; set; }
         public DateTimeOffset LastUpdated { get; set; }
