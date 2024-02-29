@@ -12,8 +12,24 @@
             <div class="basic-form">
                 <form method="post">
                     <div class="form-group">
-                        <label asp-for="RoleName">Role Name</label>
-                        <input asp-for="RoleName" type="text" class="form-control" placeholder="Role Name">
+                        <label asp-for="NewOrder.Total"></label>
+                        <input asp-for="NewOrder.Total" class="form-control" required />
+                        <span asp-validation-for="NewOrder.Total" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewOrder.OrderStatus"></label>
+                        <input asp-for="NewOrder.OrderStatus" class="form-control" required />
+                        <span asp-validation-for="NewOrder.OrderStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewOrder.OrderDetailId"></label>
+                        <input asp-for="NewOrder.OrderDetailId" class="form-control" required />
+                        <span asp-validation-for="NewOrder.OrderDetailId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewOrder.AccountId"></label>
+                        <input asp-for="NewOrder.AccountId" class="form-control" required />
+                        <span asp-validation-for="NewOrder.AccountId" class="text-danger"></span>
                     </div>
                     <input class="btn btn-default" value="Submit" type="submit" />
                 </form>

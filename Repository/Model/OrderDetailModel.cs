@@ -12,5 +12,8 @@ namespace Repository.Model
         public string? OrderDetailStatus { get; set; }
         public decimal? Cost { get; set; }
         public string? DriverId { get; set; }
+        public DateTimeOffset CreatedTime { get; set; }
+        public DateTimeOffset LastUpdated { get; set; }
+        public DateTimeOffset DeleteTime { get; set; }
     }
 }

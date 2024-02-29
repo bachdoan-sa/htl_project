@@ -2,9 +2,9 @@
 @model WebHTL.Pages.Areas.Admin.Course.IndexModel
 @{
     Layout = "_AdminLayout";
-    var list = Model.;
+    var list = Model.Courses;
 }
-   
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -16,7 +16,7 @@
 
                 <!--Create-->
                 <div class="">
-                    <a href="/Admin/Role/Create" class="btn btn-success">Create Role</a>
+                    <a href="/Admin/Course/Create" class="btn btn-success">Create Role</a>
                 </div>
 
             </div>
@@ -27,37 +27,46 @@
                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                // <th>Name</th>
-                                // <th>Description</th>
-                                // <th>Price</th>
-                                // <th>Create Date</th>
-                                // <th>Last Update</th>
-                                // <th>Status</th>
-                                // <th>Actions</th>
+                                <th>Name</th>
+                                <th>Type Of Learning</th>
+                                <th>Type</th>
+                                <th>Course In formation</th>
+                                <th>Course Status</th>
+                                <th>Default Image</th>
+                                <th>Level</th>
+                                <th>Create Date</th>
+                                <th>Last Update</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in list)
                             {
-                                    // <td>@item.Name</td>
-                                    // <td>@item.Description</td>
-                                    // <td>@item.Price</td>
-                                    // <td>@item.CreatedTime.ToString("dd-MM-yyyy")</td>
-                                    // <td>@item.LastUpdated.ToString("dd-MM-yyyy")</td>
-                                    // <td>
-                                    //     @if (item.DeleteTime != null)
-                                    //     {
-                                    //         <span class="text-danger badge badge-danger text-uppercase fs-6">Deleted</span>
-                                    //     }
-                                    //     else
-                                    //     {
-                                    //         <span class="text-success badge badge-sucess text-uppercase fs-6">Available</span>
-                                    //     }
-                                    // </td>
-                                    // <td>
-                                    //     <a href="#" class="btn btn-primary">Update</a>
-                                    //     <a href="#" class="btn btn-danger">Delete</a>
-                                    //</td>
+                                <tr>
+                                    <td>@item.CourseName</td>
+                                    <td>@item.TypeOfLearning</td>
+                                    <td>@item.Type</td>
+                                    <td>@item.CourseInformation</td>
+                                    <td>@item.CourseStatus</td>
+                                    <td>@item.DefaultImage</td>
+                                    <td>@item.Level</td>
+                                    <td>@item.CreatedTime.ToString("dd-MM-yyyy")</td>
+                                    <td>@item.LastUpdated.ToString("dd-MM-yyyy")</td>
+                                    <td>
+                                        @if (item.DeleteTime != null)
+                                        {
+                                            <span class="text-danger badge badge-danger text-uppercase fs-6">Deleted</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-success badge badge-sucess text-uppercase fs-6">Available</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary">Update</a>
+                                        <a href="#" class="btn btn-danger">Delete</a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>

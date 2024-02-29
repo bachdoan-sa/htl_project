@@ -1,4 +1,4 @@
-﻿\@page
+﻿@page
 @model WebHTL.Pages.Areas.Admin.Career.CreateModel
 @{
     Layout = "_AdminLayout";
@@ -12,8 +12,19 @@
             <div class="basic-form">
                 <form method="post">
                     <div class="form-group">
-                        <label asp-for="RoleName">Role Name</label>
-                        <input asp-for="RoleName" type="text" class="form-control" placeholder="Role Name">
+                        <label asp-for="NewCareer.CareerName"></label>
+                        <input asp-for="NewCareer.CareerName" class="form-control" required />
+                        <span asp-validation-for="NewCareer.CareerName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCareer.Major"></label>
+                        <input asp-for="NewCareer.Major" class="form-control" required />
+                        <span asp-validation-for="NewCareer.Major" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewCareer.CareerStatus"></label>
+                        <input asp-for="NewCareer.CareerStatus" class="form-control" required />
+                        <span asp-validation-for="NewCareer.CareerStatus" class="text-danger"></span>
                     </div>
                     <input class="btn btn-default" value="Submit" type="submit" />
                 </form>

@@ -9,7 +9,7 @@ namespace WebHTL.Pages.Areas.Admin
     {
         private readonly ICourseService _courseService;
 
-        public List<Course> Courses { get; set; }
+      //  public List<Course> Courses { get; set; }
 
         public CourseManagerModel(ICourseService courseService)
         {
@@ -18,7 +18,7 @@ namespace WebHTL.Pages.Areas.Admin
 
         public async Task OnGetAsync()
         {
-            Courses = await _courseService.GetAll();
+      //      Courses = await _courseService.GetAll();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Repository.Repositories.IRepositories
         Task<OrderDetail> GetById(string id);
         Task<List<OrderDetail>> GetAll();
         Task<OrderDetail> Add(OrderDetail orderDetail);
-        Task<OrderDetail> Update(OrderDetail orderDetail+);
+        Task<OrderDetail> Update(OrderDetail orderDetail);
         Task<string> Delete(string id);
     }
 }

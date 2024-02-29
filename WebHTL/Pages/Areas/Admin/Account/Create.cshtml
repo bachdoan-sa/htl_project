@@ -12,8 +12,24 @@
             <div class="basic-form">
                 <form method="post">
                     <div class="form-group">
-                        <label asp-for="RoleName">Role Name</label>
-                        <input asp-for="RoleName" type="text" class="form-control" placeholder="Role Name">
+                        <label asp-for="NewAccount.Email"></label>
+                        <input asp-for="NewAccount.Email" class="form-control" required />
+                        <span asp-validation-for="NewAccount.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewAccount.Password"></label>
+                        <input asp-for="NewAccount.Password" type="password" class="form-control" required />
+                        <span asp-validation-for="NewAccount.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewAccount.UserName"></label>
+                        <input asp-for="NewAccount.UserName" class="form-control" required />
+                        <span asp-validation-for="NewAccount.UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewAccount.Role"></label>
+                        <input asp-for="NewAccount.Role" class="form-control" required />
+                        <span asp-validation-for="NewAccount.Role" class="text-danger"></span>
                     </div>
                     <input class="btn btn-default" value="Submit" type="submit" />
                 </form>

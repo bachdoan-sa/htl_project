@@ -12,8 +12,24 @@
             <div class="basic-form">
                 <form method="post">
                     <div class="form-group">
-                        <label asp-for="RoleName">Role Name</label>
-                        <input asp-for="RoleName" type="text" class="form-control" placeholder="Role Name">
+                        <label asp-for="NewModule.Position"></label>
+                        <input asp-for="NewModule.Position" class="form-control" required />
+                        <span asp-validation-for="NewModule.Position" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewModule.ModuleName"></label>
+                        <input asp-for="NewModule.ModuleName" class="form-control" required />
+                        <span asp-validation-for="NewModule.ModuleName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewModule.ModuleTarget"></label>
+                        <input asp-for="NewModule.ModuleTarget" class="form-control" required />
+                        <span asp-validation-for="NewModule.ModuleTarget" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewModule.CourseId"></label>
+                        <input asp-for="NewModule.CourseId" class="form-control" required />
+                        <span asp-validation-for="NewModule.CourseId" class="text-danger"></span>
                     </div>
                     <input class="btn btn-default" value="Submit" type="submit" />
                 </form>

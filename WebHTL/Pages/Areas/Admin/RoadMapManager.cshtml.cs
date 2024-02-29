@@ -9,7 +9,7 @@ namespace WebHTL.Pages.Areas.Admin
     {
         private readonly IRoadmapService _roadmapService;
 
-        public List<Roadmap> Roadmaps { get; set; }
+      //  public List<Roadmap> Roadmaps { get; set; }
 
         public RoadMapManagerModel(IRoadmapService roadmapService)
         {
@@ -18,7 +18,7 @@ namespace WebHTL.Pages.Areas.Admin
 
         public async Task OnGetAsync()
         {
-            Roadmaps = await _roadmapService.GetAllRoadmapsAsync();
+     //       Roadmaps = await _roadmapService.GetAllRoadmapsAsync();
         }
     }
 }

@@ -12,8 +12,19 @@
             <div class="basic-form">
                 <form method="post">
                     <div class="form-group">
-                        <label asp-for="RoleName">Role Name</label>
-                        <input asp-for="RoleName" type="text" class="form-control" placeholder="Role Name">
+                        <label asp-for="NewSection.Type"></label>
+                        <input asp-for="NewSection.Type" class="form-control" required />
+                        <span asp-validation-for="NewSection.Type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewSection.RoadmapId"></label>
+                        <input asp-for="NewSection.RoadmapId" class="form-control" required />
+                        <span asp-validation-for="NewSection.RoadmapId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewSection.CourseId"></label>
+                        <input asp-for="NewSection.CourseId" class="form-control" required />
+                        <span asp-validation-for="NewSection.CourseId" class="text-danger"></span>
                     </div>
                     <input class="btn btn-default" value="Submit" type="submit" />
                 </form>

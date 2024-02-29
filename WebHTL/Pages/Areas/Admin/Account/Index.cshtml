@@ -2,7 +2,7 @@
 @model WebHTL.Pages.Areas.Admin.Account.IndexModel
 @{
     Layout = "_AdminLayout";
-    var list = Model.//ListOrchid;
+    var list = Model.Accounts;
 }
 <div class="row">
     <div class="col-12">
@@ -10,12 +10,12 @@
             <div class="card-header d-flex justify-content-between align-content-center">
                 <!--Title-->
                 <div class="">
-                    <h3 class="m-0">Role Manager</h3>
+                    <h3 class="m-0">User Manager</h3>
                 </div>
 
                 <!--Create-->
                 <div class="">
-                    <a href="/Admin/Role/Create" class="btn btn-success">Create Role</a>
+                    <a href="/Admin/Account/Create" class="btn btn-success">Create Role</a>
                 </div>
 
             </div>
@@ -26,37 +26,44 @@
                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                // <th>Name</th>
-                                // <th>Description</th>
-                                // <th>Price</th>
-                                // <th>Create Date</th>
-                                // <th>Last Update</th>
-                                // <th>Status</th>
-                                // <th>Actions</th>
+                                 <th>Name</th>
+                                 <th>Phone</th>
+                                <th>Email</th>
+                                <th>Birthdate</th>
+                                <th>Role</th>
+                                <th>Work</th>
+                                 <th>Create Date</th>
+                                 <th>Last Update</th>
+                                 <th>Status</th>
+                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in list)
                             {
-                                    // <td>@item.Name</td>
-                                    // <td>@item.Description</td>
-                                    // <td>@item.Price</td>
-                                    // <td>@item.CreatedTime.ToString("dd-MM-yyyy")</td>
-                                    // <td>@item.LastUpdated.ToString("dd-MM-yyyy")</td>
-                                    // <td>
-                                    //     @if (item.DeleteTime != null)
-                                    //     {
-                                    //         <span class="text-danger badge badge-danger text-uppercase fs-6">Deleted</span>
-                                    //     }
-                                    //     else
-                                    //     {
-                                    //         <span class="text-success badge badge-sucess text-uppercase fs-6">Available</span>
-                                    //     }
-                                    // </td>
-                                    // <td>
-                                    //     <a href="#" class="btn btn-primary">Update</a>
-                                    //     <a href="#" class="btn btn-danger">Delete</a>
-                                    //</td>
+                                <tr>
+                                    <td>@item.UserName</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.Birthdate</td>
+                                    <td>@item.Role</td>
+                                    <td>@item.Work</td>
+                                     <td>@item.CreatedTime.ToString("dd-MM-yyyy")</td>
+                                     <td>@item.LastUpdated.ToString("dd-MM-yyyy")</td>
+                                     <td>
+                                         @if (item.DeleteTime != null)
+                                         {
+                                             <span class="text-danger badge badge-danger text-uppercase fs-6">Deleted</span>
+                                         }
+                                         else
+                                        {
+                                             <span class="text-success badge badge-sucess text-uppercase fs-6">Available</span>
+                                         }
+                                     </td>
+                                     <td>
+                                         <a href="#" class="btn btn-primary">Update</a>
+                                         <a href="#" class="btn btn-danger">Delete</a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
