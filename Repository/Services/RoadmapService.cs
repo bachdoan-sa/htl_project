@@ -1,4 +1,6 @@
-﻿using Repository.Entities;
+﻿using AutoMapper;
+using Repository.Entities;
+using Repository.Model;
 using Repository.Repositories.IRepositories;
 using Repository.Services.IServices;
 using System;
@@ -12,35 +14,44 @@ namespace Repository.Services
     public class RoadmapService : IRoadmapService
     {
         private readonly IRoadmapRepository _roadmapRepository;
-
-        public RoadmapService(IRoadmapRepository roadmapRepository)
+        private readonly IMapper _mapper;
+        public RoadmapService(IRoadmapRepository roadmapRepository, IMapper mapper)
         {
             _roadmapRepository = roadmapRepository;
+            _mapper = mapper;
         }
 
-        public async Task<Roadmap> GetRoadmapByIdAsync(string id)
+        public Task<RoadmapModel> AddRoadmap(RoadmapModel model)
         {
-            return await _roadmapRepository.GetByIdAsync(id);
+            var entity = _mapper.Map<Roadmap>(model);
+            var result = _mapper.Map<RoadmapModel>(_roadmapRepository.Add(entity).Result);
+
+            return Task.FromResult(result);
         }
 
-        public async Task<List<Roadmap>> GetAllRoadmapsAsync()
+        public Task DeleteRoadmap(string id)
         {
-            return await _roadmapRepository.GetAllAsync();
+            return _roadmapRepository.Delete(id);
         }
 
-        public async Task AddRoadmapAsync(Roadmap roadmap)
+        public Task<List<RoadmapModel>> GetAllRoadmaps()
         {
-            await _roadmapRepository.AddAsync(roadmap);
+            var list = _roadmapRepository.GetAll().Result;
+            return Task.FromResult(_mapper.Map<List<RoadmapModel>>(list));
         }
 
-        public async Task UpdateRoadmapAsync(Roadmap roadmap)
+        public Task<RoadmapModel> GetRoadmapById(string id)
         {
-            await _roadmapRepository.UpdateAsync(roadmap);
+             var list = _roadmapRepository.GetById(id).Result;
+            return Task.FromResult(_mapper.Map<RoadmapModel>(list));
         }
 
-        public async Task DeleteRoadmapAsync(string id)
+        public Task<RoadmapModel> UpdateRoadmap(RoadmapModel model)
         {
-            await _roadmapRepository.DeleteAsync(id);
+            var entity = _mapper.Map<Roadmap>(model);
+            var result = _mapper.Map<RoadmapModel>(_roadmapRepository.Update(entity).Result);
+
+            return Task.FromResult(result);
         }
     }
 }

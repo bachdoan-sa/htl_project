@@ -10,10 +10,10 @@ namespace Repository.Services.IServices
 {
     public interface ICourseService
     {
-        Task<Course> GetById(string id);
-        Task<List<Course>> GetAll();
-        Task<Course> Add(Course course);
-        Task<Course> Update(Course model);
+        Task<CourseModel> GetById(string id);
+        Task<List<CourseModel>> GetAll();
+        Task<CourseModel> Add(CourseModel model);
+        Task<CourseModel> Update(CourseModel model);
         Task<string> Delete(string id);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Repository.Entities;
+using Repository.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Repository.Services.IServices
 {
     public interface IRoadmapService
     {
-        Task<Roadmap> GetRoadmapByIdAsync(string id);
-        Task<List<Roadmap>> GetAllRoadmapsAsync();
-        Task AddRoadmapAsync(Roadmap roadmap);
-        Task UpdateRoadmapAsync(Roadmap roadmap);
-        Task DeleteRoadmapAsync(string id);
+        Task<RoadmapModel> GetRoadmapById(string id);
+        Task<List<RoadmapModel>> GetAllRoadmaps();
+        Task<RoadmapModel> AddRoadmap(RoadmapModel model);
+        Task<RoadmapModel> UpdateRoadmap(RoadmapModel model);
+        Task DeleteRoadmap(string id);
     }
 }
