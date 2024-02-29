@@ -14,5 +14,8 @@ namespace Repository.Model
         public string? Type { get; set; }
         public string? DriverStatus { get; set; }
         public string? RoadmapId { get; set; }
+        public DateTimeOffset CreatedTime { get; set; }
+        public DateTimeOffset LastUpdated { get; set; }
+        public DateTimeOffset DeleteTime { get; set; }
     }
 }

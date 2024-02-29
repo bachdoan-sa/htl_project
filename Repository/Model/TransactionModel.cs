@@ -13,5 +13,8 @@ namespace Repository.Model
         public string? TransactionStatus { get; set; }
         public string? Message { get; set; }
         public long? ReponseTime { get; set; }
+        public DateTimeOffset CreatedTime { get; set; }
+        public DateTimeOffset LastUpdated { get; set; }
+        public DateTimeOffset DeleteTime { get; set; }
     }
 }

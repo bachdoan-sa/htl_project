@@ -13,5 +13,8 @@ namespace Repository.Model
         public string? LessonTarget { get; set; }
         public string? LessonURL { get; set; }
         public string? CourseModuleId { get; set; }
+        public DateTimeOffset CreatedTime { get; set; }
+        public DateTimeOffset LastUpdated { get; set; }
+        public DateTimeOffset DeleteTime { get; set; }
     }
 }

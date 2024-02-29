@@ -15,5 +15,8 @@ namespace Repository.Model
         public string? CourseStatus { get; set; }
         public string? DefaultImage { get; set; }
         public string? Level { get; set; }
+        public DateTimeOffset CreatedTime { get; set; }
+        public DateTimeOffset LastUpdated { get; set; }
+        public DateTimeOffset DeleteTime { get; set; }
     }
 }

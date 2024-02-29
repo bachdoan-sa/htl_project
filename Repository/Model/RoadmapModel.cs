@@ -14,5 +14,8 @@ namespace Repository.Model
         public string? RoadmapType { get; set; }
         public string? Language { get; set; }
         public string? CareerId { get; set; }
+        public DateTimeOffset CreatedTime { get; set; }
+        public DateTimeOffset LastUpdated { get; set; }
+        public DateTimeOffset DeleteTime { get; set; }
     }
 }

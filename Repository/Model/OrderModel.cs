@@ -18,6 +18,9 @@ namespace Repository.Model
         public string? OrderDetailId { get; set; }
         [Required]
         public string? AccountId { get; set; }
-       
+        public DateTimeOffset CreatedTime { get; set; }
+        public DateTimeOffset LastUpdated { get; set; }
+        public DateTimeOffset DeleteTime { get; set; }
+
     }
 }

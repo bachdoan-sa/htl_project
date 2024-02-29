@@ -2,7 +2,7 @@
 @model WebHTL.Pages.Areas.Admin.Transaction.IndexModel
 @{
     Layout = "_AdminLayout";
-    var list = Model.;
+    var list = Model.Transactions;
 }
    
 <div class="row">
@@ -27,37 +27,44 @@
                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                // <th>Name</th>
-                                // <th>Description</th>
-                                // <th>Price</th>
-                                // <th>Create Date</th>
-                                // <th>Last Update</th>
-                                // <th>Status</th>
-                                // <th>Actions</th>
+                                <th>PaymentMethod</th>
+                                <th>Amount</th>
+                                <th>TransactionStatus</th>
+                                <th>Message</th>
+                                <th>ReponseTime</th>
+                                <th>Create Date</th>   
+                                <th>Last Update</th> 
+                                <th>Status</th>
+                                <th>Actions</th>
+
+                              
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in list)
                             {
-                                    // <td>@item.Name</td>
-                                    // <td>@item.Description</td>
-                                    // <td>@item.Price</td>
-                                    // <td>@item.CreatedTime.ToString("dd-MM-yyyy")</td>
-                                    // <td>@item.LastUpdated.ToString("dd-MM-yyyy")</td>
-                                    // <td>
-                                    //     @if (item.DeleteTime != null)
-                                    //     {
-                                    //         <span class="text-danger badge badge-danger text-uppercase fs-6">Deleted</span>
-                                    //     }
-                                    //     else
-                                    //     {
-                                    //         <span class="text-success badge badge-sucess text-uppercase fs-6">Available</span>
-                                    //     }
-                                    // </td>
-                                    // <td>
-                                    //     <a href="#" class="btn btn-primary">Update</a>
-                                    //     <a href="#" class="btn btn-danger">Delete</a>
-                                    //</td>
+                                <tr>
+                                    <td>@item.PaymentMethod</td>
+                                    <td>@item.Amount</td>
+                                    <td>@item.TransactionStatus</td>
+                                    <td>@item.Message</td>
+                                    <td>@item.ReponseTime</td>
+                                     <td>@item.CreatedTime.ToString("dd-MM-yyyy")</td>
+                                    <td>@item.LastUpdated.ToString("dd-MM-yyyy")</td>
+                                     <td>
+                                         @if (item.DeleteTime != null)
+                                         {
+                                             <span class="text-danger badge badge-danger text-uppercase fs-6">Deleted</span>
+                                         }
+                                         else
+                                         {
+                                             <span class="text-success badge badge-sucess text-uppercase fs-6">Available</span>
+                                         }
+                                     </td>
+                                     <td>
+                                         <a href="#" class="btn btn-primary">Update</a>
+                                         <a href="#" class="btn btn-danger">Delete</a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
