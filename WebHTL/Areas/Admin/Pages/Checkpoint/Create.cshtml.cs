@@ -35,7 +35,7 @@ namespace WebHTL.Pages.Areas.Admin.Checkpoint
                 if (result != null)
                 {
                     // Redirect to a success page or another page as needed
-                    return RedirectToPage("/Admin/Checkpoint/Index");
+                    return Redirect("/Admin/Checkpoint/Index");
                 }
                 else
                 {

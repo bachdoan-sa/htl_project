@@ -27,6 +27,11 @@
                         <span asp-validation-for="NewAccount.UserName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <label asp-for="NewAccount.Phone"></label>
+                        <input asp-for="NewAccount.Phone" class="form-control" required />
+                        <span asp-validation-for="NewAccount.Phone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="NewAccount.Role"></label>
                         <input asp-for="NewAccount.Role" class="form-control" required />
                         <span asp-validation-for="NewAccount.Role" class="text-danger"></span>

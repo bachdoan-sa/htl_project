@@ -29,7 +29,7 @@ namespace WebHTL.Pages.Areas.Admin.Account
 
             if (result != null)
             {
-                return RedirectToPage("/Admin/Account/Index");
+                return Redirect("/Admin/Account/Index");
             }
             else
             {

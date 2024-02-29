@@ -35,7 +35,7 @@ namespace WebHTL.Pages.Areas.Admin.OrderDetail
                 if (result != null)
                 {
                     // Redirect to a success page or another page as needed
-                    return RedirectToPage("/Index");
+                    return Redirect("/Admin/OrderDetail/Index");
                 }
                 else
                 {
