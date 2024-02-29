@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.ApplicationDbContext;
 using Repository.Entities;
+using Repository.Repositories.IRepositories;
 using Repository.Services.IServices;
 using System;
 using System.Collections.Generic;
@@ -10,23 +11,24 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class CareerRepository : ICourseService
+    public class CareerRepository : ICareerRepository
     {
         private readonly AppDbContext _context;
         public CareerRepository(AppDbContext context)
         {
             _context = context;
         }
-        public Task<Course> Add(Course course)
+
+        public Task<Career> Add(Career Career)
         {
-            _context.Courses.Add(course);
+            _context.Careers.Add(Career);
             _context.SaveChanges();
-            return Task.FromResult(course);
+            return Task.FromResult(Career);
         }
 
         public Task<string> Delete(string id)
         {
-            var entity = _context.Courses.Where(_ => _.Id.Equals(id)).FirstOrDefault();
+            var entity = _context.Careers.Where(_ => _.Id.Equals(id)).FirstOrDefault();
             if (entity == null)
             {
                 throw new Exception("Not Found!");
@@ -37,27 +39,23 @@ namespace Repository.Repositories
             return Task.FromResult(entity.Id);
         }
 
-        public Task<List<Course>> GetAll()
+
+        public Task<List<Career>> GetAll()
         {
-            return _context.Courses.ToListAsync();
+            return _context.Careers.ToListAsync();
         }
 
-        public Task<Course> GetById(string id)
+        public Task<Career> GetById(string id)
         {
-            var course = _context.Courses.Where(_ => _.Id == id).FirstOrDefaultAsync();
-            if (course.Result != null)
-            {
-                return course;
-
-            }
-            throw new Exception("NotFound!");
+            var entity = _context.Careers.Where(_ => _.Id.Equals(id)).FirstOrDefault();
+            return Task.FromResult(entity);
         }
 
-        public Task<Course> Update(Course model)
+        public Task<Career> Update(Career Career)
         {
-            _context.Courses.Update(model);
+            _context.Careers.Update(Career);
             _context.SaveChanges();
-            return Task.FromResult(model);
+            return Task.FromResult(Career);
         }
     }
 }
