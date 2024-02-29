@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Repository.Services
 {
-    public class CourseLessonModelService : ICourseLessonService
+    public class CourseLessonService : ICourseLessonService
     {
         private readonly ICourseLessonRepository _courseLessonRepository;
         private readonly IMapper _mapper;
-        public CourseLessonModelService(ICourseLessonRepository courseLessonRepository, IMapper mapper)
+        public CourseLessonService(ICourseLessonRepository courseLessonRepository, IMapper mapper)
         {
             _courseLessonRepository = courseLessonRepository;
             _mapper = mapper;

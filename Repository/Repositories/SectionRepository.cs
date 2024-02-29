@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class SectionRepository
+    public class SectionRepository : ISectionRepository
     {
         private readonly AppDbContext _context;
         public SectionRepository(AppDbContext context)
