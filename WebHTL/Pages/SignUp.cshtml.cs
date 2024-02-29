@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository.Entities;
@@ -36,7 +37,15 @@ namespace WebHTL.Pages
                 Role = "Customer",
                 Work = "student"
             };
-            Message = _accountService.Add(account).Result.Email;
+            var acc = _accountService.Add(account).Result.Email;
+            if(acc != null)
+            {
+                Message = " Create Account Success: " + acc;
+            }
+            else
+            {
+                Message = "Opps, somthing have wrong...";
+            }
             return Page();
         }
     }
