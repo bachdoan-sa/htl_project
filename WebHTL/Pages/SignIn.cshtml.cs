@@ -15,6 +15,7 @@ namespace WebHTL.Pages
         }
         public void OnGet()
         {
+            Message = TempData["Message"] as string;
         }
         [BindProperty]
         public string email { get; set; } = default!;
@@ -24,15 +25,17 @@ namespace WebHTL.Pages
         public string Message { get; set; } = default!;
         public async Task<IActionResult> OnPostAsync()
         {
-            var adminAcc = _config["AdminAccount:Admin"];
-            var adminPass = _config["AdminAccount:Password"];
-            if (adminAcc == email && adminPass == password)
-            {
-                HttpContext.Session.SetString("Admin", email);
-                return RedirectToPage("./Areas/Admin/AdminDashBoard");
-            }
             try
             {
+                var adminAcc = _config["AdminAccount:Admin"];
+                var adminPass = _config["AdminAccount:Password"];
+
+                if (adminAcc == email && adminPass == password)
+                {
+                    HttpContext.Session.SetString("Admin", email);
+                    return RedirectToPage("./Areas/Admin/AdminDashBoard");
+                }
+
                 var cus = await _accountService.Login(email, password);
                 HttpContext.Session.SetInt32("customerId", cus.AccountId);
                 return RedirectToPage("./HomePage");
@@ -41,7 +44,6 @@ namespace WebHTL.Pages
             {
                 Message = ex.Message;
                 return Page();
-                
             }
         }
     }

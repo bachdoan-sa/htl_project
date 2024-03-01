@@ -28,7 +28,7 @@ namespace WebHTL.Pages
         {
             AccountModel account = new AccountModel
             {
-                UserName = Email,
+                UserName = "",
                 Email = Email,
                 Password = Password,
                 Phone = "",
@@ -36,8 +36,19 @@ namespace WebHTL.Pages
                 Role = "Customer",
                 Work = "student"
             };
-            Message = _accountService.Add(account).Result.Email;
-            return Page();
+            var result = _accountService.Add(account).Result;
+
+            if (result != null)
+            {
+                // Tạo tài khoản thành công, chuyển thông báo sang trang SignIn
+                TempData["Message"] = "Create Account Success: " + result.Email;
+                return RedirectToPage("./SignIn");
+            }
+            else
+            {
+                Message = "Failed to create account. Please try again.";
+                return Page();
+            }
         }
     }
 }

@@ -1,17 +1,9 @@
 ﻿@page
 @model WebHTL.Pages.SignUpModel
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <title> Sign Up Page</title>
-
-</head>
-
-<body>
     <section class="preloader">
         <div class="spinner">
             <span class="sk-inner-circle"></span>
@@ -60,16 +52,16 @@
 
                                     <p class="text-center">Already have an account? Please <a href="signin">Sign In</a></p>
                                 </form>
+                                @if (!string.IsNullOrEmpty(Model.Message))
+                                {
+                                    <p class="text-center" style="color:red">@Model.Message</p>
+                                }
                             </div>
                         </div>
-                        <p class="text-center" style="color:red">Create Account Success: @Model.Message</p>
                     </div>
-                    
+
                 </div>
             </div>
         </section>
     </main>
 
-
-</body>
-</html>
