@@ -9,16 +9,21 @@ namespace WebHTL.Pages.Areas.Admin
     {
         private readonly IRoadmapService _roadmapService;
 
-        public List<Roadmap> Roadmaps { get; set; }
+        public List<Roadmap> Roadmaps { get; set; } = default!;
 
         public RoadMapManagerModel(IRoadmapService roadmapService)
         {
             _roadmapService = roadmapService;
         }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("./SignIn");
+            }
             Roadmaps = await _roadmapService.GetAllRoadmapsAsync();
+            return Page();
         }
     }
 }

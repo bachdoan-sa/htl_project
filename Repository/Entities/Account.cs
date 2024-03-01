@@ -9,6 +9,7 @@ namespace Repository.Entities
 {
     public class Account : BaseEntity
     {
+        public int AccountId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
@@ -17,5 +18,6 @@ namespace Repository.Entities
         public string Role { get; set; }
         public string? Work { get; set; }
         public virtual ICollection<Order>? Orders { get; set; }
+        public string ResetToken { get; internal set; }
     }
 }

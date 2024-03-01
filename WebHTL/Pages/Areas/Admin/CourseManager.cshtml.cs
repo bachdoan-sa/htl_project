@@ -9,16 +9,21 @@ namespace WebHTL.Pages.Areas.Admin
     {
         private readonly ICourseService _courseService;
 
-        public List<Course> Courses { get; set; }
+        public List<Course> Courses { get; set; } = default!;
 
         public CourseManagerModel(ICourseService courseService)
         {
             _courseService = courseService;
         }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("./SignIn");
+            }
             Courses = await _courseService.GetAll();
+            return Page();
         }
     }
 }
