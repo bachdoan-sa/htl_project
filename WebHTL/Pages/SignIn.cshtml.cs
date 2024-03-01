@@ -22,7 +22,7 @@ namespace WebHTL.Pages
         public string password { get; set; } = default!;
         [BindProperty]
         public string Message { get; set; } = default!;
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             var adminAcc = _config["AdminAccount:Admin"];
             var adminPass = _config["AdminAccount:Password"];
@@ -33,8 +33,8 @@ namespace WebHTL.Pages
             }
             try
             {
-                _accountService.Login(email, password);
-                HttpContext.Session.SetString("Customer", email);
+                var cus = await _accountService.Login(email, password);
+                HttpContext.Session.SetInt32("customerId", cus.AccountId);
                 return RedirectToPage("./HomePage");
             }
             catch (Exception ex)
@@ -44,6 +44,5 @@ namespace WebHTL.Pages
                 
             }
         }
-
     }
 }

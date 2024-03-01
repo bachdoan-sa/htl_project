@@ -1,38 +1,48 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Repository.Services.IServices;
 
-namespace WebHTL.Pages
+public class ResetPasswordModel : PageModel
 {
-    public class ResetPasswordModel : PageModel
+    private readonly IAccountService _accountService;
+
+    public ResetPasswordModel(IAccountService accountService)
     {
-        [BindProperty]
-        public string Email { get; set; } = default!;
-        [BindProperty]
-        public int RSState { get; set; } = 0!;
-        [BindProperty]
-        public string ResetPasswordOtp { get; set; } = default!;
-        [BindProperty]
-        public string Password { get; set; } = default!;
-        [BindProperty]
-        public string PasswordConfirm { get; set; } = default!;
-        public IActionResult OnPost()
+        _accountService = accountService;
+    }
+
+    [BindProperty(SupportsGet = true)]
+    public string Email { get; set; } = default!;
+
+    [BindProperty(SupportsGet = true)]
+    public string Token { get; set; } = default!;
+
+    [BindProperty]
+    public string NewPassword { get; set; } = default!;
+
+    public bool TokenValid { get; set; }
+
+    public bool PasswordResetSuccess { get; set; }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        TokenValid = await _accountService.VerifyResetTokenAsync(Email, Token);
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
         {
-            //account toofn tai
-            if (Email != default!)
-            {
-                RSState = 1;
-            }
-            //xu li gui mail va tao otp
-            //xu li otp va so sanh hop le
-            if (ResetPasswordOtp != default!)
-            {
-                RSState = 2;
-            }
-            if(Password != default! && Password == PasswordConfirm)
-            {
-                return RedirectToPage("./HomePage");
-            }
             return Page();
         }
+
+        TokenValid = await _accountService.VerifyResetTokenAsync(Email, Token);
+        if (TokenValid)
+        {
+            PasswordResetSuccess = await _accountService.ResetPasswordAsync(Email, Token, NewPassword);
+        }
+
+        return Page();
     }
 }

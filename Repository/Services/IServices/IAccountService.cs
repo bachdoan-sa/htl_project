@@ -19,5 +19,8 @@ namespace Repository.Services.IServices
         Task<AccountModel> Update(AccountModel model);
         Task<string> Delete(string id);
         Task<Account> Login(string username, string password);
+        Task<bool> SendResetPasswordEmailAsync(string email);
+        Task<bool> ResetPasswordAsync(string email, string token, string newPassword);
+        Task<bool> VerifyResetTokenAsync(string email, string token);
     }
 }
