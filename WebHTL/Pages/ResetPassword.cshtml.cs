@@ -19,6 +19,8 @@ public class ResetPasswordModel : PageModel
 
     [BindProperty]
     public string NewPassword { get; set; } = default!;
+    [BindProperty]
+    public string ErrorMessage { get; set; } = default!;
 
     public bool TokenValid { get; set; }
 
@@ -41,8 +43,25 @@ public class ResetPasswordModel : PageModel
         if (TokenValid)
         {
             PasswordResetSuccess = await _accountService.ResetPasswordAsync(Email, Token, NewPassword);
-        }
 
-        return Page();
+            if (PasswordResetSuccess)
+            {
+                // Password reset success, redirect to SignIn page with success message
+                TempData["Message"] = "Password reset successfully. Please sign in with your new password.";
+                return RedirectToPage("/SignIn");
+            }
+            else
+            {
+                // Password reset failed, return to the current page with error message
+                TempData["ErrorMessage"] = "Failed to reset password. Please try again.";
+                return Page();
+            }
+        }
+        else
+        {
+            // Token is not valid, return to the current page with error message
+            TempData["ErrorMessage"] = "Invalid token. Please try again or request a new reset link.";
+            return Page();
+        }
     }
 }
