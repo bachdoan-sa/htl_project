@@ -15,7 +15,7 @@ namespace WebHTL.Pages
         }
         public void OnGet()
         {
-            Message = TempData["Message"] as string;
+            Message = TempData["Message"] as string ?? string.Empty;
         }
         [BindProperty]
         public string email { get; set; } = default!;
