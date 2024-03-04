@@ -11,15 +11,16 @@ namespace WebHTL.Pages
 {
 	public class LogoutModel : PageModel
     {
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            // Xoá cookies
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Xoá session
             HttpContext.Session.Clear();
-            if (User.Identity.IsAuthenticated)
-            {
-                HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                return Redirect("/SignIn");
-            }
-            return Redirect("/SignIn");
+
+            // Chuyển hướng về trang chính (HomePage)
+            return RedirectToPage("/SignIn");
         }
     }
 }
