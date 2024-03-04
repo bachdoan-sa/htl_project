@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Repository.ApplicationDbContext;
 using Repository.Repositories;
 using Repository.Repositories.IRepositories;
@@ -15,7 +16,12 @@ namespace WebHTL
 
             // Add services to the container.
             builder.Services.AddDbContext<AppDbContext>();
-            builder.Services.AddSession();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             // Add AutoMapper
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
             builder.Services.AddAutoMapperServices();
@@ -29,6 +35,13 @@ namespace WebHTL
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<IRoadmapService, RoadmapService>();
             builder.Services.AddScoped<ICourseService, CourseService>();
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/SignIn";
+                options.LogoutPath = "/Logout";
+            });
 
             var app = builder.Build();
 

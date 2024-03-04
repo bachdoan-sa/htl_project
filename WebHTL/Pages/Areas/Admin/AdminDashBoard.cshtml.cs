@@ -9,7 +9,7 @@ namespace WebHTL.Pages.Areas.Admin
         {
             if (HttpContext.Session.GetString("Admin") == null)
             {
-                return RedirectToPage("./SignIn");
+                return RedirectToPage("/SignIn");
             }
             return Page();
         }
