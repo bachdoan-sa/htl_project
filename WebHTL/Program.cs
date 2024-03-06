@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Repository.ApplicationDbContext;
 using Repository.Repositories;
 using Repository.Repositories.IRepositories;
@@ -54,8 +55,13 @@ namespace WebHTL
             builder.Services.AddScoped<IRoadmapService, RoadmapService>();
             builder.Services.AddScoped<ISectionService, SectionService>();
             builder.Services.AddScoped<ITransactionService, TransactionService>();
-            
-            
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/SignIn";
+                options.LogoutPath = "/Logout";
+            });
 
             var app = builder.Build();
 
