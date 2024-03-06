@@ -1,37 +1,66 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Repository.Services.IServices;
 
-namespace WebHTL.Pages
+public class ResetPasswordModel : PageModel
 {
-    public class ResetPasswordModel : PageModel
+    private readonly IAccountService _accountService;
+
+    public ResetPasswordModel(IAccountService accountService)
     {
-        [BindProperty]
-        public string Email { get; set; } = default!;
-        [BindProperty]
-        public int RSState { get; set; } = 0!;
-        [BindProperty]
-        public string ResetPasswordOtp { get; set; } = default!;
-        [BindProperty]
-        public string Password { get; set; } = default!;
-        [BindProperty]
-        public string PasswordConfirm { get; set; } = default!;
-        public IActionResult OnPost()
+        _accountService = accountService;
+    }
+
+    [BindProperty(SupportsGet = true)]
+    public string Email { get; set; } = default!;
+
+    [BindProperty(SupportsGet = true)]
+    public string Token { get; set; } = default!;
+
+    [BindProperty]
+    public string NewPassword { get; set; } = default!;
+    [BindProperty]
+    public string ErrorMessage { get; set; } = default!;
+
+    public bool TokenValid { get; set; }
+
+    public bool PasswordResetSuccess { get; set; }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        TokenValid = await _accountService.VerifyResetTokenAsync(Email, Token);
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
         {
-            //account toofn tai
-            if (Email != default!)
+            return Page();
+        }
+
+        TokenValid = await _accountService.VerifyResetTokenAsync(Email, Token);
+        if (TokenValid)
+        {
+            PasswordResetSuccess = await _accountService.ResetPasswordAsync(Email, Token, NewPassword);
+
+            if (PasswordResetSuccess)
             {
-                RSState = 1;
+                // Password reset success, redirect to SignIn page with success message
+                TempData["Message"] = "Password reset successfully. Please sign in with your new password.";
+                return RedirectToPage("/SignIn");
             }
-            //xu li gui mail va tao otp
-            //xu li otp va so sanh hop le
-            if (ResetPasswordOtp != default!)
+            else
             {
-                RSState = 2;
+                // Password reset failed, return to the current page with error message
+                TempData["ErrorMessage"] = "Failed to reset password. Please try again.";
+                return Page();
             }
-            if(Password != default! && Password == PasswordConfirm)
-            {
-                return RedirectToPage("./HomePage");
-            }
+        }
+        else
+        {
+            // Token is not valid, return to the current page with error message
+            TempData["ErrorMessage"] = "Invalid token. Please try again or request a new reset link.";
             return Page();
         }
     }

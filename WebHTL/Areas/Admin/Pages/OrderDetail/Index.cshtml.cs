@@ -10,18 +10,22 @@ namespace WebHTL.Pages.Areas.Admin.OrderDetail
     public class IndexModel : PageModel
     { 
 
-    private readonly IOrderDetailService _orderDetailService;
+        private readonly IOrderDetailService _orderDetailService;
 
-    public IndexModel(IOrderDetailService orderDetailService)
-    {
-        _orderDetailService = orderDetailService;
-    }
+        public IndexModel(IOrderDetailService orderDetailService)
+        {
+            _orderDetailService = orderDetailService;
+        }
 
-    public List<OrderDetailModel> OrderDetails { get; set; }
+        public List<OrderDetailModel> OrderDetails { get; set; } = default!;
 
-    public async Task OnGetAsync()
-    {
+        public async Task OnGetAsync()
+        {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                RedirectToPage("/SignIn");
+            }
             OrderDetails = await _orderDetailService.GetAll();
-    }
+        }
     }
 }

@@ -13,9 +13,17 @@ namespace WebHTL.Pages.Areas.Admin.Driver
         {
             _driverService = driverService;
         }
+        public IActionResult OnGet()
+        {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
+        }
 
         [BindProperty]
-        public DriverModel NewDriver { get; set; }
+        public DriverModel NewDriver { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {

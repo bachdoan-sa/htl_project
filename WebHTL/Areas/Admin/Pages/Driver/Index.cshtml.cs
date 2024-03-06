@@ -14,10 +14,14 @@ namespace WebHTL.Pages.Areas.Admin.Driver
             _driverService = driverService;
         }
 
-        public List<DriverModel> Drivers { get; set; }
+        public List<DriverModel> Drivers { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                RedirectToPage("/SignIn");
+            }
             Drivers = await _driverService.GetAll();
         }
     }

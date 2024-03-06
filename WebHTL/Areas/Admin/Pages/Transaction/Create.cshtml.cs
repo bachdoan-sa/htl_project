@@ -13,9 +13,17 @@ namespace WebHTL.Pages.Areas.Admin.Transaction
         {
             _transactionService = transactionService;
         }
+        public IActionResult OnGet()
+        {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
+        }
 
         [BindProperty]
-        public TransactionModel NewTransaction { get; set; }
+        public TransactionModel NewTransaction { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {

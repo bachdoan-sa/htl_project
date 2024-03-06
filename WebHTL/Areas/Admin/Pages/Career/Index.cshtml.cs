@@ -14,10 +14,14 @@ namespace WebHTL.Pages.Areas.Admin.Career
             _careerService = careerService;
         }
 
-        public List<CareerModel> Careers { get; set; }
+        public List<CareerModel> Careers { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                RedirectToPage("/SignIn");
+            }
             Careers = await _careerService.GetAll();
         }
     }

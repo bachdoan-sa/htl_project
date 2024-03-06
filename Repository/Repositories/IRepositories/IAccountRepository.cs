@@ -18,5 +18,8 @@ namespace Repository.Repositories.IRepositories
         Task<Account> Add(Account roadmap);
         Task<Account> Update(Account roadmap);
         Task<string> Delete(string id);
+        Task<bool> SendResetPasswordEmailAsync(string email);
+        Task<bool> ResetPasswordAsync(string email, string token, string newPassword);
+        Task<bool> VerifyResetTokenAsync(string email, string token);
     }
 }

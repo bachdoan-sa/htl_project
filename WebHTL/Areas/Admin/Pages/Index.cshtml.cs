@@ -5,8 +5,13 @@ namespace WebAppRazorpage.Pages.Areas.Admin
 {
     public class IndexModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
         }
     }
 }

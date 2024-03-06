@@ -24,6 +24,8 @@ namespace WebHTL.Pages
         public string Message { get; set; } = default!;
         public IActionResult OnPost()
         {
+             try
+            {
             var adminAcc = _config["AdminAccount:Admin"];
             var adminPass = _config["AdminAccount:Password"];
             if (adminAcc == email && adminPass == password)
@@ -31,10 +33,9 @@ namespace WebHTL.Pages
                 HttpContext.Session.SetString("Admin", email);
                 return Redirect("~/Admin/Index");
             }
-            try
-            {
-                _accountService.Login(email, password);
-                HttpContext.Session.SetString("Customer", email);
+           
+                var cus = _accountService.Login(email, password);
+                HttpContext.Session.SetInt32("customerId", cus.Id);
                 return RedirectToPage("./HomePage");
             }
             catch (Exception ex)

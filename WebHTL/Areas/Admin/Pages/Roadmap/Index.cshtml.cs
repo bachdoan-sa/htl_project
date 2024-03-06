@@ -14,10 +14,14 @@ namespace WebHTL.Pages.Areas.Admin.Roadmap
             _roadmapService = roadmapService;
         }
 
-        public List<RoadmapModel> Roadmaps { get; set; }
+        public List<RoadmapModel> Roadmaps { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                RedirectToPage("/SignIn");
+            }
             Roadmaps = await _roadmapService.GetAllRoadmaps();
         }
     }

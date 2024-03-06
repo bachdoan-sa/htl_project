@@ -14,10 +14,14 @@ namespace WebHTL.Pages.Areas.Admin.Section
             _sectionService = sectionService;
         }
 
-        public List<SectionModel> Sections { get; set; }
+        public List<SectionModel> Sections { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                RedirectToPage("/SignIn");
+            }
             Sections = await _sectionService.GetAll();
         }
     }

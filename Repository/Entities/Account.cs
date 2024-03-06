@@ -17,5 +17,6 @@ namespace Repository.Entities
         public string Role { get; set; }
         public string? Work { get; set; }
         public virtual ICollection<Order>? Orders { get; set; }
+        public string ResetToken { get; internal set; }
     }
 }

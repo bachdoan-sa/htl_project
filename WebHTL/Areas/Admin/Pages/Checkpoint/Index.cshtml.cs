@@ -14,10 +14,14 @@ namespace WebHTL.Pages.Areas.Admin.Checkpoint
             _checkpointService = checkpointService;
         }
 
-        public List<CheckpointModel> Checkpoints { get; set; }
+        public List<CheckpointModel> Checkpoints { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                 RedirectToPage("/SignIn");
+            }
             Checkpoints = await _checkpointService.GetAll();
         }
     }

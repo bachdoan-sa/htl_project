@@ -13,9 +13,17 @@ namespace WebHTL.Pages.Areas.Admin.CourseLesson
         {
             _courseLessonService = courseLessonService;
         }
+        public IActionResult OnGet()
+        {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
+        }
 
         [BindProperty]
-        public CourseLessonModel NewLesson { get; set; }
+        public CourseLessonModel NewLesson { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {

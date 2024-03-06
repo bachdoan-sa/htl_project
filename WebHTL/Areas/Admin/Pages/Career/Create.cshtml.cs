@@ -14,8 +14,17 @@ namespace WebHTL.Pages.Areas.Admin.Career
             _careerService = careerService;
         }
 
+        public IActionResult OnGet()
+        {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
+        }
+
         [BindProperty]
-        public CareerModel NewCareer { get; set; }
+        public CareerModel NewCareer { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {

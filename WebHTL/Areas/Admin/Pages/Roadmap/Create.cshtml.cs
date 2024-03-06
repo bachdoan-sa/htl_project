@@ -13,9 +13,16 @@ namespace WebHTL.Pages.Areas.Admin.Roadmap
         {
             _roadmapService = roadmapService;
         }
-
+        public IActionResult OnGet()
+        {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
+        }
         [BindProperty]
-        public RoadmapModel NewRoadmap { get; set; }
+        public RoadmapModel NewRoadmap { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {

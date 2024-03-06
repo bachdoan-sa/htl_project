@@ -14,10 +14,13 @@ namespace WebHTL.Pages.Areas.Admin.Account
             _accountService = accountService;
         }
 
-        public List<AccountModel> Accounts { get; set; }
+        public List<AccountModel> Accounts { get; set; } = default!;
 
         public async Task OnGetAsync()
-        {
+        {   if (HttpContext.Session.GetString("Admin") == null)
+            {
+                RedirectToPage("/SignIn");
+            }
             Accounts = await _accountService.GetAll();
         }
     }

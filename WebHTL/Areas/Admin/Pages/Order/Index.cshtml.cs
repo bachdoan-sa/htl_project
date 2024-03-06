@@ -15,10 +15,14 @@ namespace WebHTL.Pages.Areas.Admin.Order
             _orderService = orderService;
         }
 
-        public List<OrderModel> Orders { get; set; }
+        public List<OrderModel> Orders { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                RedirectToPage("/SignIn");
+            }
             Orders = await _orderService.GetAll();
         }
     }

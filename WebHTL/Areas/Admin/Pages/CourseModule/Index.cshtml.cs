@@ -14,10 +14,14 @@ namespace WebHTL.Pages.Areas.Admin.CourseModule
             _courseModuleService = courseModuleService;
         }
 
-        public List<CourseModuleModel> CourseModules { get; set; }
+        public List<CourseModuleModel> CourseModules { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                RedirectToPage("/SignIn");
+            }
             CourseModules = await _courseModuleService.GetAll();
         }
     }

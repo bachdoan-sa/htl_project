@@ -13,9 +13,16 @@ namespace WebHTL.Pages.Areas.Admin.Section
         {
             _sectionService = sectionService;
         }
-
+        public IActionResult OnGet()
+        {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
+        }
         [BindProperty]
-        public SectionModel NewSection { get; set; }
+        public SectionModel NewSection { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {

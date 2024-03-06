@@ -13,9 +13,17 @@ namespace WebHTL.Pages.Areas.Admin.Checkpoint
         {
             _checkpointService = checkpointService;
         }
+        public IActionResult OnGet()
+        {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
+        }
 
         [BindProperty]
-        public CheckpointModel NewCheckpoint { get; set; }
+        public CheckpointModel NewCheckpoint { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {

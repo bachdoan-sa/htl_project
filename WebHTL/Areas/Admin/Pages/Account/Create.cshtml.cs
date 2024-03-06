@@ -13,9 +13,17 @@ namespace WebHTL.Pages.Areas.Admin.Account
         {
             _accountService = accountService;
         }
+        public IActionResult OnGet()
+        {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
+        }
 
         [BindProperty]
-        public AccountModel NewAccount { get; set; }
+        public AccountModel NewAccount { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {

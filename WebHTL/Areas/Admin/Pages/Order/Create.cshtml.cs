@@ -13,9 +13,16 @@ namespace WebHTL.Pages.Areas.Admin.Order
         {
             _orderService = orderService;
         }
-
+        public IActionResult OnGet()
+        {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
+        }
         [BindProperty]
-        public OrderModel NewOrder { get; set; }
+        public OrderModel NewOrder { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {
