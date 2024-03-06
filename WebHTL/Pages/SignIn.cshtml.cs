@@ -29,7 +29,7 @@ namespace WebHTL.Pages
             if (adminAcc == email && adminPass == password)
             {
                 HttpContext.Session.SetString("Admin", email);
-                return RedirectToPage("./Areas/Admin/AdminDashBoard");
+                return Redirect("~/Admin/Index");
             }
             try
             {

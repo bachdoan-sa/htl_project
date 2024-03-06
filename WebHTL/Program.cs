@@ -15,7 +15,13 @@ namespace WebHTL
 
             // Add services to the container.
             builder.Services.AddDbContext<AppDbContext>();
-            builder.Services.AddSession();
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             // Add AutoMapper
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
             builder.Services.AddAutoMapperServices();
@@ -48,6 +54,8 @@ namespace WebHTL
             builder.Services.AddScoped<IRoadmapService, RoadmapService>();
             builder.Services.AddScoped<ISectionService, SectionService>();
             builder.Services.AddScoped<ITransactionService, TransactionService>();
+            
+            
 
             var app = builder.Build();
 
