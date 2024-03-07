@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var email = Context.Request.HttpContext.Session.GetString("Customer");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -78,8 +82,36 @@
                     </ul>
 
                     <div class="d-none d-lg-block">
-                        <a href="./signin" class="bi-person custom-icon me-3"></a>
+                        @* Conditionally display sign-in link based on login status *@
+                        @{
+                            var IsLogin = false;
+                            if (email != null )
+                            {
+                                IsLogin = true;
 
+                            }
+                        }
+                        @if (!IsLogin)
+                        {
+                            <div class="d-none d-lg-block">
+                                <a href="./signin" class="bi-person custom-icon me-3"></a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-none d-lg-block">
+                                <a href="#">
+                                    <div class="user-img rounded-circle" style="width: 30px; height: 30px; overflow: hidden; margin-right:15px">
+                                        <img src="~/admin/assets/images/users/5.jpg" alt="user" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                                        <span class="profile-status online pull-right"></span>
+                                    </div>
+                                   
+                                </a>
+                            </div>
+                        }
+
+                    </div>
+                    <div>
                         <a href="./product-detail.html" class="bi-bag custom-icon"></a>
                     </div>
                 </div>

@@ -47,6 +47,11 @@ namespace Repository.Services
             return Task.FromResult(_mapper.Map<CourseModel>(list));
         }
 
+        public Task<List<CourseModel>> SearchCourseByName(string courseName)
+        {
+            return Task.FromResult(_mapper.Map<List<CourseModel>>(_courseRepository.SearchCourseByName(courseName)));
+        }
+
         public Task<CourseModel> Update(CourseModel model)
         {
             var entity = _mapper.Map<Course>(model);
