@@ -19,7 +19,7 @@ namespace WebHTL.Pages.Areas.Admin.Account
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (await HttpContext.Session.GetString("Admin") == null)
+            if (HttpContext.Session.GetString("Admin") == null)
             {
                 return RedirectToPage("/SignIn");
             }
