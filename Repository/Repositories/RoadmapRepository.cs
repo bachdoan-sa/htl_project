@@ -31,7 +31,9 @@ namespace Repository.Repositories
 
         public  Task<List<Roadmap>> GetAll()
         {
-            return _context.Roadmaps.ToListAsync();
+            return _context.Roadmaps.Include(r => r.Sections)
+                                    .Include(a => a.Career)
+                                    .ToListAsync(); 
         }
 
         public  Task<Roadmap> Add(Roadmap roadmap)
@@ -59,6 +61,11 @@ namespace Repository.Repositories
             _context.SaveChanges();
 
             return Task.FromResult(entity.Id);
+        }
+
+        public Task<int> CountCourseInRoadMap(string id)
+        {
+           return Task.FromResult(_context.Sections.Where(i => i.RoadmapId.Equals(id)).Count());
         }
     }
 }

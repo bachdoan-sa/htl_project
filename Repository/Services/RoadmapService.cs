@@ -15,6 +15,7 @@ namespace Repository.Services
     {
         private readonly IRoadmapRepository _roadmapRepository;
         private readonly IMapper _mapper;
+        
         public RoadmapService(IRoadmapRepository roadmapRepository, IMapper mapper)
         {
             _roadmapRepository = roadmapRepository;
@@ -29,6 +30,11 @@ namespace Repository.Services
             return Task.FromResult(result);
         }
 
+        public Task<int> CountCourseInRoadMap(string id)
+        {
+            return Task.FromResult(_roadmapRepository.CountCourseInRoadMap(id)).Result;
+        }
+
         public Task DeleteRoadmap(string id)
         {
             return _roadmapRepository.Delete(id);
@@ -37,7 +43,26 @@ namespace Repository.Services
         public Task<List<RoadmapModel>> GetAllRoadmaps()
         {
             var list = _roadmapRepository.GetAll().Result;
-            return Task.FromResult(_mapper.Map<List<RoadmapModel>>(list));
+            var result = new List<RoadmapModel>();
+            foreach (var entity in list)
+            {
+                RoadmapModel roadmapModel = new()
+                {
+                    Id = entity.Id,
+                    Title = entity.Title,
+                    CareerId = entity.CareerId,
+                    CareerName = entity.Career.CareerName,
+                    CreatedTime = entity.CreatedTime,
+                    DeleteTime = entity.DeleteDate ?? new DateTimeOffset(),
+                    Language = entity.Language,
+                    LastUpdated = entity.LastUpdated,
+                    RoadmapGoal = entity.RoadmapGoal,
+                    RoadmapType = entity.RoadmapType,
+                    CountCourse = (_roadmapRepository.CountCourseInRoadMap(entity.Id)).Result
+                };
+                result.Add(roadmapModel);
+            }
+            return Task.FromResult(result);
         }
 
         public Task<RoadmapModel> GetRoadmapById(string id)
