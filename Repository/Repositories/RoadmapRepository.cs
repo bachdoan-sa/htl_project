@@ -67,5 +67,10 @@ namespace Repository.Repositories
         {
            return Task.FromResult(_context.Sections.Where(i => i.RoadmapId.Equals(id)).Count());
         }
+        public Task<List<Roadmap>> SearchRoadMapByName(string roadmapName)
+        {
+            return _context.Roadmaps.Where(I => I.Title.Contains(roadmapName)).Include(r => r.Sections)
+                                    .Include(a => a.Career).ToListAsync();
+        }
     }
 }

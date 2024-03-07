@@ -52,9 +52,5 @@ namespace Repository.Repositories
         return Task.FromResult(entity.Id);
     }
 
-        public Task<List<Course>> SearchCourseByName(string courseName)
-        {
-            return Task.FromResult(_context.Courses.Where(I => I.CourseName.Contains(courseName)).ToList());
-        }
     }
 }

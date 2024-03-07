@@ -14,19 +14,23 @@ namespace WebHTL.Pages
         public ProductsModel(IRoadmapService roadmapService, ISectionService sectionService)
         {
             _roadmapService = roadmapService;
-            _sectionService= sectionService;
+            _sectionService = sectionService;
         }
 
         public List<RoadmapModel> Roadmaps { get; set; }
-        public List<SectionModel> Sections { get; set; }        
-        
+        public List<SectionModel> Sections { get; set; }
 
-        public async Task OnGetAsync()
+
+        public async Task OnGetAsync(string query)
         {
-             Roadmaps = await _roadmapService.GetAllRoadmaps();
-             
-                
-            
+            if (!string.IsNullOrEmpty(query))
+            {
+                Roadmaps = await _roadmapService.SearchRoadMapByName(query);
+            }
+            else
+            {
+                Roadmaps = await _roadmapService.GetAllRoadmaps();
+            }
         }
     }
 }

@@ -15,6 +15,6 @@ namespace Repository.Services.IServices
         Task<CourseModel> Add(CourseModel model);
         Task<CourseModel> Update(CourseModel model);
         Task<string> Delete(string id);
-        Task<List<CourseModel>> SearchCourseByName(string courseName);
+        
     }
 }

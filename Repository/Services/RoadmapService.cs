@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Repository.Entities;
 using Repository.Model;
+using Repository.Repositories;
 using Repository.Repositories.IRepositories;
 using Repository.Services.IServices;
 using System;
@@ -77,6 +78,32 @@ namespace Repository.Services
             var result = _mapper.Map<RoadmapModel>(_roadmapRepository.Update(entity).Result);
 
             return Task.FromResult(result);
+        }
+
+        public async Task<List<RoadmapModel>> SearchRoadMapByName(string roadmapName)
+        {
+            var list = await _roadmapRepository.SearchRoadMapByName(roadmapName);
+            var result = new List<RoadmapModel>();
+            foreach (var entity in list)
+            {
+                RoadmapModel roadmapModel = new() 
+                {
+                    Id = entity.Id,
+                    Title = entity.Title,
+                    CareerId = entity.CareerId,
+                    CareerName = entity.Career.CareerName,
+                    CreatedTime = entity.CreatedTime,
+                    DeleteTime = entity.DeleteDate ?? new DateTimeOffset(),
+                    Language = entity.Language,
+                    LastUpdated = entity.LastUpdated,
+                    RoadmapGoal = entity.RoadmapGoal,
+                    RoadmapType = entity.RoadmapType,
+                    CountCourse = (_roadmapRepository.CountCourseInRoadMap(entity.Id)).Result
+                };
+                result.Add(roadmapModel);
+            }
+            return result;
+
         }
     }
 }
