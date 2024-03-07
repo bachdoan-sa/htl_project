@@ -1,6 +1,10 @@
 ﻿@page
 @model WebHTL.Pages.ProductsModel
 
+@{
+    
+    var list = Model.Roadmaps;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +45,18 @@
                         </h1>
                     </div>
                 </div>
+
+                <!-- Search bar -->
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <form method="GET">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Tìm sản phẩm..." name="query" style="margin-top:40px">
+                                <button type="submit" class="btn btn-primary" style="margin-top:40px">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -52,161 +68,26 @@
                       
                     </div>
 
-                    <div class="col-lg-4 col-12 mb-3">
-                        <div class="product-thumb">
-                            <a href="product-detail.html">
-                                <img src="images/product/JavaDev.jpg" class="img-fluid product-image" alt="">
-                            </a>
-
-                            <div class="product-top d-flex">
-                                <span class="product-alert me-auto">Mới thêm</span>
-
-                                <a href="#" class="bi-heart-fill product-icon"></a>
-                            </div>
-
-                            <div class="product-info d-flex">
-                                <div>
-                                    <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Lộ trình học lập trình Java</a>
-                                    </h5>
-
-                                   
+                    @foreach (var roadmap in list)
+                    {
+                        <div class="col-lg-4 col-12 mb-3">
+                            <div class="product-thumb">
+                                <a href="product-detail.html">
+                                    <img src="images/product/JavaDev.jpg" class="img-fluid product-image" alt="">
+                                </a>
+                                <div class="product-info d-flex">
+                                    <div>
+                                        <h5  class=" product-title mb-0 ">
+                                            <a href="product-detail.html" class="product-title-link">@roadmap.Title</a>
+                                            <a style="font-size:small; display: block;">Nghề nghiệp : @roadmap.CareerName</a>
+                                            <a style="font-size:small; display: block;">Số khóa học : @roadmap.CountCourse</a>
+                                        </h5>
+                                    </div>
+                                    <small class="product-price text-muted ms-auto">35$</small>
                                 </div>
-
-                                <small class="product-price text-muted ms-auto">$25</small>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-4 col-12 mb-3">
-                        <div class="product-thumb">
-                            <a href="productdetail">
-                                <img src="images/product/CsharpDev.jpg" class="img-fluid product-image" alt="">
-                            </a>
-
-                            <div class="product-top d-flex">
-                                <span class="product-alert">Mới thêm</span>
-
-                                <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                            </div>
-
-                            <div class="product-info d-flex">
-                                <div>
-                                    <h5 class="product-title mb-0">
-                                        <a href="productdetail" class="product-title-link">Lộ trình học lập trình C#</a>
-                                    </h5>
-
-                                    <p class="product-p">Costume package</p>
-                                </div>
-
-                                <small class="product-price text-muted ms-auto">$35</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-12">
-                        <div class="product-thumb">
-                            <a href="htmlproductdetail">
-                                <img src="images/product/TDV.png" class="img-fluid product-image" alt="">
-                            </a>
-
-                            <div class="product-top d-flex">
-                                <span class="product-alert">Mới thêm</span>
-                                <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                            </div>
-
-                            <div class="product-info d-flex">
-                                <div>
-                                    <h5 class="product-title mb-0">
-                                        <a href="productdetail" class="product-title-link">Lộ trình học làm thông dịch viên</a>
-                                    </h5>
-
-                                  
-                                </div>
-
-                                <small class="product-price text-muted ms-auto">$25</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                       
-                    </div>
-
-                    <div class="col-lg-4 col-12 mb-3">
-                        <div class="product-thumb">
-                            <a href="productdetail">
-                                <img src="images/product/team-fredi-8HRKoay8VJE-unsplash.jpeg" class="img-fluid product-image" alt="">
-                            </a>
-
-                            <div class="product-top d-flex">
-                               
-
-                                <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                            </div>
-
-                            <div class="product-info d-flex">
-                                <div>
-                                    <h5 class="product-title mb-0">
-                                        <a href="productdetail" class="product-title-link">Lộ trình học Marketing</a>
-                                    </h5>
-
-                                   
-                                </div>
-
-                                <small class="product-price text-muted ms-auto">$50</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-12 mb-3">
-                        <div class="product-thumb">
-                            <a href="product-detail.html">
-                                <img src="images/people/KT.jpg" class="img-fluid product-image" alt="">
-                            </a>
-
-                            <div class="product-top d-flex">
-                                <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                            </div>
-
-                            <div class="product-info d-flex">
-                                <div>
-                                    <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Lộ trình học kế toán</a>
-                                    </h5>
-
-                                   
-                                </div>
-
-                                <small class="product-price text-muted ms-auto">$30</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-12 mb-3">
-                        <div class="product-thumb">
-                            <a href="product-detail.html">
-                                <img src="images/product/anis-m-WnVrO-DvxcE-unsplash.jpeg" class="img-fluid product-image" alt="">
-                            </a>
-
-                            <div class="product-top d-flex">
-                                <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                            </div>
-
-                            <div class="product-info d-flex">
-                                <div>
-                                    <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Lộ trình học quản lí khách sạn</a>
-                                    </h5>
-
-                                  
-                                </div>
-
-                                <small class="product-price text-muted ms-auto">$20</small>
-                            </div>
-                        </div>
-                    </div>
-
+                    }
                 </div>
             </div>
         </section>

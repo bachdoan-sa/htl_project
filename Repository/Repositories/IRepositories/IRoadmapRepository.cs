@@ -14,5 +14,7 @@ namespace Repository.Repositories.IRepositories
         Task<Roadmap> Add(Roadmap roadmap);
         Task<Roadmap> Update(Roadmap roadmap);
         Task Delete(string id);
+        Task<int> CountCourseInRoadMap(string id);
+        Task<List<Roadmap>> SearchRoadMapByName(string roadmapName);
     }
 }

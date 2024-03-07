@@ -26,6 +26,11 @@ namespace WebHTL.Pages
         {
              try
             {
+            var IsLogin = false;
+            if (HttpContext.Session.GetString("Customer") !=null || HttpContext.Session.GetString("Admin") !=null)
+            {
+                IsLogin = true;
+            }
             var adminAcc = _config["AdminAccount:Admin"];
             var adminPass = _config["AdminAccount:Password"];
             if (adminAcc == email && adminPass == password)

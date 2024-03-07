@@ -15,5 +15,7 @@ namespace Repository.Services.IServices
         Task<RoadmapModel> AddRoadmap(RoadmapModel model);
         Task<RoadmapModel> UpdateRoadmap(RoadmapModel model);
         Task DeleteRoadmap(string id);
+        Task<int> CountCourseInRoadMap(string id);
+        Task<List<RoadmapModel>> SearchRoadMapByName(string roadmapName);
     }
 }
