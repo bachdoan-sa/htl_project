@@ -15,6 +15,7 @@ namespace Repository.Services
     {
         private readonly IRoadmapRepository _roadmapRepository;
         private readonly IMapper _mapper;
+        
         public RoadmapService(IRoadmapRepository roadmapRepository, IMapper mapper)
         {
             _roadmapRepository = roadmapRepository;
@@ -27,6 +28,11 @@ namespace Repository.Services
             var result = _mapper.Map<RoadmapModel>(_roadmapRepository.Add(entity).Result);
 
             return Task.FromResult(result);
+        }
+
+        public Task<int> CountCourseInRoadMap(string id)
+        {
+            return Task.FromResult(_roadmapRepository.CountCourseInRoadMap(id)).Result;
         }
 
         public Task DeleteRoadmap(string id)
@@ -51,7 +57,8 @@ namespace Repository.Services
                     Language = entity.Language,
                     LastUpdated = entity.LastUpdated,
                     RoadmapGoal = entity.RoadmapGoal,
-                    RoadmapType = entity.RoadmapType
+                    RoadmapType = entity.RoadmapType,
+                    CountCourse = (_roadmapRepository.CountCourseInRoadMap(entity.Id)).Result
                 };
                 result.Add(roadmapModel);
             }

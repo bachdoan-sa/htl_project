@@ -18,12 +18,13 @@ namespace WebHTL.Pages
         }
 
         public List<RoadmapModel> Roadmaps { get; set; }
-        public List<SectionModel> Sections { get; set; }
+        public List<SectionModel> Sections { get; set; }        
+        
 
         public async Task OnGetAsync()
         {
              Roadmaps = await _roadmapService.GetAllRoadmaps();
-
+             
                 
             
         }

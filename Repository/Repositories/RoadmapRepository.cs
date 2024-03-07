@@ -62,5 +62,10 @@ namespace Repository.Repositories
 
             return Task.FromResult(entity.Id);
         }
+
+        public Task<int> CountCourseInRoadMap(string id)
+        {
+           return Task.FromResult(_context.Sections.Where(i => i.RoadmapId.Equals(id)).Count());
+        }
     }
 }
