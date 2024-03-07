@@ -15,7 +15,7 @@
     <link href="~/css/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/slick.css" />
     <link href="~/css/tooplate-little-fashion.css" rel="stylesheet">
-
+    @RenderSection("head", required: false)
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebHTL.styles.css" asp-append-version="true" />
     <style>
@@ -142,6 +142,8 @@
         </div>
     </footer> *@
     <!-- JAVASCRIPT FILES -->
+    <!-- All Jquery -->
+    <script src="~/admin/assets/js/lib/jquery/jquery.min.js"></script>
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/Headroom.js"></script>
@@ -152,6 +154,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
+
 </html>
