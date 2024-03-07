@@ -31,7 +31,9 @@ namespace Repository.Repositories
 
         public  Task<List<Roadmap>> GetAll()
         {
-            return _context.Roadmaps.ToListAsync();
+            return _context.Roadmaps.Include(r => r.Sections)
+                                    .Include(a => a.Career)
+                                    .ToListAsync(); 
         }
 
         public  Task<Roadmap> Add(Roadmap roadmap)
