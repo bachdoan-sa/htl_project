@@ -24,30 +24,25 @@ namespace WebHTL.Pages
         public string Message { get; set; } = default!;
         public IActionResult OnPost()
         {
-             try
+            try
             {
-            var IsLogin = false;
-            if (HttpContext.Session.GetString("Customer") !=null || HttpContext.Session.GetString("Admin") !=null)
-            {
-                IsLogin = true;
-            }
-            var adminAcc = _config["AdminAccount:Admin"];
-            var adminPass = _config["AdminAccount:Password"];
-            if (adminAcc == email && adminPass == password)
-            {
-                HttpContext.Session.SetString("Admin", email);
-                return Redirect("~/Admin/Index");
-            }
-           
+
+                var adminAcc = _config["AdminAccount:Admin"];
+                var adminPass = _config["AdminAccount:Password"];
+                if (adminAcc == email && adminPass == password)
+                {
+                    HttpContext.Session.SetString("Admin", email);
+                    return Redirect("~/Admin/Index");
+                }
                 var cus = _accountService.Login(email, password);
                 HttpContext.Session.SetInt32("customerId", cus.Id);
-                return RedirectToPage("./HomePage");
+                return RedirectToPage("./Pages/Profile/Index");
             }
             catch (Exception ex)
             {
                 Message = ex.Message;
                 return Page();
-                
+
             }
         }
 
