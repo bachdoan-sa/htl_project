@@ -81,60 +81,16 @@
         </div>
 
         <!-- Phần content -->
-        <div class="content">
-                <h5 class="text-violet">Dẫn nhập</h5>
-                <p>Trong khóa học C# CƠ BẢN này chúng ta sẽ cùng tìm hiểu về một ngôn ngữ lập trình hiện đại khá mạnh mẽ – Đó là C#. Trước tiên hãy xem thử ngôn ngữ chúng ta chuẩn bị tìm hiểu có những đặc trưng gì nhé!</p>
-                <h5 class="text-violet">Nội dung</h5>
-                <p>
-                    Trong bài học này, chúng ta sẽ cùng tìm hiểu các vấn đề:
-
-                    Sơ lược về ngôn ngữ C#.
-                    Những đặc trưng của ngôn ngữ C#.
-                    Tại sao lại lựa chọn ngôn ngữ C#
-                </p>
-                <h5 class="text-violet">Sơ lược về ngôn ngữ C#</h5>
-                <p>
-                    C# (đọc là “C thăng” hay “C sharp” (“xi-sáp”)) là một ngôn ngữ lập trình thuần hướng đối tượng được phát triển bởi Microsoft.
-
-                    C# ra đời năm 2000, được thiết kế chủ yếu bởi Anders Hejlsberg – kiến trúc sư phần mềm nổi tiếng với các sản phẩm Turbo Pascal, Delphi, . . .
-
-                    Được xây dựng dựa trên nền tảng của 2 ngôn ngữ lập trình mạnh nhất đó là C++ và Java. Do đó C# được miêu tả là ngôn ngữ có sự cân bằng giữa C++, Visual Basic, Delphi và Java.
-
-                    C# với sự hỗ trợ mạnh mẽ của .NET Framework giúp cho việc tạo một ứng dụng Windows Forms hay WPF (Windows Presentation Foundation), . . . trở nên rất dễ dàng.
-                </p>
-                <h5 class="text-violet">Những đặc trưng của ngôn ngữ C#</h5>
-                <p>
-                    Ngôn ngữ lập trình C# có những đặc trưng cơ bản sau:
-
-                    Là một ngôn ngữ thuần hướng đối tượng (hướng đối tượng là gì sẽ được trình bày trong bài CLASS TRONG C#)
-                    Là ngôn ngữ khá đơn giản, chỉ có khoảng 80 từ khóa và hơn mười mấy kiểu dữ liệu được dựng sẵn.
-                    Cung cấp những đặc tính hướng thành phần (component-oriented) như là Property, Event (sẽ được trình bày trong bài CLASS TRONG C# và bài EVENT TRONG C#)
-                    C# không khuyến khích sử dụng con trỏ như trong C++ nhưng nếu bạn thực sự muốn sử dụng thì phải đánh dấu đây là mã không an toàn (unsafe).
-                    C# có bộ Garbage Collector sẽ tự động thu gom vùng nhớ khi không còn sử dụng nữa.
-                    C# đã loại bỏ đa kế thừa trong C++ mà thay vào đó C# sẽ hỗ trợ thực thi giao diện interface (sẽ được trình bày trong bài INTERFACE TRONG C# và bài TÍNH KẾ THỪA TRONG C#).
-                    Một số ưu điểm nổi bật của C#:
-
-                    Gần gũi với các ngôn ngữ lập trình thông dụng (C++, Java, Pascal).
-                    Xây dựng dựa trên nền tảng của các ngôn ngữ lập trình mạnh nên thừa hưởng những ưu điểm của những ngôn ngữ đó.
-                    Cải tiến các khuyết điểm của C/C++ như con trỏ, các hiệu ứng phụ, . . .
-                    Dễ tiếp cận, dễ phát triển.
-                    Được sự chống lưng của .NET Framework.
-                    Đi kèm với những điểm mạnh trên thì C# cũng có những nhược điểm:
-
-                    Nhược điểm lớn nhất của C# là chỉ chạy trên nền Windows và có cài .NET Framework.
-                    Thao tác đối với phần cứng yếu hơn so với ngôn ngữ khác. Hầu hết phải dựa vào windows.
-                </p>
-                
-                <h5 class="text-violet">Kết luận</h5>
-                <p>
-                    Nội dung bài này giúp các bạn nắm được:
-
-                    Sơ lược về ngôn ngữ C#.
-                    Những đặc trưng của ngôn ngữ C# cùng với ưu điểm, nhược điểm của nó.
-                    Trả lời câu hỏi tại sao lại lựa chọn ngôn ngữ C#.
-                    Bài sau chúng ta sẽ bắt đầu tìm hiểu về ngôn ngữ C# với bài học CẤU TRÚC LỆNH CƠ BẢN TRONG C#.
-                </p>
-            
+            <div class="content">
+                @if (Model.Lesson != null)
+                {
+                    <h3>@Model.Lesson.LessonName</h3>
+                    <p>@Model.Lesson.LessonURL</p>
+                }
+                else
+                {
+                    <p>No lesson content found.</p>
+                }
             </div>
 
         </section>
