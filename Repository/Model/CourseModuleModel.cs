@@ -10,6 +10,7 @@ namespace Repository.Model
 {
     public class CourseModuleModel
     {
+        public string Id { get; set; }
         public int? Position { get; set; }
         public string? ModuleName { get; set; }
         public string? ModuleTarget { get; set; }

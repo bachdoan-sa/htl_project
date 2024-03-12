@@ -29,8 +29,6 @@
 </head>
 
 <body>
-
-
     <main>
         <style>       
             .sidebar .content{
@@ -67,7 +65,7 @@
                             @foreach (var lesson in module.CourseLessons)
                             {
                                 <li>
-                                    <a href="/CourseLessons?lessonId=@lesson.Id">@lesson.LessonName</a>
+                                    <a asp-page="/CoursePage" asp-route-CourseLessonId="@lesson.Id" id="CourseLessonId">@lesson.LessonName</a>
                                 </li>
                             }
                         </ul>

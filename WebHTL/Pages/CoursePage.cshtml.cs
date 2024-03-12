@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Repository.Entities;
 using Repository.Model;
 using Repository.Services;
 using Repository.Services.IServices;
+using System.Collections.Generic;
 
 namespace WebHTL.Pages
 {
@@ -10,29 +12,43 @@ namespace WebHTL.Pages
     {
         private readonly ICourseModuleService _courseModuleService;
         private readonly ICourseLessonService _courseLessonService;
+        private readonly ICourseService _courseService;
 
-        public CoursePageModel(ICourseModuleService courseModuleService, ICourseLessonService courseLessonService)
+        public CoursePageModel(ICourseModuleService courseModuleService, ICourseLessonService courseLessonService, ICourseService courseService)
         {
             _courseModuleService = courseModuleService;
             _courseLessonService = courseLessonService;
+            _courseService = courseService;
         }
+
         public List<CourseModuleModel> CourseModules { get; private set; }
         public CourseLessonModel Lesson { get; private set; }
 
-        public async Task<IActionResult> OnGetAsync(string courseId)
+        [BindProperty(Name = "CourseLessonId")] 
+        public string CourseLessonId { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(string CourseId, string CourseLessonId, string CourseModulesId)
         {
-            string a = "1";
+            string a = "1"; // can sua sau nay'
             CourseModules = await _courseModuleService.GetByCourseId(a);
 
-            if (CourseModules != null && CourseModules.Any())
+
+            if (CourseId == null)
             {
-                var firstModule = CourseModules.FirstOrDefault();
-                if (firstModule != null && firstModule.CourseLessons != null && firstModule.CourseLessons.Any())
-                {
-                    string lessonId = firstModule.CourseLessons.First().Id; // S? d?ng ID c?a bài h?c ??u tiên
-                    Lesson = await _courseLessonService.GetCourseLessonByCourseModuleId(lessonId);
-                }
+                CourseId = (await _courseService.GetAll()).FirstOrDefault()?.Id;
             }
+
+            if (CourseModulesId == null)
+            {
+                CourseModulesId = (await _courseModuleService.GetByCourseId(CourseId)).FirstOrDefault()?.Id;
+            }
+
+            if (CourseLessonId == null)
+            {
+                CourseLessonId = (await _courseLessonService.GetCourseLessonByCourseModuleId(CourseModulesId))?.Id;
+            }
+
+            Lesson = await _courseLessonService.GetById(CourseLessonId);
             return Page();
         }
 

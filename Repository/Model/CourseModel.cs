@@ -8,6 +8,7 @@ namespace Repository.Model
 {
     public class CourseModel
     {
+        public string? Id { get; set; }
         public string? CourseName { get; set; }
         public string? TypeOfLearning { get; set; }
         public string? Type { get; set; }
