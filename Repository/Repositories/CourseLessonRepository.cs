@@ -60,5 +60,15 @@ namespace Repository.Repositories
             _context.SaveChanges();
             return Task.FromResult(courseLesson);
         }
+
+        public Task<CourseLesson> GetCourseLessonByCourseModuleId(string id)
+        {
+            var courseLesson = _context.CourseLessons.Where(_ => _.CourseModuleId == id).FirstOrDefaultAsync();
+            if(courseLesson.Result != null)
+            {
+                return courseLesson;
+            }
+            throw new Exception("NotFound!");
+        }
     }
 }

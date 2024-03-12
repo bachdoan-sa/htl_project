@@ -53,5 +53,11 @@ namespace Repository.Services
 
             return Task.FromResult(result);
         }
+
+        public Task<CourseLessonModel> GetCourseLessonByCourseModuleId(string id)
+        {
+            var list = _courseLessonRepository.GetCourseLessonByCourseModuleId(id).Result;
+            return Task.FromResult(_mapper.Map<CourseLessonModel>(list));
+        }
     }
 }
