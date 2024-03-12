@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,5 +17,8 @@ namespace Repository.Model
         public DateTimeOffset CreatedTime { get; set; }
         public DateTimeOffset LastUpdated { get; set; }
         public DateTimeOffset DeleteTime { get; set; }
+
+        public  ICollection<CourseLesson>? CourseLessons { get; set; }
+
     }
 }

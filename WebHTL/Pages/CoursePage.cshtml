@@ -58,28 +58,25 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-                <h5>Tuần 1</h5>
-                <p>
-                    C# là gì?
-                </p>
-                <p>
-                    Cấu trúc lệnh cơ bản trong C# Console Application
-                </p>
-                <p>
-                    Nhập xuất cơ bản trong C# Console Application
-                </p>
-                <p>
-                    Biến trong C#
-                </p>
-                <p>
-                    Kiểu dữ liệu trong C#
-                </p>
-                <p>
-                    Toán tử trong C#
-                </p>
-                <p>
-                    Hằng trong C#
-                </p>
+                @if (Model.CourseModules != null && Model.CourseModules.Any())
+                {
+                    @foreach (var module in Model.CourseModules)
+                    {
+                        <h5>@module.ModuleName</h5>
+                        <ul>
+                            @foreach (var lesson in module.CourseLessons)
+                            {
+                                <li>
+                                    <a href="/CourseLessons?lessonId=@lesson.Id">@lesson.LessonName</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <p>No modules found.</p>
+                }
 
         </div>
 
