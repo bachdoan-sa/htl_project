@@ -1,4 +1,5 @@
-﻿using Repository.Model;
+﻿using Repository.Entities;
+using Repository.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace Repository.Services.IServices
         Task<CourseModuleModel> Add(CourseModuleModel model);
         Task<CourseModuleModel> Update(CourseModuleModel model);
         Task<string> Delete(string id);
+
+        Task<List<CourseModuleModel>> GetByCourseId(string id);
     }
 }

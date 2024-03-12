@@ -42,6 +42,12 @@ namespace Repository.Services
             return Task.FromResult(_mapper.Map<List<CourseModuleModel>>(list));
         }
 
+        public Task<List<CourseModuleModel>> GetByCourseId(string id)
+        {
+            var list = _courseModuleRepository.GetByCourseId(id).Result;
+            return Task.FromResult(_mapper.Map<List<CourseModuleModel>>(list));
+        }
+
         public Task<CourseModuleModel> GetById(string id)
         {
             var list = _courseModuleRepository.GetById(id).Result;
