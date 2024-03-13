@@ -12,14 +12,12 @@ namespace Repository.Repositories.IRepositories
     {
         // Repo template: Chỉ nhận về entity hoặc biến và trả về entity hoặc biến
         // Nếu dùng model thì phải chuyển về model trước khi vào repo
-        Task<Account> GetByEmail(string email);
+        Task<Account?> GetByEmail(string email);
         Task<Account> GetById(string id);
         Task<List<Account>> GetAll();
         Task<Account> Add(Account roadmap);
         Task<Account> Update(Account roadmap);
         Task<string> Delete(string id);
-        Task<bool> SendResetPasswordEmailAsync(string email);
-        Task<bool> ResetPasswordAsync(string email, string token, string newPassword);
-        Task<bool> VerifyResetTokenAsync(string email, string token);
+        Task SetResetToken(string email, string token);
     }
 }

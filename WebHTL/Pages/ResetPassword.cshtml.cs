@@ -26,42 +26,22 @@ public class ResetPasswordModel : PageModel
 
     public bool PasswordResetSuccess { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public void OnGet(string email, string token)
     {
-        TokenValid = await _accountService.VerifyResetTokenAsync(Email, Token);
-        return Page();
+        Email = email;
+        Token = token;
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
+        if (!await _accountService.VerifyResetTokenAsync(Email, Token))
         {
+            ErrorMessage = "Invalid token.";
             return Page();
         }
 
-        TokenValid = await _accountService.VerifyResetTokenAsync(Email, Token);
-        if (TokenValid)
-        {
-            PasswordResetSuccess = await _accountService.ResetPasswordAsync(Email, Token, NewPassword);
-
-            if (PasswordResetSuccess)
-            {
-                // Password reset success, redirect to SignIn page with success message
-                TempData["Message"] = "Password reset successfully. Please sign in with your new password.";
-                return RedirectToPage("/SignIn");
-            }
-            else
-            {
-                // Password reset failed, return to the current page with error message
-                TempData["ErrorMessage"] = "Failed to reset password. Please try again.";
-                return Page();
-            }
-        }
-        else
-        {
-            // Token is not valid, return to the current page with error message
-            TempData["ErrorMessage"] = "Invalid token. Please try again or request a new reset link.";
-            return Page();
-        }
+        // Reset password and redirect to sign in page
+        await _accountService.ResetPasswordAsync(Email, NewPassword);
+        return RedirectToPage("SignIn");
     }
 }

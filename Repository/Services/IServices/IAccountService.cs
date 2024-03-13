@@ -1,10 +1,5 @@
 ﻿using Repository.Entities;
 using Repository.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository.Services.IServices
 {
@@ -19,8 +14,10 @@ namespace Repository.Services.IServices
         Task<AccountModel> Update(AccountModel model);
         Task<string> Delete(string id);
         Task<Account> Login(string username, string password);
-        Task<bool> SendResetPasswordEmailAsync(string email);
-        Task<bool> ResetPasswordAsync(string email, string token, string newPassword);
+        Task<Account?> GetByEmail(string email);
+        Task<string> GenerateResetToken(string email);
+        Task SendResetPasswordEmailAsync(string email);
         Task<bool> VerifyResetTokenAsync(string email, string token);
+        Task ResetPasswordAsync(string email, string newPassword);
     }
 }

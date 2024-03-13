@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebHTL - Hướng đến tương lai của bạn</title>
     <!-- CSS FILES -->
-    <link rel="icon" type="image/x-icon" href="~/images/logos/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="~/images/logos/favicon.ico" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,13 +23,26 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebHTL.styles.css" asp-append-version="true" />
     <style>
-            .footer {
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                white-space: nowrap;
-                line-height: 60px;
-                text-align: center;
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            white-space: nowrap;
+            line-height: 60px;
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
             }
     </style>
 </head>
@@ -85,7 +98,7 @@
                         @* Conditionally display sign-in link based on login status *@
                         @{
                             var IsLogin = false;
-                            if (email != null )
+                            if (email != null)
                             {
                                 IsLogin = true;
 
@@ -105,7 +118,7 @@
                                         <img src="~/admin/assets/images/users/5.jpg" alt="user" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
                                         <span class="profile-status online pull-right"></span>
                                     </div>
-                                   
+
                                 </a>
                             </div>
                         }
@@ -168,11 +181,11 @@
             </div>
         </div>
     </footer>
-   @*  <footer class="border-top footer text-muted" >
-        <div class="container">
-            &copy; 2024 - WebHTL - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer> *@
+    @*  <footer class="border-top footer text-muted" >
+            <div class="container">
+                &copy; 2024 - WebHTL - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </div>
+        </footer> *@
     <!-- JAVASCRIPT FILES -->
     <!-- All Jquery -->
     <script src="~/admin/assets/js/lib/jquery/jquery.min.js"></script>

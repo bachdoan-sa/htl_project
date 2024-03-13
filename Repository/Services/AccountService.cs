@@ -1,10 +1,15 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Repository.Entities;
 using Repository.Model;
 using Repository.Repositories.IRepositories;
 using Repository.Services.IServices;
 using Repository.Utils;
+using System;
+using System.Net.Http;
 using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Repository.Services
 {
@@ -12,10 +17,12 @@ namespace Repository.Services
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IMapper _mapper;
-        public AccountService(IAccountRepository accountRepository, IMapper mapper)
+        private readonly IEmailSender _emailSender;
+        public AccountService(IAccountRepository accountRepository, IMapper mapper, IEmailSender emailSender)
         {
             _accountRepository = accountRepository;
             _mapper = mapper;
+            _emailSender = emailSender;
         }
         public Task<List<AccountModel>> GetAll()
         {  
@@ -48,94 +55,79 @@ namespace Repository.Services
             return _accountRepository.Delete(id);
         }
 
-        public Task<Account> Login(string email, string password)
+        public async Task<Account> Login(string email, string password)
         {
-            var acc = _accountRepository.GetByEmail(email).Result;
-            if(acc.Password != password)
+            var acc = await _accountRepository.GetByEmail(email);
+            if (acc == null)
             {
-                throw new Exception("Invalid Email or Password.");
+                throw new Exception("Account not found.");
             }
-            return Task.FromResult(acc);
+            else if (acc.Password != password)
+            {
+                throw new Exception("Invalid Password.");
+            }
+            return acc;
         }
-        public async Task<bool> SendResetPasswordEmailAsync(string email)
+        public async Task<Account?> GetByEmail(string email)
         {
-            var user = await _accountRepository.GetByEmail(email);
-            if (user == null)
-                return false; // User not found
-
-            // Generate a reset token and save it to the user record
-            var token = GenerateResetToken();
-            user.ResetToken = token;
-            await _accountRepository.Update(user);
-
-            // Tạo nội dung email với URL cố định
-            var resetUrl = $"https://localhost:7035/ResetPassword?email={email}&token={token}";
-            var emailContent = $"Please reset your password by clicking the link below: <a href=\"{resetUrl}\">Reset Password</a>";
-
-            // Gửi email
             try
             {
-                var message = new MailMessage();
-                message.To.Add(email);
-                message.Subject = "Reset Your Password";
-                message.Body = emailContent;
-                message.IsBodyHtml = true;
-
-                using (var smtpClient = new SmtpClient("smtp.gmail.com"))
-                {
-                    smtpClient.Port = 587;
-                    smtpClient.Credentials = new System.Net.NetworkCredential("boybybame@gmail.com", "Ductruong2810");
-                    smtpClient.EnableSsl = true;
-
-                    await smtpClient.SendMailAsync(message);
-                }
-
-                return true;
+                var acc = await _accountRepository.GetByEmail(email);
+                return acc;
             }
             catch (Exception ex)
             {
-                // Xử lý lỗi khi gửi email
-                Console.WriteLine($"Error sending email: {ex.Message}");
-                return false;
+                Console.WriteLine($"Đã xảy ra lỗi: {ex.Message}");
+                return null;
             }
         }
 
-        public async Task<bool> ResetPasswordAsync(string email, string token, string newPassword)
+        public async Task<string> GenerateResetToken(string email)
         {
             var user = await _accountRepository.GetByEmail(email);
-            if (user == null || user.ResetToken != token)
-                return false; // Token not valid or user not found
+            var token = GenerateResetToken();
 
-            // Reset password
-            user.Password = HashPassword(newPassword); // Hash the new password before saving
-            user.ResetToken = null; // Clear reset token
-            await _accountRepository.Update(user);
+            await _accountRepository.SetResetToken(email, token);
 
-            return true;
+            return token;
         }
 
-        private string GenerateResetToken()
+        public async Task SendResetPasswordEmailAsync(string email)
         {
-            // Generate a unique token (e.g., GUID)
-            return Guid.NewGuid().ToString();
+            var user = await _accountRepository.GetByEmail(email);
+            var callbackUrl = $"http://yourwebsite.com/ResetPassword?email={email}&token={user?.ResetToken}";
+
+            await _emailSender.SendEmailAsync(
+                email,
+                "Reset Password",
+                $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
         }
 
-        private string HashPassword(string password)
+        public string GenerateResetToken()
         {
-            // Hash password (you should use a secure hashing algorithm)
-            return HashingAlgorithm.HashPassword(password);
+            using (var rngCryptoServiceProvider = new RNGCryptoServiceProvider())
+            {
+                var randomBytes = new byte[40]; // Sau này, token sẽ có ~54 ký tự
+                rngCryptoServiceProvider.GetBytes(randomBytes);
+                return Convert.ToBase64String(randomBytes);
+            }
         }
 
         public async Task<bool> VerifyResetTokenAsync(string email, string token)
         {
-            // Truy vấn người dùng từ email
             var user = await _accountRepository.GetByEmail(email);
-            if (user == null)
-            {
-                return false; // Người dùng không tồn tại
-            }
-            // Kiểm tra xem token có khớp với token lưu trong người dùng hay không
             return user.ResetToken == token;
+        }
+
+        public async Task ResetPasswordAsync(string email, string newPassword)
+        {
+            using var hmac = new HMACSHA512();
+
+            var user = await _accountRepository.GetByEmail(email);
+            user.Password = newPassword;
+            user.ResetToken = null;
+
+            await _accountRepository.Update(user);
         }
     }
 }

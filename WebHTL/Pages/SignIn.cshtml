@@ -18,36 +18,34 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-8 mx-auto col-12">
+                    <div class="col-lg-8 col-11 mx-auto">
+                        <form role="form" method="post">
 
-                        <h1 class="hero-title text-center mb-5">Sign In</h1>
+                            <div class="form-floating mb-4 p-0">
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required>
 
-                        <div class="row">
-                            <div class="col-lg-8 col-11 mx-auto">
-                                <form role="form" method="post">
-
-                                    <div class="form-floating mb-4 p-0">
-                                        <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required>
-
-                                        <label for="email">Email address</label>
-                                    </div>
-
-                                    <div class="form-floating p-0">
-                                        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
-
-                                        <label for="password">Password</label>
-                                    </div>
-
-                                    <button type="submit" class="btn custom-btn form-control mt-4 mb-3">
-                                        Sign in
-                                    </button>
-
-                                    <p class="text-center">Don’t have an account? <a href="./SignUp">Create One</a></p>
-                                    <p class="text-center">Forget password? Don't worry <a style="text-underline-offset:auto" href="./ForgotPassword">Forgot Password</a></p>
-                                </form>
+                                <label for="email">Email address</label>
                             </div>
-                        </div>
-                        <p class="text-center" style="color:red"> @Model.Message</p>
+
+                            <div class="form-floating p-0">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+
+                                <label for="password">Password</label>
+                            </div>
+                            <p class="text-right">
+                                <a href="./ForgotPassword">Forgot password?</a>
+                            </p>
+
+                            <button type="submit" class="btn custom-btn form-control mt-4 mb-3">
+                                Sign in
+                            </button>
+
+                            <p class="text-center">Don’t have an account? <a href="./SignUp">Create One</a></p>
+                        </form>
+                        @if (!string.IsNullOrEmpty(Model.Message))
+                        {
+                            <p class="text-center" style="color:red">@Model.Message</p>
+                        }
                     </div>
 
                 </div>
