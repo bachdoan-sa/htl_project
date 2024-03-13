@@ -9,6 +9,7 @@ namespace Repository.Model
 {
     public class CourseLessonModel
     {
+        public string? Id { get; set; }
         public string? LessonName { get; set; }
         public string? LessonTarget { get; set; }
         public string? LessonURL { get; set; }

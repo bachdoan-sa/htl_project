@@ -14,5 +14,6 @@ namespace Repository.Services.IServices
         Task<CourseLessonModel> Add(CourseLessonModel model);
         Task<CourseLessonModel> Update(CourseLessonModel model);
         Task<string> Delete(string id);
+        Task<CourseLessonModel> GetCourseLessonByCourseModuleId(string id);
     }
 }

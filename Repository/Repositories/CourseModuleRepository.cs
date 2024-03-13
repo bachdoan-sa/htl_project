@@ -44,6 +44,11 @@ namespace Repository.Repositories
             return _context.CourseModules.ToListAsync();
         }
 
+        public Task<List<CourseModule>> GetByCourseId(string id)
+        {
+            return _context.CourseModules.Include(cm => cm.CourseLessons).Where(_ => _.CourseId == id).ToListAsync();
+        } 
+
         public Task<CourseModule> GetById(string id)
         {
             var acc = _context.CourseModules.Where(_ => _.Id == id).FirstOrDefaultAsync();
