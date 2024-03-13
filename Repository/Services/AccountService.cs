@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Repository.Entities;
 using Repository.Model;
 using Repository.Repositories.IRepositories;
 using Repository.Services.IServices;
-using Repository.Utils;
-using System;
-using System.Net.Http;
-using System.Net.Mail;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace Repository.Services
 {

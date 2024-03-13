@@ -1,15 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using Repository.ApplicationDbContext;
 using Repository.Entities;
 using Repository.Repositories.IRepositories;
-using Repository.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {

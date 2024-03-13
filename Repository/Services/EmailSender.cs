@@ -2,35 +2,30 @@
 using Repository.Services.IServices;
 using System.Net;
 using System.Net.Mail;
+using Repository.Settings;
 
 namespace Repository.Services
 {
     public class EmailSender : IEmailSender
     {
-        private readonly string _smtpHost;
-        private readonly int _smtpPort;
-        private readonly string _smtpUser;
-        private readonly string _smtpPass;
+        private readonly SmtpSettings _smtpSettings;
 
-        public EmailSender(string smtpHost, int smtpPort, string smtpUser, string smtpPass)
+        public EmailSender(SmtpSettings smtpSettings)
         {
-            _smtpHost = smtpHost;
-            _smtpPort = smtpPort;
-            _smtpUser = smtpUser;
-            _smtpPass = smtpPass;
+            _smtpSettings = smtpSettings;
         }
 
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var client = new SmtpClient(_smtpHost, _smtpPort)
+            var client = new SmtpClient(_smtpSettings.Host, _smtpSettings.Port)
             {
-                Credentials = new NetworkCredential(_smtpUser, _smtpPass),
+                Credentials = new NetworkCredential(_smtpSettings.User, _smtpSettings.Password),
                 EnableSsl = true
             };
 
             await client.SendMailAsync(new MailMessage
             {
-                From = new MailAddress(_smtpUser),
+                From = new MailAddress(_smtpSettings.User),
                 To = { email },
                 Subject = subject,
                 Body = htmlMessage,
@@ -39,4 +34,5 @@ namespace Repository.Services
         }
     }
 }
+
 

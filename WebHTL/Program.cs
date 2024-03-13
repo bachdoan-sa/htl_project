@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.Configuration;using Repository.ApplicationDbContext;
+using Repository.ApplicationDbContext;
 using Repository.Repositories;
 using Repository.Repositories.IRepositories;
 using Repository.Services;
 using Repository.Services.IServices;
+using Repository.Settings;
 using WebHTL.Extensions;
 
 namespace WebHTL
@@ -57,12 +58,9 @@ namespace WebHTL
             builder.Services.AddScoped<ITransactionService, TransactionService>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
 
-            var smtpSettings = builder.Configuration.GetSection("SmtpSettings");
-            builder.Services.AddSingleton<IEmailSender>(new EmailSender(
-                smtpSettings["Host"],
-                int.Parse(smtpSettings["Port"]),
-                smtpSettings["User"],
-                smtpSettings["Password"]));
+            var smtpSettings = builder.Configuration.GetSection("SmtpSettings").Get<SmtpSettings>();
+            builder.Services.AddSingleton(smtpSettings);
+            builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
