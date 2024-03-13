@@ -9,7 +9,8 @@ namespace Repository.Model
 {
     public class SectionModel
     {
-        public string? Type { get; set; } 
+        public string? Type { get; set; }
+        public string? Description { get; set; }
         public string? RoadmapId { get; set; }
         public string? CourseId { get; set; }
         public DateTimeOffset CreatedTime { get; set; }
