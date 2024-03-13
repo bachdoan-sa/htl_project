@@ -1,0 +1,75 @@
+﻿@page
+@model WebHTL.Pages.Profile.ShoppingCartModel
+@{
+    Layout = "_Layout";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h2>Your Shopping Cart</h2>
+
+@if (Model.OrderDetails == null || !Model.OrderDetails.Any())
+{
+    <p>Your shopping cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order Detail ID</th>
+                <th>Order Detail Status</th>
+                <th>Driver ID</th>
+                <th>Cost</th>
+                <th>Actions</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var orderDetail in Model.OrderDetails)
+            {
+                <tr>
+                    <td>@orderDetail.Id</td>
+                    <td>@orderDetail.OrderDetailStatus</td>
+                    <td>@orderDetail.DriverId</td>
+                    <td>@orderDetail.Cost</td>
+                    <td>
+                        <a asp-page-handler="Update" asp-route-id="@orderDetail.Id">Update</a> |
+                        <a asp-page-handler="Delete" asp-route-id="@orderDetail.Id">Delete</a>
+                    </td>
+                    <td>
+                        <input type="checkbox" class="select-item" value="@orderDetail.Id" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" onClick="gotoCheckout()" class="btn btn-primary">Proceed to payment</button>
+
+    <script>function gotoCheckout() {
+            var selectedIds = [];
+            $('.select-item:checked').each(function (i, obj) {
+                selectedIds.push($(obj).val());
+            });
+            var url = '~/Checkout?items=' + selectedIds.join(',');
+            window.location.href = url;
+        }</script>
+
+}
+
+<h2>Add To Cart</h2>
+<form method="post">
+    <div class="form-group">
+        <input type="hidden" asp-for="OrderDetail.Id" value="" />
+
+        <label asp-for="OrderDetail.OrderDetailStatus"></label>
+        <input asp-for="OrderDetail.OrderDetailStatus" class="form-control" />
+
+        <label asp-for="OrderDetail.DriverId"></label>
+        <input asp-for="OrderDetail.DriverId" class="form-control" />
+
+        <label asp-for="OrderDetail.Cost"></label>
+        <input asp-for="OrderDetail.Cost" class="form-control" />
+
+        <button type="submit" class="btn btn-primary">Thêm vào giỏ</button>
+    </div>
+</form>
