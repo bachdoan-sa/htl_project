@@ -29,16 +29,23 @@ public class ForgotPasswordModel : PageModel
             return Page();
         }
 
-        var user = await _accountService.GetByEmail(Email);
-        if (user != null)
+        try
         {
-            // Generate token and send email to user
-            var token = await _accountService.GenerateResetToken(Email);
-            await _accountService.SendResetPasswordEmailAsync(Email);
+            var user = await _accountService.GetByEmail(Email);
+
+            if (user == null)
+            {
+                Message = "Email does not exist in the database.";
+            }
+            else
+            {
+                var token = await _accountService.GenerateResetToken(Email);
+                await _accountService.SendResetPasswordEmailAsync(Email);
+            }
         }
-        else
+        catch (Exception exception)
         {
-            Message = "Email does not exist in the database.";
+            Message = exception.Message;
         }
         return Page();
     }

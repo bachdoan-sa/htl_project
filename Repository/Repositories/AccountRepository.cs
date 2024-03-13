@@ -54,7 +54,7 @@ namespace Repository.Repositories
 
         public async Task<Account?> GetByEmail(string email)
         {
-            return await _context.Accounts.FirstOrDefaultAsync(_ => _.Email == email);
+            return await _context.Accounts.FirstOrDefaultAsync(account => account.Email == email);
         }
 
         public async Task SetResetToken(string email, string token)

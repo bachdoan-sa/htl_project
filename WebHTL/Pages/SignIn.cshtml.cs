@@ -24,27 +24,27 @@ namespace WebHTL.Pages
         public string Message { get; set; } = default!;
         public IActionResult OnPost()
         {
-            try
+            var adminAcc = _config["AdminAccount:Admin"];
+            var adminPass = _config["AdminAccount:Password"];
+            if (adminAcc == Email && adminPass == Password)
             {
-
-                var adminAcc = _config["AdminAccount:Admin"];
-                var adminPass = _config["AdminAccount:Password"];
-                if (adminAcc == Email && adminPass == Password)
-                {
-                    HttpContext.Session.SetString("Admin", Email);
-                    return Redirect("~/Admin/Index");
-                }
-                var cus = _accountService.Login(Email, Password);
-                HttpContext.Session.SetInt32("customerId", cus.Id);
-                return RedirectToPage("./Profile/Index");
+                HttpContext.Session.SetString("Admin", Email);
+                return Redirect("~/Admin/Index");
             }
-            catch (Exception ex)
+            else
             {
-                Message = ex.Message;
-                return Page();
-
+                try
+                {
+                    var cus = _accountService.Login(Email, Password);
+                    HttpContext.Session.SetInt32("customerId", cus.Id);
+                    return RedirectToPage("./Profile/Index");
+                }
+                catch (Exception)
+                {
+                    Message = "Incorrect login";
+                    return Page();
+                }
             }
         }
-
     }
 }
