@@ -15,6 +15,8 @@ namespace Repository.Model
         public string? RoadmapGoal { get; set; }
         public string? RoadmapType { get; set; }
         public string? Language { get; set; }
+        public string? RoadmapImage { get; set; }
+        public double? RoadmapPrice { get; set; }
         public string? CareerId { get; set; }
         public string? CareerName { get; set; }
         public int CountCourse { get; set; }

@@ -12,6 +12,7 @@ namespace Repository.Entities
     public class Section : BaseEntity
     {
         public string Type { get; set; } //not use yet
+        public string? Description { get; set; }
         [Required]
         public string RoadmapId { get; set; }
         

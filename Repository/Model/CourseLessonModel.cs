@@ -12,6 +12,7 @@ namespace Repository.Model
         public string? Id { get; set; }
         public string? LessonName { get; set; }
         public string? LessonTarget { get; set; }
+        public string? LessonContent { get; set; }
         public string? LessonURL { get; set; }
         public string? CourseModuleId { get; set; }
         public DateTimeOffset CreatedTime { get; set; }

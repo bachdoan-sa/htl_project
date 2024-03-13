@@ -16,6 +16,7 @@ namespace Repository.Entities
         public string CourseStatus { get; set; }
         public string DefaultImage { get; set; }
         public string Level { get; set; }
+        public double Price { get; set; }
 
         public virtual ICollection<CourseModule>? CourseModules { get;set; }
         public virtual ICollection<Section>? Sections { get; set; }
