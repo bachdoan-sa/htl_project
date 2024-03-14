@@ -22,37 +22,54 @@ namespace Repository.Services
             _mapper = mapper;
         }
 
-        public Task<OrderModel> Add(OrderModel model)
+        public async Task<OrderModel> Add(OrderModel model)
         {
             var entity = _mapper.Map<Order>(model);
-            var result = _mapper.Map<OrderModel>(_orderRepository.Add(entity).Result);
+            var resultEntity = await _orderRepository.Add(entity);
+            var resultModel = _mapper.Map<OrderModel>(resultEntity);
 
-            return Task.FromResult(result);
+            return resultModel;
         }
 
-        public Task<string> Delete(string id)
+        public async Task<string> Delete(string id)
         {
-            return _orderRepository.Delete(id);
+            return await _orderRepository.Delete(id);
         }
 
-        public Task<List<OrderModel>> GetAll()
+        public async Task<List<OrderModel>> GetAll()
         {
-            var list = _orderRepository.GetAll().Result;
-            return Task.FromResult(_mapper.Map<List<OrderModel>>(list));
+            var list = await _orderRepository.GetAll();
+            return _mapper.Map<List<OrderModel>>(list);
         }
 
-        public Task<OrderModel> GetById(string id)
+        public async Task<OrderModel> GetById(string id)
         {
-            var list = _orderRepository.GetById(id).Result;
-            return Task.FromResult(_mapper.Map<OrderModel>(list));
+            var entity = await _orderRepository.GetById(id);
+            return _mapper.Map<OrderModel>(entity);
         }
 
-        public Task<OrderModel> Update(OrderModel model)
+        public async Task<OrderModel> Update(OrderModel model)
         {
             var entity = _mapper.Map<Order>(model);
-            var result = _mapper.Map<OrderModel>(_orderRepository.Update(entity).Result);
+            var updatedEntity = await _orderRepository.Update(entity);
+            return _mapper.Map<OrderModel>(updatedEntity);
+        }
 
-            return Task.FromResult(result);
+        public async Task<decimal> GetTotalRevenueForCurrentMonth()
+        {
+            return await _orderRepository.GetTotalRevenueForCurrentMonth();
+        }
+        public async Task<int> GetTotalOrdersForCurrentMonth()
+        {
+            return await _orderRepository.GetTotalOrdersForCurrentMonth();
+        }
+        public async Task<int> GetTotalOrderCount()
+        {
+            return await _orderRepository.GetTotalOrderCount(); 
+        }
+        public async Task<List<OrderModel>> GetRecentOrdersWithUsers(int count)
+        {
+            return await _orderRepository.GetRecentOrdersWithUsers(count);
         }
     }
 }

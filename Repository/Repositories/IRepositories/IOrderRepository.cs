@@ -14,5 +14,6 @@ namespace Repository.Repositories.IRepositories
         Task<Order> Add(Order order);
         Task<Order> Update(Order order);
         Task<string> Delete(string id);
+        Task<decimal> GetTotalRevenueForCurrentMonth();
     }
 }

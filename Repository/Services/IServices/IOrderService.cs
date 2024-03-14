@@ -14,5 +14,6 @@ namespace Repository.Services.IServices
         Task<OrderModel> Add(OrderModel model);
         Task<OrderModel> Update(OrderModel model);
         Task<string> Delete(string id);
+        Task<decimal> GetTotalRevenueForCurrentMonth();
     }
 }
