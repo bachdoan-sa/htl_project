@@ -15,6 +15,8 @@ namespace WebHTL.Pages
         }
         public void OnGet()
         {
+            HttpContext.Session.Remove("Admin");
+            HttpContext.Session.Remove("CustomerId");
         }
         [BindProperty]
         public string Email { get; set; } = default!;
@@ -35,8 +37,8 @@ namespace WebHTL.Pages
             {
                 try
                 {
-                    var cus = _accountService.Login(Email, Password);
-                    HttpContext.Session.SetInt32("customerId", cus.Id);
+                    var cus = _accountService.Login(Email, Password).Result;
+                    HttpContext.Session.SetString("CustomerId", cus.Id);
                     return RedirectToPage("./Profile/Index");
                 }
                 catch (Exception)

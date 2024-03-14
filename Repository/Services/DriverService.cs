@@ -46,7 +46,11 @@ namespace Repository.Services
             var list = _driverRepository.GetById(id).Result;
             return Task.FromResult(_mapper.Map<DriverModel>(list));
         }
-
+        public Task<List<DriverModel>> GetListByUserId(string userId)
+        {
+            var list = _driverRepository.GetListByUserId(userId).Result;
+            return Task.FromResult(_mapper.Map<List<DriverModel>>(list));
+        }
         public Task<DriverModel> Update(DriverModel model)
         {
             var entity = _mapper.Map<Driver>(model);

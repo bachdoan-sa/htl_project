@@ -36,11 +36,11 @@
                     </div>
                     <div class="wrapper-profile__info-detail">
                         <div class="mb20">
-                            <span class="fullname">Bách Đoàn</span>
+                            <span class="fullname">@Model.Account.UserName</span>
                         </div>
                         <div class="total-course">
                             <div class="d-flex align-items-center gap10">
-                                <span class="number">1</span>
+                                <span class="number">@Model.RoadmapOngoing</span>
                                 <span class="title">Khóa học/Combo khóa học đang học</span>
                             </div>
                             <div class="d-flex align-items-center gap10 mt15">
@@ -50,11 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="wrapper-profile__info-rank">
-                    <div class="images">
-                        <img src="upload/hinhanh/tan-binh-tu-tin0101-5672.webp" alt="Rank" width="130" height="130" class="coverimg img-thumbnail" style="aspect-ratio: 130 / 130;">
-                    </div>
-                </div>
+                
             </div>
         </div>
         <div class="mt20 pb10">
@@ -69,8 +65,8 @@
                         <div class="span6 span-12-sm">
                             <div class="wrapper-profile__personal-input">
                                 <div class="log-input">
-                                    <label for="fullname" class="wrapper-profile__personal-label">Họ tên đầy đủ</label>
-                                    <input type="text" name="fullname" id="fullname" placeholder="Họ và tên đầy đủ" value="Bách Đoàn">
+                                    <label for="fullname" class="wrapper-profile__personal-label">Username</label>
+                                    <input type="text" name="fullname" id="fullname" placeholder="Họ và tên đầy đủ" value="@Model.Account.UserName">
                                 </div>
                             </div>
                         </div>
@@ -78,7 +74,7 @@
                             <div class="wrapper-profile__personal-input">
                                 <div class="log-input">
                                     <label for="email" class="wrapper-profile__personal-label">Email</label>
-                                    <input type="text" readonly="" name="email" id="email" placeholder="Email" value="superminervip@gmail.com">
+                                    <input type="text" readonly="" name="email" id="email" placeholder="Email" value="@Model.Account.Email">
                                 </div>
                             </div>
                         </div>
@@ -86,19 +82,19 @@
                             <div class="wrapper-profile__personal-input">
                                 <div class="log-input">
                                     <label for="phone" class="wrapper-profile__personal-label">Số điện thoại</label>
-                                    <input type="text" name="phone" id="phone" placeholder="Số điện thoại" value="0773525266">
+                                    <input type="text" name="phone" id="phone" placeholder="Số điện thoại" value="@Model.Account.Phone">
                                 </div>
                             </div>
                         </div>
                         <div class="span6 span-12-sm">
                             <div class="wrapper-profile__personal-input">
                                 <div class="log-input">
-                                    <label for="email" class="wrapper-profile__personal-label">Địa chỉ</label>
-                                    <input type="text" name="data[diachi]" id="diachi" placeholder="Địa chỉ" value="0">
+                                    <label for="email" class="wrapper-profile__personal-label">Ngày sinh</label>
+                                    <input type="text" name="data[diachi]" id="diachi" placeholder="@Model.Account.Birthdate?.ToString("dd/MM/yyyy")" value="0">
                                 </div>
                             </div>
                         </div>
-                        <div class="span6 span-12-sm">
+                        @*<div class="span6 span-12-sm">
                             <div class="wrapper-profile__personal-input wrapper-profile__personal-select">
                                 <div class="row-input log-input">
                                     <label class="wrapper-profile__personal-label">Tỉnh/thành phố:</label>
@@ -119,7 +115,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
 
                     </div>
                     <div class="text-center mt-3">
