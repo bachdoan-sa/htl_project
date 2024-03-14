@@ -47,16 +47,19 @@ namespace WebHTL.Pages.Profile
             return OnGet();
 
         }
-        public IActionResult OnPostUpdatePassword([FromForm] string oldpassword, string newpassword, string passwordconfirm)
+        public string OldPassword { get; set; } = string.Empty;
+        public string NewPassword { get; set; } = string.Empty;
+        public string ConfirmPassword { get; set; } = string.Empty; 
+        public IActionResult OnPostUpdatePassword()
         {
             var id = GetUser();
             var model = _accountService.GetById(id).Result;
             
-            if(oldpassword == model.Password)
+            if(OldPassword == model.Password)
             {
-                if(newpassword == passwordconfirm)
+                if(NewPassword == ConfirmPassword)
                 {
-                    _accountService.UpdatePassword(model.Id, newpassword);
+                    _accountService.UpdatePassword(model.Id, ConfirmPassword);
                     return OnGet();
                 }
             }

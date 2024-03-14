@@ -138,7 +138,7 @@
                                 <div class="log-input">
                                     <label for="password" class="wrapper-profile__personal-label">Nhập mật khẩu cũ:</label>
                                     <span class="log-view-pass"><i class="fa fa-eye-slash"></i></span>
-                                    <input type="password" name="oldpassword" id="password" placeholder="Nhập mật khẩu cũ">
+                                    <input type="password" asp-for="OldPassword" name="oldpassword" id="password" placeholder="Nhập mật khẩu cũ">
                                 </div>
                             </div>
                             <div class="wrapper-profile__personal-input mb-3">
@@ -148,7 +148,7 @@
                                         mới:
                                     </label>
                                     <span class="log-view-pass"><i class="fa fa-eye-slash"></i></span>
-                                    <input type="password" name="newpassword" id="newpassword" placeholder="Nhập mật khẩu mới">
+                                    <input type="password" asp-for="NewPassword" name="newpassword" id="newpassword" placeholder="Nhập mật khẩu mới">
                                 </div>
                             </div>
                             <div class="wrapper-profile__personal-input mb-3">
@@ -158,7 +158,7 @@
                                         khẩu:
                                     </label>
                                     <span class="log-view-pass"><i class="fa fa-eye-slash"></i></span>
-                                    <input type="password" name="passwordconfirm" id="confirm" placeholder="Xác nhận lại mật khẩu">
+                                    <input type="password" asp-for="ConfirmPassword" name="passwordconfirm" id="confirm" placeholder="Xác nhận lại mật khẩu">
                                 </div>
                             </div>
                         </div>
