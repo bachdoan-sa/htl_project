@@ -35,11 +35,40 @@ namespace WebHTL.Pages.Profile
             //end code
             return Page();
         }
+        public async Task<IActionResult> OnPostUpdateAccount()
+        {
+            var accountModel = new AccountModel();
+            accountModel.Id = GetUser();
+            accountModel.Phone = Account.Phone;
+            accountModel.Birthdate = Account.Birthdate;
 
+            var a = await _accountService.Update(accountModel, true);
+
+            return OnGet();
+
+        }
+        public IActionResult OnPostUpdatePassword([FromForm] string oldpassword, string newpassword, string passwordconfirm)
+        {
+            var id = GetUser();
+            var model = _accountService.GetById(id).Result;
+            
+            if(oldpassword == model.Password)
+            {
+                if(newpassword == passwordconfirm)
+                {
+                    _accountService.UpdatePassword(model.Id, newpassword);
+                    return OnGet();
+                }
+            }
+            return Redirect("/SignIn");
+            
+
+            
+        }
         #region private method get user and admin
         private string? GetUser()
         {
-            string? id = HttpContext.Session.GetString("CustomerId");
+            string? id = HttpContext.Session.GetString("customerId");
             if (id != null)
             {
                 return id;
