@@ -58,7 +58,21 @@ namespace Repository.Repositories
             return Task.FromResult(entity.Id);
         }
 
+        public async Task<List<OrderDetail>> GetOrderDetailsByIds(string[] itemIds)
+        {
+            var orderDetailsList = await _context.OrderDetails
+                .Where(od => itemIds.Contains(od.Id))
+                .ToListAsync();
 
+            return orderDetailsList;
+        }
+
+        public async Task<List<OrderDetail>> GetOrderDetailsByUserId(string userId)
+        {
+            return await _context.OrderDetails
+                .Where(od => od.Order.AccountId == userId)
+                .ToListAsync();
+        }
     }
 
 }

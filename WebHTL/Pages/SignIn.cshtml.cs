@@ -36,8 +36,8 @@ namespace WebHTL.Pages
                 try
                 {
                     var cus = _accountService.Login(Email, Password);
-                    HttpContext.Session.SetInt32("customerId", cus.Id);
-                    return RedirectToPage("./Profile/Index");
+                    HttpContext.Session.SetString("customerId", Email);
+                    return RedirectToPage("./Profile/ProfileAccount");
                 }
                 catch (Exception)
                 {

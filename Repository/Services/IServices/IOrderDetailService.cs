@@ -15,6 +15,9 @@ namespace Repository.Services.IServices
         Task<OrderDetailModel> Add(OrderDetailModel model);
         Task<OrderDetailModel> Update(OrderDetailModel model);
         Task<string> Delete(string id);
-        
+        Task<List<OrderDetailModel>> GetOrderDetailsByIds(string[] itemIds);
+        Task<List<OrderDetailModel>> GetOrderDetailsByUserId(string userId);
+
+
     }
 }

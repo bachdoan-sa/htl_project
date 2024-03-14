@@ -1,5 +1,48 @@
 ﻿@page
 @model WebHTL.Pages.Profile.CheckoutModel
 @{
+    Layout = "_Layout";
 }
+<h2>Checkout</h2>
 
+@if (Model.TotalAmount > 0)
+{
+    <p>Total Amount: @Model.TotalAmount.ToString("C")</p>
+    <p>Please enter your email and the amount to be paid when scanning the QR code.</p>
+    <form method="post">
+        <div class="form-group">
+            <label>Select Payment Method:</label>
+            <select asp-for="Transaction.PaymentMethod" class="form-control">
+                <option value="Bank">Bank Transfer</option>
+                <option value="Momo">Momo</option>
+            </select>
+        </div>
+
+        <div id="qrCode">
+            <p>Scan the QR code to pay:</p>
+            <img src="~/images/bank_qr.png" alt="Bank QR Code" class="qr-code" style="display: none;" />
+            <img src="~/images/momo_qr.png" alt="Momo QR Code" class="qr-code" style="display: none;" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Complete Payment</button>
+    </form>
+}
+else
+{
+    <p>Your shopping cart is empty or an error occurred.</p>
+}
+<script>document.addEventListener("DOMContentLoaded", function () {
+        // Lắng nghe sự kiện thay đổi của select box
+        document.querySelector("select[name='Transaction.PaymentMethod']").addEventListener("change", function () {
+            // Ẩn cả hai QR code
+            document.querySelector("img[alt='Bank QR Code']").style.display = 'none';
+            document.querySelector("img[alt='Momo QR Code']").style.display = 'none';
+
+            // Hiển thị QR code tương ứng với phương thức thanh toán được chọn
+            if (this.value === "Bank") {
+                document.querySelector("img[alt='Bank QR Code']").style.display = 'block';
+            } else if (this.value === "Momo") {
+                document.querySelector("img[alt='Momo QR Code']").style.display = 'block';
+            }
+        });
+    });</script>
