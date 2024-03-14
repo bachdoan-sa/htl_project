@@ -50,8 +50,8 @@
                     <span><i class="fa fa-user f-s-40 color-danger"></i></span>
                 </div>
                 <div class="media-body media-text-right">
-                    <h2>847</h2>
-                    <p class="m-b-0">Customer</p>
+                    <<h2>@Model.TotalNewUsers</h2> <!-- Cập nhật giá trị ở đây -->
+                <p class="m-b-0">Customer</p>
                 </div>
             </div>
         </div>
@@ -195,59 +195,22 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Name</th>
-                                <th>Product</th>
-                                <th>quantity</th>
                                 <th>Status</th>
+                                <th>Total</th>
+                                <th>CreatedTime</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            <tr>
-                                <td>
-                                    <div class="round-img">
-                                        <a href=""><img src="~/admin/assets/images/avatar/4.jpg" alt=""></a>
-                                    </div>
-                                </td>
-                                <td>John Abraham</td>
-                                <td><span>iBook</span></td>
-                                <td><span>456 pcs</span></td>
-                                <td><span class="badge badge-success">Done</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="round-img">
-                                        <a href=""><img src="~/admin/assets/images/avatar/2.jpg" alt=""></a>
-                                    </div>
-                                </td>
-                                <td>John Abraham</td>
-                                <td><span>iPhone</span></td>
-                                <td><span>456 pcs</span></td>
-                                <td><span class="badge badge-success">Done</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="round-img">
-                                        <a href=""><img src="~/admin/assets/images/avatar/3.jpg" alt=""></a>
-                                    </div>
-                                </td>
-                                <td>John Abraham</td>
-                                <td><span>iMac</span></td>
-                                <td><span>456 pcs</span></td>
-                                <td><span class="badge badge-warning">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="round-img">
-                                        <a href=""><img src="~/admin/assets/images/avatar/4.jpg" alt=""></a>
-                                    </div>
-                                </td>
-                                <td>John Abraham</td>
-                                <td><span>iBook</span></td>
-                                <td><span>456 pcs</span></td>
-                                <td><span class="badge badge-success">Done</span></td>
-                            </tr>
+                            @foreach (var order in Model.RecentOrdersWithUsers)
+                            {
+                                <tr>
+                                    <td>@(order.Account?.UserName ?? "N/A")</td>
+                                    <td>@order.OrderStatus</td>
+                                    <td>@order.Total</td>
+                                    <td>@order.CreatedTime.ToString("MM/dd/yyyy HH:mm")</td> 
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

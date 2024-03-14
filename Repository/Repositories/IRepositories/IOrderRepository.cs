@@ -1,4 +1,5 @@
 ﻿using Repository.Entities;
+using Repository.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,8 @@ namespace Repository.Repositories.IRepositories
         Task<Order> Update(Order order);
         Task<string> Delete(string id);
         Task<decimal> GetTotalRevenueForCurrentMonth();
+        Task<int> GetTotalOrdersForCurrentMonth();
+        Task<int> GetTotalOrderCount();
+        Task<List<OrderModel>> GetRecentOrdersWithUsers(int count);
     }
 }

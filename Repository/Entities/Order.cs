@@ -16,7 +16,6 @@ namespace Repository.Entities
 
         [Required]
         public string? AccountId { get; set; }
-        public DateTime DateCreated { get; set; }
 
         [ForeignKey(nameof(AccountId))]
         public virtual Account? Account { get; set; }

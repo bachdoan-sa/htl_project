@@ -1,4 +1,5 @@
-﻿using Repository.Entities;
+﻿using System.Threading.Tasks;
+using Repository.Entities;
 using Repository.Model;
 
 namespace Repository.Services.IServices
@@ -12,8 +13,6 @@ namespace Repository.Services.IServices
         Task<List<AccountModel>> GetAll();
         Task<AccountModel> Add(AccountModel model);
         Task<AccountModel> Update(AccountModel model);
-        Task<string> Update(AccountModel model, bool IsUserProfile);
-        Task<string> UpdatePassword(string id, string pass);
         Task<string> Delete(string id);
         Task<Account> Login(string username, string password);
         Task<Account?> GetByEmail(string email);
@@ -21,5 +20,6 @@ namespace Repository.Services.IServices
         Task SendResetPasswordEmailAsync(string email);
         Task<bool> VerifyResetTokenAsync(string email, string token);
         Task ResetPasswordAsync(string email, string newPassword);
+        Task<int> GetNewUserCountForCurrentMonth();
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Repository.ApplicationDbContext;
 using Repository.Entities;
 using Repository.Repositories.IRepositories;
@@ -14,17 +16,17 @@ namespace Repository.Repositories
         }
         public Task<Account> GetById(string id)
         {
-            var acc = _context.Accounts.Where(_ => _.Id == id).FirstOrDefault();
-            if (acc != null)
+            var acc = _context.Accounts.Where(_ => _.Id == id).FirstOrDefaultAsync();
+            if (acc.Result != null)
             {
-                return Task.FromResult(acc);
+                return acc;
 
             }
             throw new Exception("NotFound!");
         }
         public Task<List<Account>> GetAll()
         {
-            return Task.FromResult(_context.Accounts.ToList());
+            return _context.Accounts.ToListAsync();
         }
         public Task<Account> Add(Account account)
         {
@@ -32,11 +34,11 @@ namespace Repository.Repositories
             _context.SaveChanges();
             return Task.FromResult(account);
         }
-        public Task<Account> Update(Account account)
+        public async Task<Account> Update(Account account)
         {
             _context.Accounts.Update(account);
-            _context.SaveChanges();
-            return Task.FromResult(account);
+            await _context.SaveChangesAsync();
+            return account;
         }
         public Task<string> Delete(string id)
         {
@@ -68,6 +70,15 @@ namespace Repository.Repositories
             user.ResetToken = token;
 
             await _context.SaveChangesAsync();
+        }
+        public async Task<int> GetNewUserCountForCurrentMonth()
+        {
+            var now = DateTimeOffset.Now;
+            var firstDayOfMonth = new DateTimeOffset(new DateTime(now.Year, now.Month, 1));
+            var newUserCount = await _context.Accounts
+                .CountAsync(a => a.CreatedTime >= firstDayOfMonth && a.CreatedTime < firstDayOfMonth.AddMonths(1));
+
+            return newUserCount;
         }
     }
 }

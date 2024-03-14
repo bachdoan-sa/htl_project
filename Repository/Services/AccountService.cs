@@ -4,6 +4,7 @@ using Repository.Model;
 using Repository.Repositories.IRepositories;
 using Repository.Services.IServices;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace Repository.Services
 {
@@ -19,7 +20,7 @@ namespace Repository.Services
             _emailSender = emailSender;
         }
         public Task<List<AccountModel>> GetAll()
-        {
+        {  
             var list = _accountRepository.GetAll().Result;
             return Task.FromResult(_mapper.Map<List<AccountModel>>(list));
         }
@@ -32,42 +33,17 @@ namespace Repository.Services
         public Task<AccountModel> Add(AccountModel model)
         {
             var entity = _mapper.Map<Account>(model);
-            var result = _mapper.Map<AccountModel>(_accountRepository.Add(entity).Result);
+            var result = _mapper.Map <AccountModel>(_accountRepository.Add(entity).Result);
 
             return Task.FromResult(result);
         }
-
+ 
         public Task<AccountModel> Update(AccountModel model)
         {
             var entity = _mapper.Map<Account>(model);
             var result = _mapper.Map<AccountModel>(_accountRepository.Update(entity).Result);
 
             return Task.FromResult(result);
-        }
-        public Task<string> Update(AccountModel model, bool isProfile)
-        {
-            if (isProfile)
-            {
-                var acc = _accountRepository.GetById(model.Id).Result;
-                acc.Phone = model.Phone;
-                acc.Birthdate = model.Birthdate ?? DateTimeOffset.Now;
-                _accountRepository.Update(acc);
-
-                return Task.FromResult(acc.Id);
-            }
-            throw new NotImplementedException();
-
-        }
-        public Task<string> UpdatePassword(string id, string password)
-        {
-
-            var acc = _accountRepository.GetById(id).Result;
-            acc.Password = password;
-            _accountRepository.Update(acc);
-
-            return Task.FromResult(acc.Id);
-
-
         }
         public Task<string> Delete(string id)
         {
@@ -147,6 +123,10 @@ namespace Repository.Services
             user.ResetToken = null;
 
             await _accountRepository.Update(user);
+        }
+        public async Task<int> GetNewUserCountForCurrentMonth()
+        {
+            return await _accountRepository.GetNewUserCountForCurrentMonth();
         }
     }
 }
