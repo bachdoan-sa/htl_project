@@ -1,14 +1,13 @@
-﻿@page
+﻿@page "{id}"
 @model WebHTL.Pages.Profile.ProfileRoadMapModel
 @{
     Layout = "_Layout";
 }
-@section head{
+@section head {
     <!-- Swiper CSS -->
-    
 }
-@section Scripts{
-    <script src="~/js/carousel.js"></script> 
+@section Scripts {
+    <script src="~/js/carousel.js"></script>
 
 }
 <style>
@@ -43,7 +42,7 @@
         <section class="slick-slideshow" style="margin-top:0">
 
             <div class="slick-custom">
-                <img src="../images/slideshow/team-meeting-renewable-energy-project.jpeg" class="img-fluid" alt="">
+                <img src="/images/slideshow/team-meeting-renewable-energy-project.jpeg" class="img-fluid" alt="">
 
                 <div class="slick-bottom">
                     <div class="container">
@@ -65,7 +64,7 @@
             <div class="fs-4 col-12 font-weight-bold text-center">
                 <div class="wrapper-detailCombo__title">
 
-                    <span style="margin-bottom:0px" >Khu vực đầu tiên</span>
+                    <span style="margin-bottom:0px">Khu vực đầu tiên</span>
 
                 </div>
             </div>
@@ -74,104 +73,124 @@
                     <!-- Carouse -->
                     <div id="carouselExampleControls" class="carousel" data-ride="carousel" style="padding:0 40px">
                         <div class="carousel-inner">
+                            @foreach (var sections in Model.Section.Select((value, i) => new { i, value }))
+                            {
+                                <div class="carousel-item @if(sections.i == 1){ Html.Raw("active");}" >
+                                    <div class="card swiper-slide">
+                                        <div class="image-content">
+                                            <span class="overlay"></span>
+                                            <div class="card-image">
+                                                <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-content">
+                                            <h2 class="name">@if (sections.value.CourseModel != null) { @sections.value.CourseModel.CourseName }</h2>
+                                            <p class="description">@sections.value.Description</p>
+                                            <a href="/CoursePage"></a><button class="button">View more</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
 
-                            <div class="carousel-item active">
-                                <div class="card swiper-slide">
-                                    <div class="image-content">
-                                        <span class="overlay"></span>
-                                        <div class="card-image">
-                                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
-                                            </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h2 class="name">Bach Doan</h2>
-                                        <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
-                                        <a href="/CoursePage"></a><button class="button">View more</button>
-                                    </div>
-                                </div>
+                            @* <div class="carousel-item active">
+                            <div class="card swiper-slide">
+                            <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
+                            </div>
+
+                            </div>
+                            </div>
+                            <div class="card-content">
+                            <h2 class="name">Bach Doan</h2>
+                            <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
+                            <a href="/CoursePage"></a><button class="button">View more</button>
+                            </div>
+                            </div>
                             </div>
                             <div class="carousel-item ">
-                                <div class="card swiper-slide">
-                                    <div class="image-content">
-                                        <span class="overlay"></span>
-                                        <div class="card-image">
-                                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h2 class="name">Bach Doan</h2>
-                                        <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
-                                        <a href="/CoursePage"></a><button class="button">View more</button>
-                                    </div>
-                                </div>
+                            <div class="card swiper-slide">
+                            <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
+                            </div>
+                            </div>
+                            </div>
+                            <div class="card-content">
+                            <h2 class="name">Bach Doan</h2>
+                            <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
+                            <a href="/CoursePage"></a><button class="button">View more</button>
+                            </div>
+                            </div>
                             </div>
                             <div class="carousel-item ">
-                                <div class="card swiper-slide">
-                                    <div class="image-content">
-                                        <span class="overlay"></span>
-                                        <div class="card-image">
-                                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h2 class="name">Bach Doan</h2>
-                                        <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
-                                        <a href="/CoursePage"></a><button class="button">View more</button>
-                                    </div>
-                                </div>
+                            <div class="card swiper-slide">
+                            <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
+                            </div>
+                            </div>
+                            </div>
+                            <div class="card-content">
+                            <h2 class="name">Bach Doan</h2>
+                            <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
+                            <a href="/CoursePage"></a><button class="button">View more</button>
+                            </div>
+                            </div>
                             </div>
                             <div class="carousel-item ">
-                                <div class="card swiper-slide">
-                                    <div class="image-content">
-                                        <span class="overlay"></span>
-                                        <div class="card-image">
-                                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h2 class="name">Bach Doan</h2>
-                                        <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
-                                        <a href="/CoursePage"></a><button class="button">View more</button>
-                                    </div>
-                                </div>
+                            <div class="card swiper-slide">
+                            <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
+                            </div>
+                            </div>
+                            </div>
+                            <div class="card-content">
+                            <h2 class="name">Bach Doan</h2>
+                            <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
+                            <a href="/CoursePage"></a><button class="button">View more</button>
+                            </div>
+                            </div>
                             </div>
                             <div class="carousel-item ">
-                                <div class="card swiper-slide">
-                                    <div class="image-content">
-                                        <span class="overlay"></span>
-                                        <div class="card-image">
-                                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h2 class="name">Bach Doan</h2>
-                                        <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
-                                        <a href="/CoursePage"></a><button class="button">View more</button>
-                                    </div>
-                                </div>
+                            <div class="card swiper-slide">
+                            <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
+                            </div>
+                            </div>
+                            </div>
+                            <div class="card-content">
+                            <h2 class="name">Bach Doan</h2>
+                            <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
+                            <a href="/CoursePage"></a><button class="button">View more</button>
+                            </div>
+                            </div>
                             </div>
                             <div class="carousel-item ">
-                                <div class="card swiper-slide">
-                                    <div class="image-content">
-                                        <span class="overlay"></span>
-                                        <div class="card-image">
-                                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h2 class="name">Bach Doan</h2>
-                                        <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
-                                        <a href="/CoursePage"></a><button class="button">View more</button>
-                                    </div>
-                                </div>
+                            <div class="card swiper-slide">
+                            <div class="image-content">
+                            <span class="overlay"></span>
+                            <div class="card-image">
+                            <div class="card-img" style="background:url(/images/basicweb.png) no-repeat center center">
                             </div>
+                            </div>
+                            </div>
+                            <div class="card-content">
+                            <h2 class="name">Bach Doan</h2>
+                            <p class="description">Toi khong biet the nao, torng truong hop co co quan nao truy cuu web nay toi xin mien tru trach nhiem.</p>
+                            <a href="/CoursePage"></a><button class="button">View more</button>
+                            </div>
+                            </div>
+                            </div> *@
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -183,9 +202,9 @@
                         </button>
                     </div>
 
-                 
 
-                   
+
+
                 </div>
             </div>
         </section>
@@ -201,7 +220,7 @@
                     </div>
                     <div class=" col-6">
                         <div class="wrapper-detailCombo__box-images p-relative">
-                            <img src="../images/slideshow/team-meeting-renewable-energy-project.jpeg" alt=" Nhập môn C# FullStack" class="coverimg" style="aspect-ratio: 620 / 340;width:100%">
+                            <img src="/images/slideshow/team-meeting-renewable-energy-project.jpeg" alt=" Nhập môn C# FullStack" class="coverimg" style="aspect-ratio: 620 / 340;width:100%">
                             <div class="coursedetail_thumb_play js-video wrapper-detailCombo__box-images-play" data-rel="316" data-col="baiviet">
                                 <span><i class="fa-solid fa-play"></i></span>
                             </div>
@@ -300,7 +319,7 @@
     }
 
     .slide-container {
-/*        max-width: 1120px;*/
+        /*        max-width: 1120px;*/
         width: 100%;
         justify-content: center;
         align-items: center;
@@ -309,7 +328,6 @@
     }
 
     .slide-content {
-        
     }
 
     .card {
@@ -345,28 +363,28 @@
     }
 
     /* .overlay::before,
-                    .overlay::after {
-                        content: '';
-                        position: absolute;
-                        right: 0;
-                        bottom: -40px;
-                        height: 40px;
-                        width: 40px;
-                        background-color: #4070F4;
-                    }
+                        .overlay::after {
+                            content: '';
+                            position: absolute;
+                            right: 0;
+                            bottom: -40px;
+                            height: 40px;
+                            width: 40px;
+                            background-color: #4070F4;
+                        }
 
-                    .overlay::after {
-                        border-radius: 0 25px 0 0;
-                        background-color: #FFF;
-                    }*/
+                        .overlay::after {
+                            border-radius: 0 25px 0 0;
+                            background-color: #FFF;
+                        }*/
 
     .card-image {
         position: relative;
         height: 150px;
         width: auto;
         /*border-radius: 50%;
-                    background-color: #FFF;
-                    padding: 3px;*/
+                        background-color: #FFF;
+                        padding: 3px;*/
     }
 
         .card-image .card-img {

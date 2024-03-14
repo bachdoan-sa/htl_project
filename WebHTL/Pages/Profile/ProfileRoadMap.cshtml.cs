@@ -7,14 +7,17 @@ namespace WebHTL.Pages.Profile
 {
     public class ProfileRoadMapModel : PageModel
     {
+        private readonly ISectionService _sectionService;
         private readonly IRoadmapService _roadmapService;
-
-        public GetRoadmapDetailResDto Roadmap { get; set; }
-
-        public ProfileRoadMapModel(IRoadmapService roadmapService)
+        public ProfileRoadMapModel(ISectionService sectionService, IRoadmapService roadmapService)
         {
+            _sectionService = sectionService;
             _roadmapService = roadmapService;
+            
         }
+
+        public List<SectionModel> Section { get; set; } = new List<SectionModel>();
+        public RoadmapModel Roadmap { get; set; }
 
         //public IActionResult OnGet()
         //{
@@ -37,7 +40,8 @@ namespace WebHTL.Pages.Profile
             }
             else
             {
-                
+                Roadmap = _roadmapService.GetRoadmapById(id).Result;
+                Section = _sectionService.GetSectionsByRoadmapId(id).Result;
                 return Page();
             }
         }

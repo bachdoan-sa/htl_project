@@ -39,7 +39,7 @@ namespace WebHTL.Pages.Profile
         #region private method get user and admin
         private string? GetUser()
         {
-            string? id = HttpContext.Session.GetString("CustomerId");
+            string? id = HttpContext.Session.GetString("customerId");
             if (id != null)
             {
                 return id;
