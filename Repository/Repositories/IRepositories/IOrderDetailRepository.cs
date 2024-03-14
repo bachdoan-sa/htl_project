@@ -15,5 +15,7 @@ namespace Repository.Repositories.IRepositories
         Task<OrderDetail> Add(OrderDetail orderDetail);
         Task<OrderDetail> Update(OrderDetail orderDetail);
         Task<string> Delete(string id);
+        Task<List<OrderDetail>> GetOrderDetailsByIds(string[] itemIds);
+        Task<List<OrderDetail>> GetOrderDetailsByUserId(string userId);
     }
 }

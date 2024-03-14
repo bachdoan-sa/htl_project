@@ -4,65 +4,73 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Repository.Entities;
 using Repository.Model;
+using Repository.Services;
 using Repository.Services.IServices;
 
 namespace WebHTL.Pages.Profile
 {
-	public class CheckoutModel : PageModel
+    public class CheckoutModel : PageModel
     {
-        private readonly IOrderDetailService _orderDetailService;
-        private readonly IPaymentService _paymentService;
-
-        public CheckoutModel(IOrderDetailService orderDetailService, IPaymentService paymentService)
-        {
-            _orderDetailService = orderDetailService;
-            _paymentService = paymentService;
-        }
+        private readonly ITransactionService _transactionService;
+        // Assume other services are injected as needed
 
         [BindProperty]
-        public List<OrderDetailModel> OrderDetails { get; set; } = new List<OrderDetailModel>();
+        public TransactionModel Transaction { get; set; } = default!;
 
-        public IActionResult OnGet()
+        private readonly IOrderDetailService _orderDetailService;
+        public List<OrderDetailModel> OrderDetails { get; set; } = default!;
+        public decimal TotalAmount { get; set; }
+
+        public CheckoutModel(ITransactionService transactionService, IOrderDetailService orderDetailService)
         {
-            if (HttpContext.Session.GetInt32("customerId") == null)
+            _transactionService = transactionService;
+            _orderDetailService = orderDetailService;
+        }
+
+        public async Task<IActionResult> OnGet(string items)
+        {
+            if (HttpContext.Session.GetString("customerId") == null)
             {
                 return RedirectToPage("/SignIn");
             }
-            return Page();
+            var itemIds = items?.Split(',') ?? new string[0];
+
+            OrderDetails = await _orderDetailService.GetOrderDetailsByIds(itemIds);
+
+            TotalAmount = OrderDetails.Sum(od => od.Quantity * od.Price);
+
+            if (TotalAmount > 0 && OrderDetails.Any())
+            {
+                return Page();
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Your shopping cart is empty or an error occurred.";
+                return RedirectToPage("/Profile/ShoppingCart");
+            }
         }
 
-        public IActionResult OnPost(string paymentmethod, string selectedItems)
+        public async Task<IActionResult> OnPostAsync()
         {
-            var selectedItemIds = selectedItems.Split(',')
-                                     .Where(id => !string.IsNullOrEmpty(id))
-                                     .ToList();
-            foreach (var id in selectedItemIds)
-            {
-                var orderDetail = _orderDetailService.GetById(id).Result;
-                OrderDetails.Add(orderDetail);
-            }
-
-            switch (paymentmethod)
-            {
-                case "cash":
-                    _paymentService.ProcessCashPayment(OrderDetails);
-                    break;
-                case "banktransfer":
-                    _paymentService.ProcessBankPayment(OrderDetails);
-                    break;
-                case "momo":
-                    _paymentService.ProcessMomoPayment(OrderDetails);
-                    break;
-                default:
-                    ModelState.AddModelError("", "Invalid payment method selected");
-                    break;
-            }
-
             if (!ModelState.IsValid)
-                return Page(); 
+            {
+                return Page();
+            }
 
-            return RedirectToPage("/Success"); 
+            // Process the payment based on the selected method
+            if (Transaction.PaymentMethod == "Bank")
+            {
+                // Process bank transfer
+            }
+            else if (Transaction.PaymentMethod == "Momo")
+            {
+                // Process Momo payment
+            }
+
+            // Redirect to a confirmation page or display a success message
+            return RedirectToPage("/PaymentConfirmation");
         }
     }
 }
