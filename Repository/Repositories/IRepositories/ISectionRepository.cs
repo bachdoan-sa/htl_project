@@ -15,5 +15,6 @@ namespace Repository.Repositories.IRepositories
         Task<Section> Add(Section section);
         Task<Section> Update(Section section);
         Task<string> Delete(string id);
+        Task<List<Section>> GetListSectionByRoadmapId (string id);
     }
 }

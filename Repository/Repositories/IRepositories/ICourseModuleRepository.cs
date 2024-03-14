@@ -14,7 +14,6 @@ namespace Repository.Repositories.IRepositories
         Task<CourseModule> Add(CourseModule courseModule);
         Task<CourseModule> Update(CourseModule courseModule);
         Task<string> Delete(string id);
-
         Task<List<CourseModule>> GetByCourseId(string id);
     }
 }

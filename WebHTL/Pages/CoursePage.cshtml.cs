@@ -30,7 +30,7 @@ namespace WebHTL.Pages
         public async Task<IActionResult> OnGetAsync(string CourseId, string CourseLessonId, string CourseModulesId)
         {
             string a = "1"; // can sua sau nay'
-            CourseModules = await _courseModuleService.GetByCourseId(a);
+            CourseModules = await _courseModuleService.GetByCourseId(CourseId);
 
 
             if (CourseId == null)

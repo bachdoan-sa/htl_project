@@ -5,28 +5,52 @@
 <div class="wrapper">
     <div class="wrapper-slider">
         <section class="slick-slideshow" style="margin-top:0">
-
-
             <div class="slick-custom">
                 <img src="../images/slideshow/team-meeting-renewable-energy-project.jpeg" class="img-fluid" alt="">
-
                 <div class="slick-bottom">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-6 col-10">
-                                <h1 class="slick-title">Lộ trình cho người mới bắt đầu với ngôn ngữ C#</h1>
-
-                                <p class="lead text-white mt-lg-3 mb-lg-5">Bước đầu trên con đường sự nghiệp IT.</p>
-
-                                <a href="" class="btn custom-btn">Trải nghiệm ngay</a>
+                                <h1 class="slick-title">@Model.Roadmap.Title</h1>
+                                <p class="lead text-white mt-lg-3 mb-lg-5">@Model.Roadmap.RoadmapGoal</p>
+                                <a href="" class="btn custom-btn">Mua ngay</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </section>
 
+       @*  
+                            @if (Model.Roadmap.ListCourse != null && Model.Roadmap.ListCourse.Any())
+                            {
+                                <div class="course-list">
+                                    <h3>Danh sách các khóa học của Lộ trình:</h3>
+                                    <ul>
+                                        @foreach (var course in Model.Roadmap.ListCourse)
+                                        {
+                                            <li>
+                                                <span class="course-name">Tên Khóa Học :</span>
+                                                <span class="course-name">@course.CourseName</span><br>
+                                                <span class="course-name">Kiểu học :</span>
+                                                <span class="course-type">@course.TypeOfLearning</span><br>
+                                                <span class="course-name">Thông tin Khóa Học :</span>
+                                                <span class="course-info">@course.CourseInformation</span><br>
+                                                <span class="course-name">Độ khó :</span>
+                                                <span class="course-info">@course.Level</span><br>
+                                                <span class="course-name">Số Module :</span>
+                                                <span class="course-info">@course.CourseModules</span><br>
+                                                <!--Thêm các thông tin khác của khóa học nếu cần-->
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> *@
         <section class="wrapper-detailCombo" style="padding-top:30px; padding-bottom:30px;">
             <div class="container">
                 <div class="row align-items-center">
@@ -48,16 +72,16 @@
                     <div class=" col-6">
                         <div class="wrapper-detailCombo__box-detail">
                             <div class="title mb20">
-                                <h2> Nhập môn C# FullStack</h2>
+                                <h2>@Model.Roadmap.Title</h2>
                             </div>
                             <div class="info d-flex align-items-center gap-15 mb-30">
-                                <span>Beginner</span>
-                                <span>19</span>
+                                <span>Ngôn ngữ: </span>
+                                <span>@Model.Roadmap.Language</span>
                             </div>
                             <div class="content">
                                 <p>
                                     <span style="font-family:raleway-regular;">
-                                        Chào mừng bạn đến với khóa học "Nhập môn C# fullstack". Đây là khóa học lý tưởng cho những người mới bắt đầu và có mong muốn trở thành một kĩ sư máy tính. Chúng tôi đã hệ thống một lộ trình học từ nền tảng để giúp bạn xây dựng những kỹ năng cơ bản cho lập trình viên. Trọng tâm của khóa học là việc trau dồi kỹ năng xử lí và code, giúp bạn tự tin hơn khi khám phá thế giới của lĩnh vực vẽ IT. Hãy bắt đầu hành trình của bạn cùng chúng tôi ngay hôm nay!
+                                        @Model.Roadmap.RoadmapGoal
                                     </span>
                                 </p>
                             </div>
@@ -77,66 +101,22 @@
 
                         </div>
                     </div>
-                    <div class="col-6 mb20">
-                        <div class="wrapper-achievement__box d-flex gap50 gap15-m gap15-tl wrapper-achievement__box-hover">
-                            <div class="wrapper-achievement__images">
-                                <img src="~/images/icon-but.webp" alt="Nắm Vững Kỹ Thuật Thiết Kế Chính Xác" width="120" height="150" class="coverimg" style="aspect-ratio: 120 / 150;">
+                    @foreach (var sections in Model.Roadmap.Sections)
+            {
+                <div class="col-6 mb20">
+                    <div class="wrapper-achievement__box d-flex gap50 gap15-m gap15-tl wrapper-achievement__box-hover">
+                        <div class="wrapper-achievement__images">
+                                    <img src="~/images/icon-nguoi.webp" width="120" height="150" class="coverimg" style="aspect-ratio: 120 / 150;">
+                        </div>
+                        <div class="wrapper-achievement__detail flex-1">
+                            <div class="title line-2">
+                                @sections.Description
                             </div>
-                            <div class="wrapper-achievement__detail flex-1">
-                                <div class="title line-2">
-                                    Nắm Vững Kỹ Thuật Lập Trình Web Chính Xác
-                                </div>
-                                <div class="content line-5">
-                                    Khóa học này trang bị cho bạn kỹ năng cơ bản trong bảo trì webapp. Bạn sẽ học cách sử dụng các kiến trúc thông dụng, nắm vững kỹ thuật vẽ code chính xác, và đặt nền móng cho tác phẩm nghệ thuật của bạn. Những kỹ năng thiết yếu này rất quan trọng trong việc làm cho các tác phẩm anime của bạn trở nên sống động.
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
-                    <div class="col-6 mb20">
-                        <div class="wrapper-achievement__box d-flex gap50 gap15-m gap15-tl wrapper-achievement__box-hover">
-                            <div class="wrapper-achievement__images">
-                                <img src="~/images/icon-nguoi.webp" alt="Kỹ Năng Mô Tả Các Bộ Phận Cơ Thể Nhân Vật Anime" width="120" height="150" class="coverimg" style="aspect-ratio: 120 / 150;">
-                            </div>
-                            <div class="wrapper-achievement__detail flex-1">
-                                <div class="title line-2">
-                                    Kỹ Năng Mô Tả Các Bộ Phận Cơ Thể Nhân Vật Anime
-                                </div>
-                                <div class="content line-5">
-                                    Khóa học này phân tích và áp dụng các bộ phận cơ thể nhân vật anime, như mắt, mũi, miệng, tay, tóc,... Khóa học cung cấp hướng dẫn chi tiết về cách vẽ và mô tả chi tiết những phộ phận chính này để tạo ra những nhân vật rõ nét và biểu cảm sống động.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 mb20">
-                        <div class="wrapper-achievement__box d-flex gap50 gap15-m gap15-tl wrapper-achievement__box-hover">
-                            <div class="wrapper-achievement__images">
-                                <img src="~/images/icon-giotnuoc.webp" alt="Trang Bị Kỹ Năng Sử Dụng Phần Mềm" width="120" height="150" class="coverimg" style="aspect-ratio: 120 / 150;">
-                            </div>
-                            <div class="wrapper-achievement__detail flex-1">
-                                <div class="title line-2">
-                                    Trang Bị Kỹ Năng Sử Dụng Phần Mềm
-                                </div>
-                                <div class="content line-5">
-                                    Khóa học trang bị cho bạn kỹ năng sử dụng phần mềm MediBang Paint Pro để hỗ trợ hành trình vẽ nhân vật anime của bạn. Học cách sử dụng công cụ một cách hiệu quả, làm cho quá trình sáng tạo của bạn trở nên mượt mà và thú vị hơn.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 mb20">
-                        <div class="wrapper-achievement__box d-flex gap50 gap15-m gap15-tl wrapper-achievement__box-hover">
-                            <div class="wrapper-achievement__images">
-                                <img src="~/images/icon-tucgian.webp" alt="Cách Vẽ Từng Bộ Phận Khuôn Mặt Anime" width="120" height="150" class="coverimg" style="aspect-ratio: 120 / 150;">
-                            </div>
-                            <div class="wrapper-achievement__detail flex-1">
-                                <div class="title line-2">
-                                    Cách Vẽ Từng Bộ Phận Khuôn Mặt Anime
-                                </div>
-                                <div class="content line-5">
-                                    Khóa học này sẽ hướng dẫn bạn cách vẽ từng chi tiết trên khuôn mặt như khuôn mặt ở các góc độ, mắt, mũi, miệng... dưới dạng đen trắng. Từ đó bạn có thể thỏa sức sáng tạo ra các dạng khuôn mặt anime ở nhiều góc độ, với các hình dáng khuôn mặt khác nhau.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+            }
                 </div>
             </div>
         </section>
@@ -149,35 +129,21 @@
                             <span>Chương trình học</span>
                         </div>
                     </div>
-                    <div class="col-12 text-center">
-                        <div class="wrapper-programme__title">
-                            Lộ trình học ngôn ngữ C# định hướng FullStack
-                        </div>
-                        <div class="wrapper-programme__content">
-                            <p><span style="font-family:raleway-regular;">Chào mừng bạn đến với khóa học "Anime 1: Sketch &amp; Lineart". Đây là khóa học lý tưởng cho những người mới bắt đầu và có mong muốn trở thành họa sĩ vẽ anime. Chúng tôi đã hệ thống một lộ trình học từ nền tảng để giúp bạn xây dựng những kỹ năng cơ bản cho một họa sĩ anime. Trọng tâm của khóa học là việc trau dồi kỹ năng sketch và lineart, giúp bạn tự tin hơn khi khám phá thế giới của lĩnh vực vẽ anime. Hãy bắt đầu hành trình nghệ thuật của bạn cùng chúng tôi ngay hôm nay!</span></p>
-                        </div>
-                    </div>
                     <div class="col-12">
                         <div class="wrapper-programme__box d-flex align-items-center justify-content-center">
+                            
+                                <div class="text-center">
+                                    <div class="number">
+                                    @Model.TotalModules
+                                    </div>
+                                    <div class="title">
+                                        Check Point
+                                    </div>
+                                </div>
+                            
                             <div class="text-center">
                                 <div class="number">
-                                    20
-                                </div>
-                                <div class="title">
-                                    Check Point
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <div class="number">
-                                    1 Tháng
-                                </div>
-                                <div class="title">
-                                    Thời gian lộ trình
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <div class="number">
-                                    4
+                                    @Model.Roadmap.CountCourse
                                 </div>
                                 <div class="title">
                                     Số khóa học
@@ -189,7 +155,7 @@
             </div>
         </section>
 
-        <section class="wrapper-courses" >
+        @* <section class="wrapper-courses">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="row col-12 text-center">
@@ -276,10 +242,12 @@
                             <a href="" class="view-all">Xem tất cả khóa học</a>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
-        </section>
+        </section> *@
+
+        <!-- Các phần còn lại của mã HTML có thể được cập nhật tương tự -->
     </div>
 </div>
 <style>
@@ -343,5 +311,5 @@
         }
 
 
-        
+
 </style>

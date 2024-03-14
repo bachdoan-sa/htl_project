@@ -58,6 +58,15 @@ namespace Repository.Repositories
             return Task.FromResult(entity.Id);
         }
 
-
+        public async Task<List<Section>> GetListSectionByRoadmapId(string id)
+        {
+            try
+            {
+                return await _context.Sections.Where(p => p.RoadmapId == id).ToListAsync();
+            } catch
+            {
+                throw;
+            }
+        }
     }
 }

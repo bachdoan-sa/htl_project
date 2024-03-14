@@ -17,5 +17,6 @@ namespace Repository.Services.IServices
         Task DeleteRoadmap(string id);
         Task<int> CountCourseInRoadMap(string id);
         Task<List<RoadmapModel>> SearchRoadMapByName(string roadmapName);
+        Task<GetRoadmapDetailResDto> GetRoadmapDetailResByIdAsync(string id);
     }
 }

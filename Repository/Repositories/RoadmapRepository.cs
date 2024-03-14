@@ -20,7 +20,8 @@ namespace Repository.Repositories
         }
         public Task<Roadmap> GetById(string id)
         {
-            var acc = _context.Roadmaps.Where(_ => _.Id == id).FirstOrDefaultAsync();
+            var acc = _context.Roadmaps.Include(r => r.Sections)
+                                    .Include(a => a.Career).Where(_ => _.Id == id).FirstOrDefaultAsync();
             if (acc.Result != null)
             {
                 return acc;
