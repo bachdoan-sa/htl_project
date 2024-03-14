@@ -24,6 +24,14 @@ namespace WebHTL.Pages.Areas.Admin.Transaction
         [BindProperty]
         public string Email { get; set; }
 
+        public IActionResult OnGet()
+        {
+            if (HttpContext.Session.GetString("Admin") == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
