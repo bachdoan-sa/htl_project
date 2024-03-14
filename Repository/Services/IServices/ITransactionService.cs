@@ -14,5 +14,6 @@ namespace Repository.Services.IServices
         Task<TransactionModel> Add(TransactionModel model);
         Task<TransactionModel> Update(TransactionModel model);
         Task<string> Delete(string id);
+        Task<string> AddByhand(SetTransactionDto model);
     }
 }

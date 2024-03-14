@@ -2,6 +2,7 @@
 using Microsoft.Identity.Client;
 using Repository.ApplicationDbContext;
 using Repository.Entities;
+using Repository.Model;
 using Repository.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -57,6 +58,50 @@ namespace Repository.Repositories
 
             return Task.FromResult(entity.Id);
         }
+        public Task<string> AddbyHand(SetTransactionDto model)
+        {
+            var order = new Order()
+            {
+                Total = model.Order.Total ?? 0,
+                OrderStatus = model.Order.OrderStatus,
+                AccountId = model.Order.AccountId,
+
+            };
+
+            var tran = new Transaction()
+            {
+                PaymentMethod = model.Transaction.PaymentMethod,
+                Amount = model.Transaction.Amount ?? 0,
+                TransactionStatus = model.Transaction.TransactionStatus,
+                Message = model.Transaction.Message,
+                ReponseTime = model.Transaction.ReponseTime ?? 0,
+                OrderId = order.Id,
+            };
+
+            var driver = new Driver()
+            {
+                StartTime = model.Driver.StartTime ?? DateTimeOffset.Now,
+                ExpectedEndTime = model.Driver.ExpectedEndTime ?? DateTimeOffset.Now,
+                Type = model.Driver.Type,
+                DriverStatus = model.Driver.DriverStatus,
+                RoadmapId = model.Driver.RoadmapId,
+            };
+
+            var orderDetail = new OrderDetail()
+            {
+                OrderDetailStatus = model.OrderDetail.OrderDetailStatus,
+                Cost = model.OrderDetail.Cost ?? 0,
+                DriverId = driver.Id,
+                OrderId = order.Id,
+            };
+            _context.Orders.Add(order);
+            _context.Transactions.Add(tran);
+            _context.Drivers.Add(driver);
+            _context.OrderDetails.Add(orderDetail);
+            _context.SaveChanges();
+            return Task.FromResult("OK");
+        }
+
 
 
     }

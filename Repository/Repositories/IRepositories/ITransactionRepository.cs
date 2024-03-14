@@ -16,5 +16,6 @@ namespace Repository.Repositories.IRepositories
         Task<Transaction> Add(Transaction transaction);
         Task<Transaction> Update(Transaction transaction);
         Task<string> Delete(string id);
+        Task<string> AddbyHand(SetTransactionDto model);
     }
 }

@@ -51,5 +51,10 @@ namespace Repository.Services
             return _transactionRepository.Delete(id);
         }
 
+        public Task<string> AddByhand(SetTransactionDto model)
+        {
+
+            return _transactionRepository.AddbyHand(model);
+        }
     }
 }
