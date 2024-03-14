@@ -25,6 +25,11 @@ namespace Repository.Services
             var list = _sectionRepository.GetAll().Result;
             return Task.FromResult(_mapper.Map<List<SectionModel>>(list));
         }
+        public Task<List<SectionModel>> GetSectionsByRoadmapId(string id)
+        {
+            var list = _sectionRepository.GetListSectionByRoadmapId(id).Result;
+            return Task.FromResult(_mapper.Map<List<SectionModel>>(list));
+        }
 
         public Task<SectionModel> GetById(string id)
         {

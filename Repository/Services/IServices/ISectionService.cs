@@ -11,6 +11,7 @@ namespace Repository.Services.IServices
     {
         Task<SectionModel> GetById(string id);
         Task<List<SectionModel>> GetAll();
+        Task<List<SectionModel>> GetSectionsByRoadmapId(string id);
         Task<SectionModel> Add(SectionModel model);
         Task<SectionModel> Update(SectionModel model);
         Task<string> Delete(string id);

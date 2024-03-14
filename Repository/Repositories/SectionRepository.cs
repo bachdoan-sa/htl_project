@@ -28,6 +28,16 @@ namespace Repository.Repositories
             }
             throw new Exception("NotFound!");
         }
+        public Task<List<Section>> GetByRoadmapId(string roadmapId)
+        {
+            var sec = _context.Sections.Include(_ => _.Course).Where(_ => _.RoadmapId == roadmapId).ToList();
+            if (sec == null)
+            {
+                throw new Exception("NotFound!");
+            }
+            return Task.FromResult(sec);
+            
+        }
         public Task<List<Section>> GetAll()
         {
             return _context.Sections.ToListAsync();
