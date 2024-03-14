@@ -11,6 +11,7 @@ namespace Repository.Repositories.IRepositories
     {
         Task<Driver> GetById(string id);
         Task<List<Driver>> GetAll();
+        Task<List<Driver>> GetListByUserId(string userId);
         Task<Driver> Add(Driver driver);
         Task<Driver> Update(Driver driver);
         Task<string> Delete(string id);

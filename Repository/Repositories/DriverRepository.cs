@@ -53,7 +53,19 @@ namespace Repository.Repositories
             }
             throw new Exception("NotFound!");
         }
+        public Task<List<Driver>> GetListByUserId(string userId)
+        {
+            var drivers = _context.OrderDetails.Include(_ => _.Order).Include(_=>_.Driver).ThenInclude(_=>_.Roadmap)
+                                                    .Where(_ => _.Order.AccountId == userId)
+                                                    .Select(_=>_.Driver)
+                                                    .ToListAsync();
+            if (drivers.Result != null)
+            {
+                return drivers;
 
+            }
+            throw new Exception("NotFound!");
+        }
         public Task<Driver> Update(Driver driver)
         {
             _context.Drivers.Update(driver);

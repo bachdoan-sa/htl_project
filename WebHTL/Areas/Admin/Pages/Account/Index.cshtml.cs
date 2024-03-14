@@ -23,5 +23,6 @@ namespace WebHTL.Pages.Areas.Admin.Account
             }
             Accounts = await _accountService.GetAll();
         }
+        
     }
 }
