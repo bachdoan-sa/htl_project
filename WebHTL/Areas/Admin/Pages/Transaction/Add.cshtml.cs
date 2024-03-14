@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Repository.Entities;
 using Repository.Model;
 using Repository.Services.IServices;
@@ -9,31 +10,41 @@ namespace WebHTL.Pages.Areas.Admin.Transaction
     public class AddModel : PageModel
     {
         private readonly ITransactionService _transactionService;
-        
+        private readonly IAccountService _accountService;
 
-        public AddModel(ITransactionService transactionService)
+        public AddModel(ITransactionService transactionService, IAccountService accountService)
         {
             _transactionService = transactionService;
-            
+            _accountService = accountService;
         }
 
         [BindProperty]
         public SetTransactionDto Dto { get; set; }
 
+        [BindProperty]
+        public string Email { get; set; }
+
+
         public async Task<IActionResult> OnPostAsync()
         {
-            
-
-
             try
             {
+                var account = await _accountService.GetByEmail(Email);
+                if (account == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Không tìm th?y tài kho?n v?i email ?ã nh?p.");
+                    return Page();
+                }
+
+                // Gán ID c?a tài kho?n vào Order
+                Dto.Order.AccountId = account.Id;
                 // Map DTO to model
                 var result = await _transactionService.AddByhand(Dto);
 
                 if (result != null)
                 {
                     // Redirect to a success page or another page as needed
-                    return RedirectToPage("/Admin/Transaction/Index");
+                    return Redirect("/Admin/Transaction/Index");
                 }
                 else
                 {
