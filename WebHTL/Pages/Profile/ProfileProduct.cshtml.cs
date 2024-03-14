@@ -5,8 +5,15 @@ namespace WebHTL.Pages.Profile
 {
     public class ProfileProductModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            var userId = HttpContext.Session.GetString("customerId");
+
+            if (userId == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+            return Page();
         }
     }
 }
