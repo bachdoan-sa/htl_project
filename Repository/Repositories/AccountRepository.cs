@@ -14,17 +14,17 @@ namespace Repository.Repositories
         }
         public Task<Account> GetById(string id)
         {
-            var acc = _context.Accounts.Where(_ => _.Id == id).FirstOrDefaultAsync();
-            if (acc.Result != null)
+            var acc = _context.Accounts.Where(_ => _.Id == id).FirstOrDefault();
+            if (acc != null)
             {
-                return acc;
+                return Task.FromResult(acc);
 
             }
             throw new Exception("NotFound!");
         }
         public Task<List<Account>> GetAll()
         {
-            return _context.Accounts.ToListAsync();
+            return Task.FromResult(_context.Accounts.ToList());
         }
         public Task<Account> Add(Account account)
         {
@@ -32,11 +32,11 @@ namespace Repository.Repositories
             _context.SaveChanges();
             return Task.FromResult(account);
         }
-        public async Task<Account> Update(Account account)
+        public Task<Account> Update(Account account)
         {
             _context.Accounts.Update(account);
-            await _context.SaveChangesAsync();
-            return account;
+            _context.SaveChanges();
+            return Task.FromResult(account);
         }
         public Task<string> Delete(string id)
         {

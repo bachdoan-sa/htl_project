@@ -15,7 +15,7 @@ namespace Repository.Entities
         public decimal Cost { get; set; }
         [Required]
         public string OrderId { get; set; }
-        [ForeignKey(nameof(OrderDetailStatus))]
+        [ForeignKey(nameof(OrderId))]
         public virtual Order Order { get; set; }
         [Required]
         public string DriverId { get; set; }
