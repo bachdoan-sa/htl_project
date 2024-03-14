@@ -13,7 +13,8 @@ namespace Repository.Mapper
     {
         public SectionProfile()
         {
-            CreateMap<SectionModel, Section>().ReverseMap();
+            CreateMap<SectionModel, Section>().ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<Section, SectionModel>();
         }
     }
 }

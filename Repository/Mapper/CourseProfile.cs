@@ -13,7 +13,8 @@ namespace Repository.Mapper
     {
         public CourseProfile()
         {
-            CreateMap<CourseModel, Course>().ReverseMap();
+            CreateMap<CourseModel, Course>().ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<Course, CourseModel>();
         }
     }
 }
