@@ -45,6 +45,31 @@ namespace Repository.Services
 
             return Task.FromResult(result);
         }
+        public Task<string> Update(AccountModel model, bool isProfile)
+        {
+            if (isProfile)
+            {
+                var acc = _accountRepository.GetById(model.Id).Result;
+                acc.Phone = model.Phone;
+                acc.Birthdate = model.Birthdate ?? DateTimeOffset.Now;
+                _accountRepository.Update(acc);
+
+                return Task.FromResult(acc.Id);
+            }
+            throw new NotImplementedException();
+
+        }
+        public Task<string> UpdatePassword(string id, string password)
+        {
+
+            var acc = _accountRepository.GetById(id).Result;
+            acc.Password = password;
+            _accountRepository.Update(acc);
+
+            return Task.FromResult(acc.Id);
+
+
+        }
         public Task<string> Delete(string id)
         {
             return _accountRepository.Delete(id);

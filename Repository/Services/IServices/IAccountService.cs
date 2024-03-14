@@ -13,6 +13,8 @@ namespace Repository.Services.IServices
         Task<List<AccountModel>> GetAll();
         Task<AccountModel> Add(AccountModel model);
         Task<AccountModel> Update(AccountModel model);
+        Task<string> Update(AccountModel model, bool IsUserProfile);
+        Task<string> UpdatePassword(string id, string pass);
         Task<string> Delete(string id);
         Task<Account> Login(string username, string password);
         Task<Account?> GetByEmail(string email);
