@@ -15,6 +15,8 @@ namespace WebHTL.Pages
         }
         public void OnGet()
         {
+            HttpContext.Session.Remove("Admin");
+            HttpContext.Session.Remove("CustomerId");
         }
         [BindProperty]
         public string Email { get; set; } = default!;
