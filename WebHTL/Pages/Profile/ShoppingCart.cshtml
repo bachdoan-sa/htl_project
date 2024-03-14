@@ -45,14 +45,16 @@ else
     </table>
     <button type="button" onClick="gotoCheckout()" class="btn btn-primary">Proceed to payment</button>
 
-    <script>function gotoCheckout() {
+    <script>
+        function gotoCheckout() {
             var selectedIds = [];
             $('.select-item:checked').each(function (i, obj) {
-                selectedIds.push($(obj).val());
+            selectedIds.push($(obj).val());
             });
-            var url = '~/Checkout?items=' + selectedIds.join(',');
+            var url = '@Url.Page("/Profile/Checkout")' + '?items=' + selectedIds.join(',') + '&total=' + @Model.TotalAmount;
             window.location.href = url;
-        }</script>
+        }
+    </script>
 
 }
 

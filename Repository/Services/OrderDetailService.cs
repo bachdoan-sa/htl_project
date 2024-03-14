@@ -51,6 +51,17 @@ namespace Repository.Services
         {
             return _orderDetailRepository.Delete(id);
         }
+        public async Task<List<OrderDetailModel>> GetOrderDetailsByIds(string[] itemIds)
+        {
+            var orderDetails = await _orderDetailRepository.GetOrderDetailsByIds(itemIds);
+            return _mapper.Map<List<OrderDetailModel>>(orderDetails);
+        }
+
+        public async Task<List<OrderDetailModel>> GetOrderDetailsByUserId(string userId)
+        {
+            var orderDetailsEntities = await _orderDetailRepository.GetOrderDetailsByUserId(userId);
+            return _mapper.Map<List<OrderDetailModel>>(orderDetailsEntities);
+        }
 
     }
 }

@@ -15,6 +15,7 @@ namespace WebHTL.Pages.Profile
         [BindProperty]
         public List<OrderDetailModel> OrderDetails { get; set; } = default!;
         public OrderDetailModel OrderDetail { get; set; } = default!;
+        public decimal TotalAmount { get; set; }
 
         public ShoppingCartModel(IOrderDetailService service)
         {
@@ -23,12 +24,21 @@ namespace WebHTL.Pages.Profile
 
         public async Task<IActionResult> OnGetAsync()
         {
-            OrderDetails = await _orderDetailService.GetAll();
+            var userId = HttpContext.Session.GetString("customerId");
+
+            if (userId == null)
+            {
+                return RedirectToPage("/SignIn");
+            }
+
+            OrderDetails = await _orderDetailService.GetOrderDetailsByUserId(userId);
 
             if (OrderDetails == null || !OrderDetails.Any())
             {
                 return NotFound();
             }
+
+            TotalAmount = OrderDetails.Sum(od => od.Quantity * od.Price);
 
             return Page();
         }
