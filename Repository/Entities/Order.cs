@@ -12,13 +12,14 @@ namespace Repository.Entities
     public class Order : BaseEntity
     {
         public decimal Total { get; set; }
-        public string OrderStatus { get; set; }
+        public string? OrderStatus { get; set; }
 
         [Required]
-        public string AccountId { get; set; }
+        public string? AccountId { get; set; }
+        public DateTime DateCreated { get; set; }
 
         [ForeignKey(nameof(AccountId))]
-        public virtual Account Account { get; set; }
+        public virtual Account? Account { get; set; }
         public virtual ICollection<OrderDetail>? OrderDetails { get; set; }
         public virtual ICollection<Transaction>? Transactions { get; set; }
     }

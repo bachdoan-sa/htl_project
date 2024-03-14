@@ -60,5 +60,28 @@ namespace Repository.Repositories
             _context.SaveChanges();
             return Task.FromResult(order);
         }
+        public async Task<decimal> GetTotalRevenueForCurrentMonth()
+        {
+            var now = DateTime.Now;
+            var firstDayOfMonth = new DateTime(now.Year, now.Month, 1);
+            var totalRevenue = await _context.Orders
+                .Where(o => o.DateCreated >= firstDayOfMonth && o.DateCreated < firstDayOfMonth.AddMonths(1))
+                .SumAsync(o => o.Total);
+
+            return totalRevenue;
+        }
+        public async Task<int> GetTotalOrdersForCurrentMonth()
+        {
+            var now = DateTime.Now;
+            var firstDayOfMonth = new DateTime(now.Year, now.Month, 1);
+            var totalOrders = await _context.Orders
+                .CountAsync(o => o.DateCreated >= firstDayOfMonth && o.DateCreated < firstDayOfMonth.AddMonths(1));
+
+            return totalOrders;
+        }
+        public async Task<int> GetTotalOrderCount()
+        {
+            return await _context.Orders.CountAsync(); 
+        }
     }
 }
