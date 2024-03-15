@@ -10,16 +10,18 @@
     <title>HTL - Sign In</title>
 
 </head>
-
 <body>
     <main>
-
         <section class="sign-in-form section-padding">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto col-12">
 
                         <h1 class="hero-title text-center mb-5">Sign In</h1>
+                        @if (TempData["Message"] != null)
+                        {
+                            <p class="alert alert-success">@TempData["Message"]</p>
+                        }
                         <div class="col-lg-8 col-11 mx-auto">
                             <form role="form" method="post">
 
@@ -54,9 +56,6 @@
                 </div>
             </div>
         </section>
-
     </main>
-
-
 </body>
 </html>

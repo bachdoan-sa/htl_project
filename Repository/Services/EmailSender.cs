@@ -1,5 +1,4 @@
-﻿using System;
-using Repository.Services.IServices;
+﻿using Repository.Services.IServices;
 using System.Net;
 using System.Net.Mail;
 using Repository.Settings;
@@ -17,20 +16,23 @@ namespace Repository.Services
 
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var client = new SmtpClient(_smtpSettings.Host, _smtpSettings.Port)
+            using (var client = new SmtpClient(_smtpSettings.Host, _smtpSettings.Port)
             {
                 Credentials = new NetworkCredential(_smtpSettings.User, _smtpSettings.Password),
-                EnableSsl = true
-            };
-
-            await client.SendMailAsync(new MailMessage
+                EnableSsl = _smtpSettings.EnableSsl
+            })
             {
-                From = new MailAddress(_smtpSettings.User),
-                To = { email },
-                Subject = subject,
-                Body = htmlMessage,
-                IsBodyHtml = true
-            });
+                var mailMessage = new MailMessage
+                {
+                    From = new MailAddress(_smtpSettings.User),
+                    Subject = subject,
+                    Body = htmlMessage,
+                    IsBodyHtml = true
+                };
+                mailMessage.To.Add(email);
+
+                await client.SendMailAsync(mailMessage);
+            }
         }
     }
 }
