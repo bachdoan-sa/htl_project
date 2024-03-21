@@ -1,0 +1,52 @@
+﻿@page "{orderId}"
+@model WebHTL.Pages.Profile.OrderDetailHistoryModel
+@{
+    Layout = "_LayoutProfile";
+}
+@section head {
+    <link href="~/css/profile-page.css" rel="stylesheet" />
+}
+
+
+<section class="page-wrapper">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-primary font-weight-bold text-uppercase">Chi tiết đơn hàng </h3>
+        </div>
+    </div>
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="mt20 pb10">
+            <div class="wrapper-profile__bg wrapper-profile__activated">
+                <table class="mt-3 w-100">
+                    <thead style="text-align:center">
+                        <tr>
+                            <th class="font-weight-bold text-uppercase">Mã</th>
+                            <th class="font-weight-bold text-uppercase">Mã Driver</th>
+                            <th class="font-weight-bold text-uppercase">Giá</th>
+                            <th class="font-weight-bold text-uppercase">Ngày Tạo</th>
+                            <th class="font-weight-bold text-uppercase">Ngày Cập Nhật gần nhất</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:center ;">
+                        @foreach (var order in Model.OrderDetails)
+                        {
+                            <tr style="border-top: 1px solid black; margin:20px">
+                                <td>@order.Id</td>
+                                <td>@order.DriverId</td>
+                                <td>@order.Cost</td>
+                                <td>@order.CreatedTime</td>
+                                <td>@order.LastUpdated</td>
+                                
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>

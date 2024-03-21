@@ -73,6 +73,14 @@ namespace Repository.Repositories
                 .Where(od => od.Order.AccountId == userId)
                 .ToListAsync();
         }
+
+
+        public async Task<List<OrderDetail>> GetOrderDetailsByOrderId(string Id)
+        {
+            return await _context.OrderDetails
+                .Where(od => od.OrderId == Id)
+                .ToListAsync();
+        }
     }
 
 }

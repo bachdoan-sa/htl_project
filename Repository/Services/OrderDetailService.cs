@@ -62,6 +62,10 @@ namespace Repository.Services
             var orderDetailsEntities = await _orderDetailRepository.GetOrderDetailsByUserId(userId);
             return _mapper.Map<List<OrderDetailModel>>(orderDetailsEntities);
         }
-
+        public async Task<List<OrderDetailModel>> GetOrderDetailsByOrderId(string Id)
+        {
+            var orderDetailsEntities = await _orderDetailRepository.GetOrderDetailsByOrderId(Id);
+            return _mapper.Map<List<OrderDetailModel>>(orderDetailsEntities);
+        }
     }
 }

@@ -18,5 +18,6 @@ namespace Repository.Services.IServices
         Task<int> GetTotalOrdersForCurrentMonth();
         Task<int> GetTotalOrderCount();
         Task<List<OrderModel>> GetRecentOrdersWithUsers(int count);
+        Task<List<OrderModel>> GetAllByAccountId(string id);
     }
 }

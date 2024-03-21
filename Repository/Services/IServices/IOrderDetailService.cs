@@ -17,6 +17,7 @@ namespace Repository.Services.IServices
         Task<string> Delete(string id);
         Task<List<OrderDetailModel>> GetOrderDetailsByIds(string[] itemIds);
         Task<List<OrderDetailModel>> GetOrderDetailsByUserId(string userId);
+        Task<List<OrderDetailModel>> GetOrderDetailsByOrderId(string Id);
 
 
     }

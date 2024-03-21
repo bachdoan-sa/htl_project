@@ -100,6 +100,12 @@ namespace Repository.Repositories
             var orderModels = _mapper.Map<List<OrderModel>>(orderEntities);
             return orderModels;
         }
+
+        public Task<List<Order>> GetAllByAccountId(string id)
+        {
+            var acc = _context.Orders.Where(_ => _.AccountId == id).ToListAsync();
+            return acc;
+        }
     }
-   
+
 }

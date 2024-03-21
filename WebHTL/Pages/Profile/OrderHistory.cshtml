@@ -1,0 +1,53 @@
+﻿@page 
+@model WebHTL.Pages.Profile.OrderHistoryModel
+@{
+    Layout = "_LayoutProfile";
+}
+@section head {
+    <link href="~/css/profile-page.css" rel="stylesheet" />
+}
+
+<section class="page-wrapper">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-primary font-weight-bold text-uppercase">Lịch sử đơn hàng</h3>
+        </div>
+    </div>
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="mt20 pb10">
+            <div class="wrapper-profile__bg wrapper-profile__activated">
+                <table class="mt-3 w-100">
+                    <thead style="text-align:center">
+                        <tr>
+                            <th class="font-weight-bold text-uppercase">Mã Đơn Hàng</th>
+                            <th class="font-weight-bold text-uppercase">Tổng Giá(VNĐ)</th>
+                            <th class="font-weight-bold text-uppercase">Trạng Thái</th>
+                            <th class="font-weight-bold text-uppercase">Ngày Tạo</th>
+                            <th class="font-weight-bold text-uppercase">Ngày Cập Nhật gần nhất</th>
+                            <th class="font-weight-bold text-uppercase"></th>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:center ;">
+                        @foreach (var order in Model.Orders)
+                        {
+                            <tr style="border-top: 1px solid black; margin:20px">
+                                <td>@order.Id</td>
+                                <td>@order.Total</td>
+                                <td>@order.OrderStatus</td>
+                                <td>@order.CreatedTime</td>
+                                <td>@order.LastUpdated</td>
+                                <td style="text-align:center !important;">
+                                    <a class="wrapper-profile__activated-link" href="~/Profile/OrderDetailHistory/@order.Id">Xem chi tiết</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>

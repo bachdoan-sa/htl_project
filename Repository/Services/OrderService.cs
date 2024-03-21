@@ -71,5 +71,10 @@ namespace Repository.Services
         {
             return await _orderRepository.GetRecentOrdersWithUsers(count);
         }
+        public async Task<List<OrderModel>> GetAllByAccountId(string id)
+        {
+            var entity = await _orderRepository.GetAllByAccountId(id);
+            return _mapper.Map<List<OrderModel>>(entity);
+        }
     }
 }

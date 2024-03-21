@@ -11,6 +11,7 @@ namespace Repository.Model
 {
     public class OrderModel
     {
+        public string? Id { get; set; }
         public decimal? Total { get; set; }
         public string? OrderStatus { get; set; }
         public string? AccountId { get; set; }
