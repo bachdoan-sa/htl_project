@@ -20,6 +20,8 @@ public class ResetPasswordModel : PageModel
     [BindProperty]
     public string NewPassword { get; set; } = default!;
     [BindProperty]
+    public string ConfirmPassword { get; set; } = default!;
+    [BindProperty]
     public string ErrorMessage { get; set; } = default!;
 
     public bool TokenValid { get; set; }
@@ -47,6 +49,6 @@ public class ResetPasswordModel : PageModel
 
         await _accountService.ResetPasswordAsync(Email, NewPassword);
         TempData["Message"] = "Your password has been reset successfully. Please sign in with your new password.";
-        return RedirectToPage("SignIn");
+        return RedirectToPage("/SignIn");
     }
 }
