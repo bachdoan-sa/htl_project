@@ -30,6 +30,7 @@ namespace Repository.Repositories
         }
         public Task<Account> Add(Account account)
         {
+            account.ResetToken = "";
             _context.Accounts.Add(account);
             _context.SaveChanges();
             return Task.FromResult(account);

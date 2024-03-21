@@ -36,6 +36,7 @@ namespace WebHTL.Pages
                 Birthdate = DateTime.UtcNow,
                 Role = "Customer",
                 Work = "student"
+                
             };
             var acc = _accountService.Add(account).Result.Email;
             if(acc != null)

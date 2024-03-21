@@ -1,5 +1,5 @@
 ﻿@{
-    var email = Context.Request.HttpContext.Session.GetString("Customer");
+    var email = Context.Request.HttpContext.Session.GetString("customerId");
 }
 
 <!DOCTYPE html>
@@ -113,7 +113,7 @@
                         else
                         {
                             <div class="d-none d-lg-block">
-                                <a href="#">
+                                <a href="/Profile/Index">
                                     <div class="user-img rounded-circle" style="width: 30px; height: 30px; overflow: hidden; margin-right:15px">
                                         <img src="~/admin/assets/images/users/5.jpg" alt="user" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
                                         <span class="profile-status online pull-right"></span>
@@ -125,7 +125,7 @@
 
                     </div>
                     <div>
-                        <a href="./product-detail.html" class="bi-bag custom-icon"></a>
+                        <a href="./products" class="bi-bag custom-icon"></a>
                     </div>
                 </div>
             </div>
