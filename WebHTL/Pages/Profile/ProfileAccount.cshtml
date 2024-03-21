@@ -61,12 +61,13 @@
                 <div class="alert--error mb-2">
                 </div>
                 <form asp-page-handler="UpdateAccount" method="post" class="w-100"  accept-charset="utf-8">
+                    <input hidden asp-for="Account.Id" readonly/>
                     <div class="grid gap20">
                         <div class="span6 span-12-sm">
                             <div class="wrapper-profile__personal-input">
                                 <div class="log-input">
                                     <label for="fullname" class="wrapper-profile__personal-label">Username</label>
-                                    <input type="text" readonly name="fullname" id="fullname" asp-for="Account.UserName">
+                                    <input type="text" readonly id="fullname" asp-for="Account.UserName">
                                 </div>
                             </div>
                         </div>
@@ -74,7 +75,7 @@
                             <div class="wrapper-profile__personal-input">
                                 <div class="log-input">
                                     <label for="email" class="wrapper-profile__personal-label">Email</label>
-                                    <input type="text" readonly name="email" placeholder="Email" asp-for="Account.Email">
+                                    <input type="text" readonly placeholder="Email" asp-for="Account.Email">
                                 </div>
                             </div>
                         </div>
@@ -82,7 +83,7 @@
                             <div class="wrapper-profile__personal-input">
                                 <div class="log-input">
                                     <label for="phone" class="wrapper-profile__personal-label">Số điện thoại</label>
-                                    <input type="text" name="phone" placeholder="Số điện thoại" asp-for="Account.Phone">
+                                    <input type="text" placeholder="Số điện thoại" asp-for="Account.Phone">
                                 </div>
                             </div>
                         </div>
@@ -132,6 +133,7 @@
                 <div class="alert--error mb-2">
                 </div>
                 <form asp-page-handler="UpdatePassword" method="post" accept-charset="utf-8" >
+                    <input hidden asp-for="Account.Id" readonly />
                     <div class="row d-flex">
                         <div class="col-12">
                             <div class="wrapper-profile__personal-input mb-3">
@@ -148,7 +150,7 @@
                                         mới:
                                     </label>
                                     <span class="log-view-pass"><i class="fa fa-eye-slash"></i></span>
-                                    <input type="password" asp-for="NewPassword" name="newpassword" id="newpassword" placeholder="Nhập mật khẩu mới">
+                                    <input type="password" asp-for="NewPassword" placeholder="Nhập mật khẩu mới">
                                 </div>
                             </div>
                             <div class="wrapper-profile__personal-input mb-3">
@@ -158,7 +160,7 @@
                                         khẩu:
                                     </label>
                                     <span class="log-view-pass"><i class="fa fa-eye-slash"></i></span>
-                                    <input type="password" asp-for="ConfirmPassword" name="passwordconfirm" id="confirm" placeholder="Xác nhận lại mật khẩu">
+                                    <input type="password" asp-for="ConfirmPassword"  placeholder="Xác nhận lại mật khẩu">
                                 </div>
                             </div>
                         </div>

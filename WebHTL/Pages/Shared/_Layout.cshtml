@@ -1,5 +1,6 @@
-﻿@{
-    var email = Context.Request.HttpContext.Session.GetString("customerId");
+﻿
+@{
+    var userId = Context.Request.HttpContext.Session.GetString("customerId");
 }
 
 <!DOCTYPE html>
@@ -98,7 +99,7 @@
                         @* Conditionally display sign-in link based on login status *@
                         @{
                             var IsLogin = false;
-                            if (email != null)
+                            if (userId != null)
                             {
                                 IsLogin = true;
 

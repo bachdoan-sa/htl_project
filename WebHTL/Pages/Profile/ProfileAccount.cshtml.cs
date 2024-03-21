@@ -49,7 +49,7 @@ namespace WebHTL.Pages.Profile
         }
         public string OldPassword { get; set; } = string.Empty;
         public string NewPassword { get; set; } = string.Empty;
-        public string ConfirmPassword { get; set; } = string.Empty; 
+        public string ConfirmPassword { get;    set; } = string.Empty; 
         public IActionResult OnPostUpdatePassword()
         {
             var id = GetUser();
@@ -72,7 +72,7 @@ namespace WebHTL.Pages.Profile
         private string? GetUser()
         {
             string? id = HttpContext.Session.GetString("customerId");
-            if (id != null)
+            if (!string.IsNullOrEmpty(id))
             {
                 return id;
             }
@@ -81,7 +81,7 @@ namespace WebHTL.Pages.Profile
         private string? GetAdmin()
         {
             string? id = HttpContext.Session.GetString("Admin");
-            if (id != null)
+            if (!string.IsNullOrEmpty(id))
             {
                 return id;
             }
