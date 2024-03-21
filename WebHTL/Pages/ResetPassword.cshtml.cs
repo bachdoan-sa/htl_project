@@ -40,8 +40,8 @@ public class ResetPasswordModel : PageModel
             return Page();
         }
 
-        // Reset password and redirect to sign in page
         await _accountService.ResetPasswordAsync(Email, NewPassword);
+        TempData["Message"] = "Your password has been reset successfully. Please sign in with your new password.";
         return RedirectToPage("SignIn");
     }
 }
