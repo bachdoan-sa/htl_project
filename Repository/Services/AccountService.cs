@@ -168,7 +168,7 @@ namespace Repository.Services
             }
 
             user.Password = newPassword;
-            user.ResetToken = null; 
+            user.ResetToken = string.Empty; 
 
             await _accountRepository.Update(user);
         }

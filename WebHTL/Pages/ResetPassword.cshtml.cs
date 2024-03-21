@@ -23,9 +23,9 @@ public class ResetPasswordModel : PageModel
     public string ConfirmPassword { get; set; } = default!;
     [BindProperty]
     public string ErrorMessage { get; set; } = default!;
-
+    [BindProperty]
     public bool TokenValid { get; set; }
-
+    [BindProperty]
     public bool PasswordResetSuccess { get; set; }
 
     public void OnGet(string email, string token)
@@ -34,14 +34,14 @@ public class ResetPasswordModel : PageModel
         Token = token;
     }
 
-    public async Task<IActionResult> OnPostAsync(string otp)
+    public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
+        /*if (!ModelState.IsValid)
         {
             return Page();
-        }
+        }*/
 
-        if (!await _accountService.VerifyResetTokenAsync(Email, otp))
+        if (!await _accountService.VerifyResetTokenAsync(Email, Token))
         {
             ErrorMessage = "Invalid OTP.";
             return Page();
