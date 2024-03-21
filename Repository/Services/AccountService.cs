@@ -106,52 +106,52 @@ namespace Repository.Services
         public async Task<string> GenerateResetToken(string email)
         {
             var user = await _accountRepository.GetByEmail(email);
-            var token = GenerateResetToken();
+
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
+
+            var token = GenerateOtpToken();
 
             await _accountRepository.SetResetToken(email, token);
 
             return token;
         }
+    
 
         public async Task SendResetPasswordEmailAsync(string email)
         {
             var user = await _accountRepository.GetByEmail(email);
 
-            // Kiểm tra xem người dùng và ResetToken có tồn tại không
-            if (user == null || string.IsNullOrEmpty(user.ResetToken))
+            if (user == null)
             {
                 await _emailSender.SendEmailAsync(
                     email,
                     "Reset Password",
-                    "If an account with this email address exists, a password reset link has been sent. Please check your email.");
+                    "If an account with this email address exists, an OTP has been sent. Please check your email.");
                 return;
             }
 
-            // Encode email và token để đảm bảo chúng an toàn khi được chuyển qua URL
-            string tokenEncoded = WebUtility.UrlEncode(user.ResetToken);
-            string emailEncoded = WebUtility.UrlEncode(email);
-
-            // Tạo URL an toàn với HTTPS và các tham số đã được encode
-            var callbackUrl = $"https://localhost:7035/ResetPassword?email={emailEncoded}&token={tokenEncoded}";
-
-            // Gửi email với URL đặt lại mật khẩu
             await _emailSender.SendEmailAsync(
                 email,
                 "Reset Password",
-                $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+                $"Your OTP for password reset is: {user.ResetToken}");
         }
 
-        public static string GenerateResetToken()
+        public static string GenerateOtpToken()
         {
-            var randomBytes = new byte[40];
-            RandomNumberGenerator.Fill(randomBytes);
-            return Convert.ToBase64String(randomBytes);
+            var tokenData = new byte[4];
+            RandomNumberGenerator.Fill(tokenData);
+            int tokenValue = BitConverter.ToInt32(tokenData, 0);
+            string token = Math.Abs(tokenValue % 1000000).ToString("D6"); // OTP 6 digits
+            return token;
         }
 
-        public async Task<bool> VerifyResetTokenAsync(string email, string token)
+        public async Task<bool> VerifyResetTokenAsync(string email, string otp)
         {
             var user = await _accountRepository.GetByEmail(email);
-            return user != null && user.ResetToken == token;
+            return user != null && user.ResetToken == otp;
         }
 
         public async Task ResetPasswordAsync(string email, string newPassword)

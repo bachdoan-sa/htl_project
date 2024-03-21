@@ -32,11 +32,16 @@ public class ResetPasswordModel : PageModel
         Token = token;
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(string otp)
     {
-        if (!await _accountService.VerifyResetTokenAsync(Email, Token))
+        if (!ModelState.IsValid)
         {
-            ErrorMessage = "Invalid token.";
+            return Page();
+        }
+
+        if (!await _accountService.VerifyResetTokenAsync(Email, otp))
+        {
+            ErrorMessage = "Invalid OTP.";
             return Page();
         }
 
