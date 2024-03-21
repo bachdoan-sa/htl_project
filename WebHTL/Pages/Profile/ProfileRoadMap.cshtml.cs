@@ -19,35 +19,42 @@ namespace WebHTL.Pages.Profile
         public List<SectionModel> Section { get; set; } = new List<SectionModel>();
         public RoadmapModel Roadmap { get; set; }
 
-        //public IActionResult OnGet()
-        //{
-        //    var userId = HttpContext.Session.GetString("customerId");
-
-        //    if (userId == null)
-        //    {
-        //        return RedirectToPage("/SignIn");
-        //    }
-        //    return Page();
-        //}
-
         public IActionResult OnGet(string id)
         {
-            var userId = 1;
-
-            if (userId == null)
+            var userId = GetUser(); var admin = GetAdmin();
+            if (string.IsNullOrEmpty(userId) && string.IsNullOrEmpty(admin))
             {
-                return RedirectToPage("/SignIn");
+                return Redirect("/SignIn");
             }
-            else
+            if (admin != null)
             {
-                Roadmap = _roadmapService.GetRoadmapById(id).Result;
+                return Redirect("/Admin/Index");
+            }
+            //code here
+            Roadmap = _roadmapService.GetRoadmapById(id).Result;
                 Section = _sectionService.GetSectionsByRoadmapId(id).Result;
                 return Page();
-            }
+            
         }
-
-
-
-
+        #region private method get user and admin
+        private string? GetUser()
+        {
+            string? id = HttpContext.Session.GetString("customerId");
+            if (!string.IsNullOrEmpty(id))
+            {
+                return id;
+            }
+            return null;
+        }
+        private string? GetAdmin()
+        {
+            string? id = HttpContext.Session.GetString("Admin");
+            if (!string.IsNullOrEmpty(id))
+            {
+                return id;
+            }
+            return null;
+        }
+        #endregion
     }
 }
