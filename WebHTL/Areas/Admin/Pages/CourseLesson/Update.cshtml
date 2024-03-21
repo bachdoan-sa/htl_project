@@ -8,11 +8,12 @@
 <div class="row">
     <div class="card">
         <div class="card-title">
-            <h4>Create Role</h4>
+            <h4>Update Lesson</h4>
         </div>
         <div class="card-body">
             <div class="basic-form">
                 <form method="post">
+                    <input type="hidden" asp-for="UpdateLesson.Id" />
                     <div class="form-group">
                         <label asp-for="UpdateLesson.LessonName"></label>
                         <input asp-for="UpdateLesson.LessonName" class="form-control" required />
@@ -27,6 +28,20 @@
                         <label>Nội dung bài học</label>
                         <textarea id="contentCKEditor" asp-for="UpdateLesson.LessonURL" required>This will be replace by CKEDITOR</textarea>
                         <span asp-validation-for="UpdateLesson.LessonURL" class="text-danger"></span>
+                    </div>
+                    @* <div class="form-group">
+                        <label asp-for="UpdateLesson.CourseModuleId"></label>
+                        <input class="form-control" asp-for="UpdateLesson.CourseModuleId" />
+                    </div> *@
+                    <div class="form-group">
+                        <label asp-for="UpdateLesson.CourseModuleId"></label>
+                        <select class="form-control" asp-for="UpdateLesson.CourseModuleId">
+                            <option value="">-- Select Course Module --</option>
+                            @foreach (var module in ViewData["CourseModules"] as List<Repository.Model.CourseModuleModel>)
+                            {
+                                <option value="@module.Id">@module.ModuleName</option>
+                            }
+                        </select>
                     </div>
                     <input class="btn btn-default" value="Submit" type="submit" />
                 </form>

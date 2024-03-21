@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository.Model;
+using Repository.Services;
 using Repository.Services.IServices;
 
 namespace WebHTL.Pages.Areas.Admin.CourseLesson
@@ -8,21 +9,39 @@ namespace WebHTL.Pages.Areas.Admin.CourseLesson
     public class UpdateModel : PageModel
     {
         private readonly ICourseLessonService _courseLessonService;
+        private readonly ICourseModuleService _courseModuleService;
 
-        public UpdateModel(ICourseLessonService courseLessonService)
+        public UpdateModel(ICourseLessonService courseLessonService,
+                           ICourseModuleService courseModuleService)
         {
             _courseLessonService = courseLessonService;
+            _courseModuleService = courseModuleService;
         }
-        public IActionResult OnGet(string id)
+        public async Task<IActionResult> OnGet(string id)
         {
             if (HttpContext.Session.GetString("Admin") == null)
             {
                 return RedirectToPage("/SignIn");
             }
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            UpdateLesson = await _courseLessonService.GetById(id);
+
+            if (UpdateLesson == null)
+            {
+                return NotFound();
+            }
+            var courseModules = await _courseModuleService.GetAll();
+            var courseModulesList = courseModules.ToList();
+            ViewData["CourseModules"] = courseModulesList;
+
             return Page();
         }
         [BindProperty]
-        public CourseLessonModel UpdateLesson { get; set; } = new CourseLessonModel();
+        public CourseLessonModel UpdateLesson { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -33,7 +52,7 @@ namespace WebHTL.Pages.Areas.Admin.CourseLesson
             try
             {
                 // Set created and last updated times
-                UpdateLesson.CreatedTime = DateTimeOffset.Now;
+                
                 UpdateLesson.LastUpdated = DateTimeOffset.Now;
 
                 var result = await _courseLessonService.Update(UpdateLesson);
