@@ -41,6 +41,7 @@ public class ForgotPasswordModel : PageModel
             {
                 var token = await _accountService.GenerateResetToken(Email);
                 await _accountService.SendResetPasswordEmailAsync(Email);
+                return RedirectToPage("ResetPassword", new { email = Email });
             }
         }
         catch (Exception exception)
