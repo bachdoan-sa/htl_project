@@ -61,4 +61,11 @@
 	  <ProjectReference Include="..\Repository\Repository.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Content Remove="Pages\Profile\ProfileCourse.cshtml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="Pages\Profile\ProfileProduct.cshtml.cs" />
+	  <Compile Remove="Pages\Profile\ProfileRoadMap.cshtml.cs" />
+	</ItemGroup>
 </Project>

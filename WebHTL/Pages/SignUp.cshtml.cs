@@ -36,16 +36,18 @@ namespace WebHTL.Pages
                 Birthdate = DateTime.UtcNow,
                 Role = "Customer",
                 Work = "student"
-                
+
             };
-            var acc = _accountService.Add(account).Result.Email;
-            if(acc != null)
+            var result = _accountService.Add(account).Result;
+
+            if (result == null)
             {
-                Message = " Create Account Success: " + acc;
+                Message = "Email already exists. Please choose a different email.";
             }
             else
             {
-                Message = "Opps, somthing have wrong...";
+                Message = "Create Account Success: " + result.Email;
+                return RedirectToPage("/SignIn");
             }
             return Page();
         }
