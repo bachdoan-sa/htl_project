@@ -6,16 +6,11 @@ using Repository.Services.IServices;
 
 namespace WebAppRazorpage.Pages.Areas.Admin
 {
+    [BindProperties]
     public class IndexModel : PageModel
     {
         private readonly IOrderService _orderService;
         private readonly IAccountService _accountService;
-
-        public decimal TotalRevenue { get; set; } = default!;
-        public int TotalOrders { get; set; } = default!;
-        public int TotalStores { get; set; } = default!;
-        public int TotalNewUsers { get; set; } = default!;
-        public List<OrderModel> RecentOrdersWithUsers { get; private set; }
 
         public IndexModel(IOrderService orderService, IAccountService accountService)
         {
@@ -23,7 +18,11 @@ namespace WebAppRazorpage.Pages.Areas.Admin
             _orderService = orderService;
             _accountService = accountService;
         }
-
+        public decimal TotalRevenue { get; set; } = 0;
+        public int TotalOrders { get; set; } = 0;
+        public int TotalStores { get; set; } = 0;
+        public int TotalNewUsers { get; set; } = 0;
+        public List<OrderModel> RecentOrdersWithUsers { get; set; } = new List<OrderModel>();
         public async Task OnGetAsync()
         {
             if (HttpContext.Session.GetString("Admin") == null)

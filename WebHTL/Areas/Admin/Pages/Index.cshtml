@@ -198,7 +198,7 @@
                                 <th>Name</th>
                                 <th>Status</th>
                                 <th>Total</th>
-                                <th>CreatedTime</th>
+                                <th>Last Update</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -208,7 +208,7 @@
                                     <td>@(order.Account?.UserName ?? "N/A")</td>
                                     <td>@order.OrderStatus</td>
                                     <td>@order.Total</td>
-                                    <td>@order.CreatedTime.ToString("MM/dd/yyyy HH:mm")</td> 
+                                    <td>@order.LastUpdated.ToString("dd/MM/yyyy HH:mm")</td> 
                                 </tr>
                             }
                         </tbody>
