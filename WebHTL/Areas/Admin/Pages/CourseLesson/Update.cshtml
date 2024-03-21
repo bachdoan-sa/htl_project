@@ -1,4 +1,38 @@
-﻿@page
+﻿@page "{id}"
 @model WebHTL.Pages.Areas.Admin.CourseLesson.UpdateModel
 @{
+    Layout = "_AdminLayout";
 }
+
+<h1>Update Course Lesson</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="CourseLesson.Id" />
+
+    <div class="form-group">
+        <label asp-for="CourseLesson.LessonName"></label>
+        <input class="form-control" asp-for="CourseLesson.LessonName" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CourseLesson.LessonTarget"></label>
+        <input class="form-control" asp-for="CourseLesson.LessonTarget" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CourseLesson.LessonContent"></label>
+        <textarea class="form-control" asp-for="CourseLesson.LessonContent"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CourseLesson.LessonURL"></label>
+        <input class="form-control" asp-for="CourseLesson.LessonURL" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CourseLesson.CourseModuleId"></label>
+        <input class="form-control" asp-for="CourseLesson.CourseModuleId" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
