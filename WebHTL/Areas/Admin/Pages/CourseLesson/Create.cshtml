@@ -22,8 +22,8 @@
                         <span asp-validation-for="NewLesson.LessonTarget" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="NewLesson.LessonURL"></label>
-                        <input asp-for="NewLesson.LessonURL" class="form-control" required />
+                        <label>Nội dung bài học</label>
+                        <textarea id="contentCKEditor" asp-for="NewLesson.LessonURL" required>This will be replace by CKEDITOR</textarea>
                         <span asp-validation-for="NewLesson.LessonURL" class="text-danger"></span>
                     </div>
                     <input class="btn btn-default" value="Submit" type="submit" />
@@ -33,3 +33,7 @@
     </div>
 
 </div>
+<script src="~/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    CKEDITOR.replace('contentCKEditor');
+</script>
