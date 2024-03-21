@@ -3,7 +3,7 @@
 @{
     Layout = "_AdminLayout";
 }
-<div class="row">
+<div class="">
     <div class="card">
         <div class="card-title">
             <h4>Create Role</h4>
@@ -22,6 +22,11 @@
                         <span asp-validation-for="NewLesson.LessonTarget" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <label>Nội dung bài học</label>
+                        <textarea id="contentCKEditor" asp-for="NewLesson.LessonContent" required>This will be replace by CKEDITOR</textarea>
+                        <span asp-validation-for="NewLesson.LessonContent" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="NewLesson.LessonURL"></label>
                         <input asp-for="NewLesson.LessonURL" class="form-control" required />
                         <span asp-validation-for="NewLesson.LessonURL" class="text-danger"></span>
@@ -33,3 +38,7 @@
     </div>
 
 </div>
+<script src="~/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    CKEDITOR.replace('contentCKEditor');
+</script>
