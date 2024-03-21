@@ -9,10 +9,12 @@ namespace Repository.Repositories.IRepositories
 {
     public interface IRoadmapRepository
     {
-        Task<Roadmap> GetByIdAsync(string id);
-        Task<List<Roadmap>> GetAllAsync();
-        Task AddAsync(Roadmap roadmap);
-        Task UpdateAsync(Roadmap roadmap);
-        Task DeleteAsync(string id);
+        Task<Roadmap> GetById(string id);
+        Task<List<Roadmap>> GetAll();
+        Task<Roadmap> Add(Roadmap roadmap);
+        Task<Roadmap> Update(Roadmap roadmap);
+        Task Delete(string id);
+        Task<int> CountCourseInRoadMap(string id);
+        Task<List<Roadmap>> SearchRoadMapByName(string roadmapName);
     }
 }

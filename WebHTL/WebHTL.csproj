@@ -17,11 +17,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Repository\Repository.csproj" />
-  </ItemGroup>
-
 	<ItemGroup>
+		<Folder Include="Pages\Errors\" />
 		<Folder Include="wwwroot\images\products\" />
 	</ItemGroup>
 
@@ -58,6 +55,10 @@
 		<None Include="wwwroot\lib\jquery\dist\jquery.js" />
 		<None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
 		<None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Repository\Repository.csproj" />
 	</ItemGroup>
 
 </Project>

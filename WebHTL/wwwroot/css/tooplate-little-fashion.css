@@ -1058,7 +1058,7 @@ button:focus:not(:focus-visible) {
 }
 
 .social-icon-link:hover {
-  color: var(--primary-color);
+  color: dodgerblue;
 }
 
 /*---------------------------------------

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebHTL.Pages
 {
-	public class LogoutModel : PageModel
+    public class LogoutModel : PageModel
     {
         public async Task<IActionResult> OnGetAsync()
         {

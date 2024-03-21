@@ -13,6 +13,7 @@ namespace Repository.Entities
     {
         public string LessonName { get; set; }
         public string LessonTarget { get; set; }
+        public string? LessonContent { get; set; }
         public string LessonURL { get; set; }
         [Required]
         public string CourseModuleId { get; set; }

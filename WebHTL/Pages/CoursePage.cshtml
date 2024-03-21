@@ -1,0 +1,98 @@
+﻿@page "{CourseId}"
+@model WebHTL.Pages.CoursePageModel
+@{
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/slick.css" />
+    <link rel="stylesheet" href="~/css/image.css" />
+
+    <link href="~/css/tooplate-little-fashion.css" rel="stylesheet">
+    <!-- ... (other head content) ... -->
+</head>
+
+<body>
+    <main>
+        <style>       
+            .sidebar .content{
+
+                magin-top : 100px;
+            }
+            /* CSS cho sidebar */
+            .sidebar {
+                width: 30%; /* Chiếm 30% của tổng kích thước màn hình */
+                background-color: #f1f1f1;
+                float: left;
+                padding: 20px;
+            }
+            /* CSS cho phần content */
+            .content {
+                margin-left: 32%; /* Để tạo khoảng trống giữa sidebar và phần content */
+                padding: 20px;
+            }
+            .text-violet{
+                color:darkviolet;
+            }
+        </style>
+
+        <section class="products section-padding">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+                @if (Model.CourseModules != null && Model.CourseModules.Any())
+                {
+                    @foreach (var module in Model.CourseModules)
+                    {
+                        <h5>@module.ModuleName</h5>
+                        <ul>
+                            @foreach (var lesson in module.CourseLessons)
+                            {
+                                <li>
+                                    <a asp-page="/CoursePage" asp-route-CourseLessonId="@lesson.Id" id="CourseLessonId">@lesson.LessonName</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <p>No modules found.</p>
+                }
+
+        </div>
+
+        <!-- Phần content -->
+            <div class="content">
+                @if (Model.Lesson != null)
+                {
+                    <h3>@Model.Lesson.LessonName</h3>
+                    <p>@Model.Lesson.LessonURL</p>
+                }
+                else
+                {
+                    <p>No lesson content found.</p>
+                }
+            </div>
+
+        </section>
+    </main>
+
+</body>
+</html>

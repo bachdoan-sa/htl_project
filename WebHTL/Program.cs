@@ -4,6 +4,7 @@ using Repository.Repositories;
 using Repository.Repositories.IRepositories;
 using Repository.Services;
 using Repository.Services.IServices;
+using Repository.Settings;
 using WebHTL.Extensions;
 
 namespace WebHTL
@@ -16,9 +17,10 @@ namespace WebHTL
 
             // Add services to the container.
             builder.Services.AddDbContext<AppDbContext>();
+            builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -27,14 +29,38 @@ namespace WebHTL
             builder.Services.AddAutoMapperServices();
 
             builder.Services.AddRazorPages(options => options.Conventions.AddPageRoute("/HomePage", "")); 
-            
-            builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
+                      
             builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+            builder.Services.AddScoped<ICareerRepository, CareerRepository>();
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+            builder.Services.AddScoped<ICourseLessonRepository, CourseLessonRepository>();
+            builder.Services.AddScoped<ICourseModuleRepository, CourseModuleRepository>();
+            builder.Services.AddScoped<ICheckpointRepository, CheckpointRepository>();
+            builder.Services.AddScoped<IDriverRepository, DriverRepository>();
+            builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+            builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
+            builder.Services.AddScoped<ISectionRepository, SectionRepository>();
+            builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+
 
             builder.Services.AddScoped<IAccountService, AccountService>();
-            builder.Services.AddScoped<IRoadmapService, RoadmapService>();
+            builder.Services.AddScoped<ICareerService, CareerService>();
             builder.Services.AddScoped<ICourseService, CourseService>();
+            builder.Services.AddScoped<ICourseLessonService, CourseLessonService>();
+            builder.Services.AddScoped<ICourseModuleService, CourseModuleService>();
+            builder.Services.AddScoped<ICheckpointService, CheckpointService>();
+            builder.Services.AddScoped<IDriverService, DriverService>();
+            builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IRoadmapService, RoadmapService>();
+            builder.Services.AddScoped<ISectionService, SectionService>();
+            builder.Services.AddScoped<ITransactionService, TransactionService>();
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
+
+            var smtpSettings = builder.Configuration.GetSection("SmtpSettings").Get<SmtpSettings>();
+            builder.Services.AddSingleton(smtpSettings);
+            builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>

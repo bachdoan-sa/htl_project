@@ -1,0 +1,120 @@
+﻿@page
+@model WebHTL.Pages.Areas.Admin.Transaction.AddModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<h1>Add Transaction</h1>
+
+<form method="post">
+    <!-- Transaction Model -->
+    <h2>Transaction</h2>
+    <div class="form-group">
+        <label asp-for="Dto.Transaction.PaymentMethod"></label>
+        <input asp-for="Dto.Transaction.PaymentMethod" class="form-control" />
+        <span asp-validation-for="Dto.Transaction.PaymentMethod" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dto.Transaction.Amount"></label>
+        <input asp-for="Dto.Transaction.Amount" class="form-control" />
+        <span asp-validation-for="Dto.Transaction.Amount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dto.Transaction.TransactionStatus"></label>
+        <input asp-for="Dto.Transaction.TransactionStatus" class="form-control" />
+        <span asp-validation-for="Dto.Transaction.TransactionStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dto.Transaction.Message"></label>
+        <input asp-for="Dto.Transaction.Message" class="form-control" />
+        <span asp-validation-for="Dto.Transaction.Message" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dto.Transaction.ReponseTime"></label>
+        <input asp-for="Dto.Transaction.ReponseTime" class="form-control" />
+        <span asp-validation-for="Dto.Transaction.ReponseTime" class="text-danger"></span>
+    </div>
+    
+    <!-- Order Model -->
+    <h2>Order</h2>
+    <div class="form-group">
+        <label asp-for="Dto.Order.Total"></label>
+        <input asp-for="Dto.Order.Total" class="form-control" />
+        <span asp-validation-for="Dto.Order.Total" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dto.Order.OrderStatus"></label>
+        <input asp-for="Dto.Order.OrderStatus" class="form-control" />
+        <span asp-validation-for="Dto.Order.OrderStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <!-- Order Detail Model -->
+    <h2>Order Detail</h2>
+    <div class="form-group">
+        <label asp-for="Dto.OrderDetail.OrderDetailStatus"></label>
+        <input asp-for="Dto.OrderDetail.OrderDetailStatus" class="form-control" />
+        <span asp-validation-for="Dto.OrderDetail.OrderDetailStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dto.OrderDetail.Cost"></label>
+        <input asp-for="Dto.OrderDetail.Cost" class="form-control" />
+        <span asp-validation-for="Dto.OrderDetail.Cost" class="text-danger"></span>
+    </div>
+    @* <div class="form-group">
+        <label asp-for="Dto.OrderDetail.DriverId"></label>
+        <input asp-for="Dto.OrderDetail.DriverId" class="form-control" />
+        <span asp-validation-for="Dto.OrderDetail.DriverId" class="text-danger"></span>
+    </div> *@
+    @* <div class="form-group">
+        <label asp-for="Dto.Quantity"></label>
+        <input asp-for="Dto.Quantity" class="form-control" />
+        <span asp-validation-for="Dto.Quantity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dto.Price"></label>
+        <input asp-for="Dto.Price" class="form-control" />
+        <span asp-validation-for="Dto.Price" class="text-danger"></span>
+    </div> *@
+
+    <!-- Driver Model -->
+    <h2>Driver</h2>
+    <div class="form-group">
+        <label asp-for="Dto.Driver.StartTime"></label>
+        <input asp-for="Dto.Driver.StartTime" class="form-control" />
+        <span asp-validation-for="Dto.Driver.StartTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dto.Driver.ExpectedEndTime"></label>
+        <input asp-for="Dto.Driver.ExpectedEndTime" class="form-control" />
+        <span asp-validation-for="Dto.Driver.ExpectedEndTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dto.Driver.Type"></label>
+        <input asp-for="Dto.Driver.Type" class="form-control" />
+        <span asp-validation-for="Dto.Driver.Type" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dto.Driver.DriverStatus"></label>
+        <input asp-for="Dto.Driver.DriverStatus" class="form-control" />
+        <span asp-validation-for="Dto.Driver.DriverStatus" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dto.Driver.RoadmapId"></label>
+        <input asp-for="Dto.Driver.RoadmapId" class="form-control" />
+        <span asp-validation-for="Dto.Driver.RoadmapId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@if (!Model.ModelState.IsValid)
+{
+    <div class="alert alert-danger" role="alert">
+        Please correct the errors below.
+    </div>
+}

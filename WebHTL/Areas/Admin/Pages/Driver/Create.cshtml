@@ -1,0 +1,45 @@
+﻿@page
+@model WebHTL.Pages.Areas.Admin.Driver.CreateModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="card">
+        <div class="card-title">
+            <h4>Create Role</h4>
+        </div>
+        <div class="card-body">
+            <div class="basic-form">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="NewDriver.StartTime"></label>
+                        <input asp-for="NewDriver.StartTime" type="datetime-local" class="form-control" required />
+                        <span asp-validation-for="NewDriver.StartTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewDriver.ExpectedEndTime"></label>
+                        <input asp-for="NewDriver.ExpectedEndTime" type="datetime-local" class="form-control" required />
+                        <span asp-validation-for="NewDriver.ExpectedEndTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewDriver.Type"></label>
+                        <input asp-for="NewDriver.Type" class="form-control" required />
+                        <span asp-validation-for="NewDriver.Type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewDriver.DriverStatus"></label>
+                        <input asp-for="NewDriver.DriverStatus" class="form-control" required />
+                        <span asp-validation-for="NewDriver.DriverStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewDriver.RoadmapId"></label>
+                        <input asp-for="NewDriver.RoadmapId" class="form-control" required />
+                        <span asp-validation-for="NewDriver.RoadmapId" class="text-danger"></span>
+                    </div>
+                    <input class="btn btn-default" value="Submit" type="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

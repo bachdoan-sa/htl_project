@@ -15,35 +15,37 @@ namespace WebHTL.Pages
         }
         public void OnGet()
         {
-            Message = TempData["Message"] as string ?? string.Empty;
+            HttpContext.Session.Remove("Admin");
+            HttpContext.Session.Remove("customerId");
         }
         [BindProperty]
-        public string email { get; set; } = default!;
+        public string Email { get; set; } = default!;
         [BindProperty]
-        public string password { get; set; } = default!;
+        public string Password { get; set; } = default!;
         [BindProperty]
         public string Message { get; set; } = default!;
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
-            try
+            var adminAcc = _config["AdminAccount:Admin"];
+            var adminPass = _config["AdminAccount:Password"];
+            if (adminAcc == Email && adminPass == Password)
             {
-                var adminAcc = _config["AdminAccount:Admin"];
-                var adminPass = _config["AdminAccount:Password"];
-
-                if (adminAcc == email && adminPass == password)
-                {
-                    HttpContext.Session.SetString("Admin", email);
-                    return RedirectToPage("./Areas/Admin/AdminDashBoard");
-                }
-
-                var cus = await _accountService.Login(email, password);
-                HttpContext.Session.SetInt32("customerId", cus.AccountId);
-                return RedirectToPage("./HomePage");
+                HttpContext.Session.SetString("Admin", Email);
+                return Redirect("~/Admin/Index");
             }
-            catch (Exception ex)
+            else
             {
-                Message = ex.Message;
-                return Page();
+                try
+                {
+                    var cus = _accountService.Login(Email, Password).Result;
+                    HttpContext.Session.SetString("customerId", cus.Id);
+                    return RedirectToPage("./Profile/Index");
+                }
+                catch (Exception)
+                {
+                    Message = "Incorrect login";
+                    return Page();
+                }
             }
         }
     }

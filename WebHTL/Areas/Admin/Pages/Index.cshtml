@@ -1,0 +1,370 @@
+﻿@page
+@model WebAppRazorpage.Pages.Areas.Admin.IndexModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="row">
+    <div class="col-md-3">
+        <div class="card p-30">
+            <div class="media">
+                <div class="media-left meida media-middle">
+                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                </div>
+                <div class="media-body media-text-right">
+                    <h2>@Model.TotalRevenue.ToString("C")</h2> <!-- Cập nhật giá trị ở đây -->
+                    <p class="m-b-0">Total Revenue</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-30">
+            <div class="media">
+                <div class="media-left meida media-middle">
+                    <span><i class="fa fa-shopping-cart f-s-40 color-success"></i></span>
+                </div>
+                <div class="media-body media-text-right">
+                    <h2>@Model.TotalOrders</h2> <!-- Cập nhật giá trị ở đây -->
+                    <p class="m-b-0">Sales</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-30">
+            <div class="media">
+                <div class="media-left meida media-middle">
+                    <span><i class="fa fa-archive f-s-40 color-warning"></i></span>
+                </div>
+                <div class="media-body media-text-right">
+                    <h2>@Model.TotalStores</h2> <!-- Cập nhật giá trị ở đây -->
+                    <p class="m-b-0">Stores</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card p-30">
+            <div class="media">
+                <div class="media-left meida media-middle">
+                    <span><i class="fa fa-user f-s-40 color-danger"></i></span>
+                </div>
+                <div class="media-body media-text-right">
+                    <<h2>@Model.TotalNewUsers</h2> <!-- Cập nhật giá trị ở đây -->
+                <p class="m-b-0">Customer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row bg-white m-l-0 m-r-0 box-shadow ">
+
+    <!-- column -->
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Extra Area Chart</h4>
+                <div id="extra-area-chart"></div>
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+    <!-- column -->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body browser">
+                <p class="f-w-600">iMacs <span class="pull-right">85%</span></p>
+                <div class="progress ">
+                    <div role="progressbar" style="width: 85%; height:8px;" class="progress-bar bg-danger wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                </div>
+
+                <p class="m-t-30 f-w-600">iBooks<span class="pull-right">90%</span></p>
+                <div class="progress">
+                    <div role="progressbar" style="width: 90%; height:8px;" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                </div>
+
+                <p class="m-t-30 f-w-600">iPhone<span class="pull-right">65%</span></p>
+                <div class="progress">
+                    <div role="progressbar" style="width: 65%; height:8px;" class="progress-bar bg-success wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                </div>
+
+                <p class="m-t-30 f-w-600">Samsung<span class="pull-right">65%</span></p>
+                <div class="progress">
+                    <div role="progressbar" style="width: 65%; height:8px;" class="progress-bar bg-warning wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                </div>
+
+                <p class="m-t-30 f-w-600">android<span class="pull-right">65%</span></p>
+                <div class="progress m-b-30">
+                    <div role="progressbar" style="width: 65%; height:8px;" class="progress-bar bg-success wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- column -->
+</div>
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card bg-dark">
+            <div class="testimonial-widget-one p-17">
+                <div class="testimonial-widget-one owl-carousel owl-theme">
+                    <div class="item">
+                        <div class="testimonial-content">
+                            <img class="testimonial-author-img" src="~/admin/assets/images/avatar/2.jpg" alt="" />
+                            <div class="testimonial-author">John</div>
+                            <div class="testimonial-author-position">Founder-Ceo. Dell Corp</div>
+
+                            <div class="testimonial-text">
+                                <i class="fa fa-quote-left"></i>  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .
+                                <i class="fa fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimonial-content">
+                            <img class="testimonial-author-img" src="~/admin/assets/images/avatar/3.jpg" alt="" />
+                            <div class="testimonial-author">Abraham</div>
+                            <div class="testimonial-author-position">Founder-Ceo. Dell Corp</div>
+
+                            <div class="testimonial-text">
+                                <i class="fa fa-quote-left"></i>  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .
+                                <i class="fa fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimonial-content">
+                            <img class="testimonial-author-img" src="~/admin/assets/images/avatar/1.jpg" alt="" />
+                            <div class="testimonial-author">Lincoln</div>
+                            <div class="testimonial-author-position">Founder-Ceo. Dell Corp</div>
+
+                            <div class="testimonial-text">
+                                <i class="fa fa-quote-left"></i>  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .
+                                <i class="fa fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimonial-content">
+                            <img class="testimonial-author-img" src="~/admin/assets/images/avatar/4.jpg" alt="" />
+                            <div class="testimonial-author">TYRION LANNISTER</div>
+                            <div class="testimonial-author-position">Founder-Ceo. Dell Corp</div>
+
+                            <div class="testimonial-text">
+                                <i class="fa fa-quote-left"></i>  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .
+                                <i class="fa fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimonial-content">
+                            <img class="testimonial-author-img" src="~/admin/assets/images/avatar/5.jpg" alt="" />
+                            <div class="testimonial-author">TYRION LANNISTER</div>
+                            <div class="testimonial-author-position">Founder-Ceo. Dell Corp</div>
+
+                            <div class="testimonial-text">
+                                <i class="fa fa-quote-left"></i>  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .
+                                <i class="fa fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimonial-content">
+                            <img class="testimonial-author-img" src="~/admin/assets/images/avatar/6.jpg" alt="" />
+                            <div class="testimonial-author">TYRION LANNISTER</div>
+                            <div class="testimonial-author-position">Founder-Ceo. Dell Corp</div>
+
+                            <div class="testimonial-text">
+                                <i class="fa fa-quote-left"></i>  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .
+                                <i class="fa fa-quote-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <div class="card">
+            <div class="card-title">
+                <h4>Recent Orders </h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                                <th>CreatedTime</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.RecentOrdersWithUsers)
+                            {
+                                <tr>
+                                    <td>@(order.Account?.UserName ?? "N/A")</td>
+                                    <td>@order.OrderStatus</td>
+                                    <td>@order.Total</td>
+                                    <td>@order.CreatedTime.ToString("MM/dd/yyyy HH:mm")</td> 
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-title">
+                        <h4>Message </h4>
+                    </div>
+                    <div class="recent-comment">
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#"><img alt="..." src="~/admin/assets/images/avatar/1.jpg" class="media-object"></a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">john doe</h4>
+                                <p>Cras sit amet nibh libero, in gravida nulla. </p>
+                                <p class="comment-date">October 21, 2018</p>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#"><img alt="..." src="~/admin/assets/images/avatar/1.jpg" class="media-object"></a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">john doe</h4>
+                                <p>Cras sit amet nibh libero, in gravida nulla. </p>
+                                <p class="comment-date">October 21, 2018</p>
+                            </div>
+                        </div>
+
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#"><img alt="..." src="~/admin/assets/images/avatar/1.jpg" class="media-object"></a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">john doe</h4>
+                                <p>Cras sit amet nibh libero, in gravida nulla. </p>
+                                <p class="comment-date">October 21, 2018</p>
+                            </div>
+                        </div>
+
+                        <div class="media no-border">
+                            <div class="media-left">
+                                <a href="#"><img alt="..." src="~/admin/assets/images/avatar/1.jpg" class="media-object"></a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Mr. Michael</h4>
+                                <p>Cras sit amet nibh libero, in gravida nulla. </p>
+                                <div class="comment-date">October 21, 2018</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /# card -->
+            </div>
+            <!-- /# column -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="year-calendar"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Todo</h4>
+                <div class="card-content">
+                    <div class="todo-list">
+                        <div class="tdl-holder">
+                            <div class="tdl-content">
+                                <ul>
+                                    <li>
+                                        <label>
+                                            <input type="checkbox"><i class="bg-primary"></i><span>Build an angular app</span>
+                                            <a href='#' class="ti-close"></a>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" checked><i class="bg-success"></i><span>Creating component page</span>
+                                            <a href='#' class="ti-close"></a>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" checked><i class="bg-warning"></i><span>Follow back those who follow you</span>
+                                            <a href='#' class="ti-close"></a>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" checked><i class="bg-danger"></i><span>Design One page theme</span>
+                                            <a href='#' class="ti-close"></a>
+                                        </label>
+                                    </li>
+
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" checked><i class="bg-success"></i><span>Creating component page</span>
+                                            <a href='#' class="ti-close"></a>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <input type="text" class="tdl-new form-control" placeholder="Type here">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section head{
+    <link href="~/admin/assets/css/lib/calendar2/semantic.ui.min.css" rel="stylesheet">
+    <link href="~/admin/assets/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet">
+    <link href="~/admin/assets/css/lib/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/admin/assets/css/lib/owl.theme.default.min.css" rel="stylesheet" />
+}
+@section scripts{
+    <!-- Amchart -->
+    <script src="~/admin/assets/js/lib/morris-chart/raphael-min.js"></script>
+    <script src="~/admin/assets/js/lib/morris-chart/morris.js"></script>
+    <script src="~/admin/assets/js/lib/morris-chart/dashboard1-init.js"></script>
+
+
+    <script src="~/admin/assets/js/lib/calendar-2/moment.latest.min.js"></script>
+    <!-- scripit init-->
+    <script src="~/admin/assets/js/lib/calendar-2/semantic.ui.min.js"></script>
+    <!-- scripit init-->
+    <script src="~/admin/assets/js/lib/calendar-2/prism.min.js"></script>
+    <!-- scripit init-->
+    <script src="~/admin/assets/js/lib/calendar-2/pignose.calendar.min.js"></script>
+    <!-- scripit init-->
+    <script src="~/admin/assets/js/lib/calendar-2/pignose.init.js"></script>
+
+    <script src="~/admin/assets/js/lib/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/admin/assets/js/lib/owl-carousel/owl.carousel-init.js"></script>
+
+    <script src="~/admin/assets/js/scripts.js"></script>
+    <!-- scripit init-->
+}

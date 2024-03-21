@@ -1,0 +1,185 @@
+﻿@page
+@model WebHTL.Pages.Profile.ProfileAccountModel
+@{
+    Layout = "_LayoutProfile";
+}
+@section head{
+    <link href="~/css/profile-page.css" rel="stylesheet" />
+}
+<section class="page-wrapper">
+    <!-- Bread crumb -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-primary">Tài khoản</h3>
+        </div>
+    </div>
+    <!-- End Bread crumb -->
+    <!-- Container fluid  -->
+    <div class="container-fluid">
+        <!-- Start Page Content -->
+        <div class="mt20 pb10">
+            <div class="wrapper-profile__title">
+                Thông tin chung
+            </div>
+            <div class="wrapper-profile__bg d-flex align-items-center gap30">
+                <div class="d-flex align-items-center flex-1 gap30">
+                    <div class="wrapper-profile__info-avt">
+                        <div class="menu-account_avatar_thumb">
+                            <div class="menu-account_avatar_thumb_box thumb-box">
+
+                                <img class="img-thumbnail coverimg user-img-custom" src="" alt="Avatar">
+
+                                <span><i class="fa-light fa-pen-to-square"></i></span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrapper-profile__info-detail">
+                        <div class="mb20">
+                            <span class="fullname">@Model.Account.UserName</span>
+                        </div>
+                        <div class="total-course">
+                            <div class="d-flex align-items-center gap10">
+                                <span class="number">@Model.RoadmapOngoing</span>
+                                <span class="title">Khóa học/Combo khóa học đang học</span>
+                            </div>
+                            <div class="d-flex align-items-center gap10 mt15">
+                                <span class="number">0</span>
+                                <span class="title">Khóa học/Combo khóa học hoàn thành</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="mt20 pb10">
+            <div class="wrapper-profile__title">
+                Thông tin cá nhân
+            </div>
+            <div class="wrapper-profile__personal wrapper-profile__bg">
+                <div class="alert--error mb-2">
+                </div>
+                <form asp-page-handler="UpdateAccount" method="post" class="w-100"  accept-charset="utf-8">
+                    <input hidden asp-for="Account.Id" readonly/>
+                    <div class="grid gap20">
+                        <div class="span6 span-12-sm">
+                            <div class="wrapper-profile__personal-input">
+                                <div class="log-input">
+                                    <label for="fullname" class="wrapper-profile__personal-label">Username</label>
+                                    <input type="text" readonly id="fullname" asp-for="Account.UserName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6 span-12-sm">
+                            <div class="wrapper-profile__personal-input">
+                                <div class="log-input">
+                                    <label for="email" class="wrapper-profile__personal-label">Email</label>
+                                    <input type="text" readonly placeholder="Email" asp-for="Account.Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6 span-12-sm">
+                            <div class="wrapper-profile__personal-input">
+                                <div class="log-input">
+                                    <label for="phone" class="wrapper-profile__personal-label">Số điện thoại</label>
+                                    <input type="text" placeholder="Số điện thoại" asp-for="Account.Phone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6 span-12-sm">
+                            <div class="wrapper-profile__personal-input">
+                                <div class="log-input">
+                                    <label for="email" class="wrapper-profile__personal-label">Ngày sinh</label>
+                                    <input type="date" name="birthday"  asp-for="Account.Birthdate">
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="span6 span-12-sm">
+                            <div class="wrapper-profile__personal-input wrapper-profile__personal-select">
+                                <div class="row-input log-input">
+                                    <label class="wrapper-profile__personal-label">Tỉnh/thành phố:</label>
+                                    <select class="input-select select" name="data[id_city]" id="id_city" onchange="onChangeSelect('#id_dist',{id:this.value, fs:'id,name_vi as name, code',fw:'id_city',t:'place/dists',tt:'Chọn quận huyện'})">
+                                        <option value="">Chọn tỉnh thành</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6 span-12-sm">
+                            <div class="wrapper-profile__personal-input wrapper-profile__personal-select">
+                                <div class="row-input log-input">
+                                    <label class="wrapper-profile__personal-label">Quận/huyện:</label>
+                                    <select class="input-select select" name="data[id_dist]" id="id_dist">
+                                        <option value="">Chọn quận huyện</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>*@
+
+                    </div>
+                    <div class="text-center mt-3">
+                        <button class="wrapper-account__btn" id="submit-person" type="submit">Lưu thay đổi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="mt20 pb10">
+            <div class="wrapper-profile__title">
+                Đổi mật khẩu
+            </div>
+            <div class="wrapper-profile__resetPass wrapper-profile__bg">
+                <div class="alert--error mb-2">
+                </div>
+                <form asp-page-handler="UpdatePassword" method="post" accept-charset="utf-8" >
+                    <input hidden asp-for="Account.Id" readonly />
+                    <div class="row d-flex">
+                        <div class="col-12">
+                            <div class="wrapper-profile__personal-input mb-3">
+                                <div class="log-input">
+                                    <label for="password" class="wrapper-profile__personal-label">Nhập mật khẩu cũ:</label>
+                                    <span class="log-view-pass"><i class="fa fa-eye-slash"></i></span>
+                                    <input type="password" asp-for="OldPassword" placeholder="Nhập mật khẩu cũ">
+                                </div>
+                            </div>
+                            <div class="wrapper-profile__personal-input mb-3">
+                                <div class="log-input">
+                                    <label for="newpassword" class="wrapper-profile__personal-label">
+                                        Nhập mật khẩu
+                                        mới:
+                                    </label>
+                                    <span class="log-view-pass"><i class="fa fa-eye-slash"></i></span>
+                                    <input type="password" asp-for="NewPassword" placeholder="Nhập mật khẩu mới">
+                                </div>
+                            </div>
+                            <div class="wrapper-profile__personal-input mb-3">
+                                <div class="log-input">
+                                    <label for="confirm" class="wrapper-profile__personal-label">
+                                        Xác nhận lại mật
+                                        khẩu:
+                                    </label>
+                                    <span class="log-view-pass"><i class="fa fa-eye-slash"></i></span>
+                                    <input type="password" asp-for="ConfirmPassword"  placeholder="Xác nhận lại mật khẩu">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center">
+                                <button class="wrapper-account__btn" type="submit">Lưu thay đổi</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- End PAge Content -->
+    </div>
+    <!-- End Container fluid  -->
+    <!-- footer -->
+    <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+    <!-- End footer -->
+</section>
+

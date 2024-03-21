@@ -15,6 +15,8 @@ namespace Repository.Entities
         public string RoadmapGoal { get; set; }
         public string RoadmapType { get; set; }
         public string? Language { get; set; }
+        public string? RoadmapImage { get; set; }
+        public double RoadmapPrice { get; set; }
         [Required]
         public string CareerId { get; set; }
         [ForeignKey(nameof(CareerId))]

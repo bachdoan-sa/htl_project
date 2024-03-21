@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository.Entities;
@@ -28,27 +29,25 @@ namespace WebHTL.Pages
         {
             AccountModel account = new AccountModel
             {
-                UserName = "",
+                UserName = Email,
                 Email = Email,
                 Password = Password,
                 Phone = "",
                 Birthdate = DateTime.UtcNow,
                 Role = "Customer",
                 Work = "student"
+                
             };
-            var result = _accountService.Add(account).Result;
-
-            if (result != null)
+            var acc = _accountService.Add(account).Result.Email;
+            if(acc != null)
             {
-                // Tạo tài khoản thành công, chuyển thông báo sang trang SignIn
-                TempData["Message"] = "Create Account Success: " + result.Email;
-                return RedirectToPage("./SignIn");
+                Message = " Create Account Success: " + acc;
             }
             else
             {
-                Message = "Failed to create account. Please try again.";
-                return Page();
+                Message = "Opps, somthing have wrong...";
             }
+            return Page();
         }
     }
 }

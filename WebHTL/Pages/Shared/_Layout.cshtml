@@ -1,11 +1,16 @@
-﻿<!DOCTYPE html>
+﻿
+@{
+    var userId = Context.Request.HttpContext.Session.GetString("customerId");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebHTL - Hướng đến tương lai của bạn</title>
     <!-- CSS FILES -->
-    <link rel="shortcut icon" type="image/x-icon" href="~/images/logos/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="~/images/logos/favicon.ico" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,26 +20,27 @@
     <link href="~/css/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/slick.css" />
     <link href="~/css/tooplate-little-fashion.css" rel="stylesheet">
-
+    @RenderSection("head", required: false)
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebHTL.styles.css" asp-append-version="true" />
     <style>
-            .footer {
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                white-space: nowrap;
-                line-height: 60px;
-                text-align: center;
-            }
-            .text-right {
-                text-align: right;
-            }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            white-space: nowrap;
+            line-height: 60px;
+            text-align: center;
+        }
 
-            a {
-                color: #007bff;
-                text-decoration: none;
-            }
+        .text-right {
+            text-align: right;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
 
             a:hover {
                 text-decoration: underline;
@@ -55,46 +61,72 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <a class="navbar-brand" href="./HomePage">
-                    <img src="../images/header/Htllogo.jpg" alt="HTL Logo" class="logo">
+                <a class="navbar-brand" href="/HomePage">
+                    <img src="/images/header/Htllogo.jpg" alt="HTL Logo" class="logo">
                     <strong> Hướng<span>Tương Lai</span></strong>
                 </a>
 
-                <div class="d-lg-none">
-                    <a href="/" class="bi-person custom-icon me-3"></a>
+               @*  <div class="d-lg-none">
+                    <a href="/signin" class="bi-person custom-icon me-3"></a>
 
                     <a href="./product-detail.html" class="bi-bag custom-icon"></a>
-                </div>
+                </div> *@
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="./HomePage">Home</a>
+                            <a class="nav-link active" href="/HomePage">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="./error" @*href="./about"*@>Khám phá bản thân</a>
+                            <a class="nav-link" href="/error" @*href="./about"*@>Khám phá bản thân</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="./products">Khóa học</a>
+                            <a class="nav-link" href="/products">Khóa học</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="./News" @*href="./faq"*@>Tin tức</a>
+                            <a class="nav-link" href="/News" @*href="./faq"*@>Tin tức</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="./error" @*href="./contact"*@>Việc làm</a>
+                            <a class="nav-link" href="/error" @*href="./contact"*@>Việc làm</a>
                         </li>
                     </ul>
 
                     <div class="d-none d-lg-block">
-                        <a href="/signin" class="bi-person custom-icon me-3"></a>
+                        @* Conditionally display sign-in link based on login status *@
+                        @{
+                            var IsLogin = false;
+                            if (userId != null)
+                            {
+                                IsLogin = true;
 
-                        <a href="./product-detail.html" class="bi-bag custom-icon"></a>
+                            }
+                        }
+                        @if (!IsLogin)
+                        {
+                            <div class="d-none d-lg-block">
+                                <a href="/signin" class="bi-person custom-icon me-3"></a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-none d-lg-block">
+                                <a href="/Profile/Index">
+                                    <div class="user-img rounded-circle" style="width: 30px; height: 30px; overflow: hidden; margin-right:15px">
+                                        <img src="~/admin/assets/images/users/5.jpg" alt="user" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                                        <span class="profile-status online pull-right"></span>
+                                    </div>
 
-                        <button class="btn btn-primary" onclick="window.location.href='/Logout'">Logout</button>
+                                </a>
+                            </div>
+                        }
+
+                    </div>
+                    <div>
+                        <a href="./products" class="bi-bag custom-icon"></a>
                     </div>
                 </div>
             </div>
@@ -110,7 +142,7 @@
             <div class="row">
 
                 <div class="col-lg-3 col-10 me-auto mb-4">
-                    <h4 class="text-white mb-3"><a href="./index.html">Hướng</a> Tương Lai</h4>
+                    <h4 class="text-white mb-3"><a href="/index.html">Hướng</a> Tương Lai</h4>
                     <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>Hướng Tương Lai</strong></p>
                     <br>
 
@@ -120,7 +152,7 @@
                     <h5 class="text-white mb-3">Sitemap</h5>
 
                     <ul class="footer-menu d-flex flex-wrap">
-                        <li class="footer-menu-item"><a href="./about.html" class="footer-menu-link">Story</a></li>
+                        <li class="footer-menu-item"><a href="/about.html" class="footer-menu-link">Story</a></li>
 
                         <li class="footer-menu-item"><a href="#" class="footer-menu-link">Products</a></li>
 
@@ -150,12 +182,14 @@
             </div>
         </div>
     </footer>
-   @*  <footer class="border-top footer text-muted" >
-        <div class="container">
-            &copy; 2024 - WebHTL - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer> *@
+    @*  <footer class="border-top footer text-muted" >
+            <div class="container">
+                &copy; 2024 - WebHTL - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </div>
+        </footer> *@
     <!-- JAVASCRIPT FILES -->
+    <!-- All Jquery -->
+    <script src="~/admin/assets/js/lib/jquery/jquery.min.js"></script>
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/Headroom.js"></script>
@@ -166,6 +200,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
+
 </html>

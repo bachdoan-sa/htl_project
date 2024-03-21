@@ -1,0 +1,48 @@
+﻿@page
+@model WebHTL.Pages.Areas.Admin.Account.UpdateModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Update Account";
+}
+
+<h1>Update Account</h1>
+
+@if (Model.Account == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <form method="post">
+        <div>
+            <label for="UserName">Username:</label>
+            <input type="text" id="UserName" name="UserName" value="@Model.Account.UserName" required />
+        </div>
+        <div>
+            <label for="Password">Password:</label>
+            <input type="password" id="Password" name="Password" value="@Model.Account.Password" required />
+        </div>
+        <div>
+            <label for="Phone">Phone:</label>
+            <input type="text" id="Phone" name="Phone" value="@Model.Account.Phone" />
+        </div>
+        <div>
+            <label for="Email">Email:</label>
+            <input type="email" id="Email" name="Email" value="@Model.Account.Email" />
+        </div>
+        <div>
+            <label for="Birthdate">Birthdate:</label>
+            <input type="date" id="Birthdate" name="Birthdate" value="@Model.Account.Birthdate?.ToString("yyyy-MM-dd")" />
+        </div>
+        <div>
+            <label for="Role">Role:</label>
+            <input type="text" id="Role" name="Role" value="@Model.Account.Role" />
+        </div>
+        <div>
+            <label for="Work">Work:</label>
+            <input type="text" id="Work" name="Work" value="@Model.Account.Work" />
+        </div>
+        <button type="submit">Update</button>
+    </form>
+}
+

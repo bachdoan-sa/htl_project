@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Repository.Repositories.IRepositories;
+using Repository.Services;
 using Repository.Services.IServices;
 using System.Threading.Tasks;
 
@@ -10,6 +12,9 @@ public class ForgotPasswordModel : PageModel
     public ForgotPasswordModel(IAccountService accountService)
     {
         _accountService = accountService;
+    }
+    public void OnGet()
+    {
     }
 
     [BindProperty]
@@ -24,16 +29,24 @@ public class ForgotPasswordModel : PageModel
             return Page();
         }
 
-        var emailSent = await _accountService.SendResetPasswordEmailAsync(Email);
-        if (emailSent)
+        try
         {
-            Message = "An email with instructions to reset your password has been sent to your email address.";
-        }
-        else
-        {
-            Message = "User not found.";
-        }
+            var user = await _accountService.GetByEmail(Email);
 
+            if (user == null)
+            {
+                Message = "Email does not exist in the database.";
+            }
+            else
+            {
+                var token = await _accountService.GenerateResetToken(Email);
+                await _accountService.SendResetPasswordEmailAsync(Email);
+            }
+        }
+        catch (Exception exception)
+        {
+            Message = exception.Message;
+        }
         return Page();
     }
 }
