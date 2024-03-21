@@ -14,7 +14,7 @@ namespace Repository.Entities
         public string LessonName { get; set; }
         public string LessonTarget { get; set; }
         public string? LessonContent { get; set; }
-        public string LessonURL { get; set; }
+        public string LessonURL { get; set; } = string.Empty;
         [Required]
         public string CourseModuleId { get; set; }
         [ForeignKey(nameof(CourseModuleId))]
