@@ -29,13 +29,14 @@ namespace WebHTL.Pages
         {
             AccountModel account = new AccountModel
             {
-                UserName = "",
+                UserName = Email,
                 Email = Email,
                 Password = Password,
                 Phone = "",
                 Birthdate = DateTime.UtcNow,
                 Role = "Customer",
                 Work = "student"
+
             };
             var result = _accountService.Add(account).Result;
 
