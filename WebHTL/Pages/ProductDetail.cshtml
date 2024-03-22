@@ -1,7 +1,15 @@
 ﻿@page "{id}"
 @model WebHTL.Pages.ProductDetailModel
 @{
+    Layout = "_Layout";
 }
+<style>
+    .qr-code{
+        height: 250px;
+        width: auto;
+    }
+</style>
+<script src="~/admin//assets/js/lib/jquery/jquery.min.js"></script>
 <div class="wrapper">
     <div class="wrapper-slider">
         <section class="slick-slideshow" style="margin-top:0">
@@ -13,43 +21,83 @@
                             <div class="col-lg-6 col-10">
                                 <h1 class="slick-title">@Model.Roadmap.Title</h1>
                                 <p class="lead text-white mt-lg-3 mb-lg-5">@Model.Roadmap.RoadmapGoal</p>
-                                <a href="" class="btn custom-btn">Mua ngay</a>
+                                <button type="button" class="btn custom-btn" onclick="show()"><i class="ri-add-line align-bottom me-1"></i> Mua Ngay</button>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-       @*  
-                            @if (Model.Roadmap.ListCourse != null && Model.Roadmap.ListCourse.Any())
-                            {
-                                <div class="course-list">
-                                    <h3>Danh sách các khóa học của Lộ trình:</h3>
-                                    <ul>
-                                        @foreach (var course in Model.Roadmap.ListCourse)
-                                        {
-                                            <li>
-                                                <span class="course-name">Tên Khóa Học :</span>
-                                                <span class="course-name">@course.CourseName</span><br>
-                                                <span class="course-name">Kiểu học :</span>
-                                                <span class="course-type">@course.TypeOfLearning</span><br>
-                                                <span class="course-name">Thông tin Khóa Học :</span>
-                                                <span class="course-info">@course.CourseInformation</span><br>
-                                                <span class="course-name">Độ khó :</span>
-                                                <span class="course-info">@course.Level</span><br>
-                                                <span class="course-name">Số Module :</span>
-                                                <span class="course-info">@course.CourseModules</span><br>
-                                                <!--Thêm các thông tin khác của khóa học nếu cần-->
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
-                            }
-                        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-light p-3">
+                        <h5 class="modal-title" id="exampleModalLabel">Thanh Toán</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" id="close-modal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    <div class="modal-body p-3">
+                        <div class="form-group">
+                            <label>Select Payment Method:</label>
+                            <select onchange="selectmethod(this)" class="form-control">
+                                <option value="Bank">Bank Transfer</option>
+                                <option value="Momo">Momo</option>
+                            </select>
+                        </div>
+
+                        <div id="qrCode">
+                            <div class=" d-flex justify-content-center"><p>Scan the QR code to pay:</p></div>
+                            <div  class=" d-flex justify-content-center">
+                                <img src="~/images/bank_qr.png" alt="Bank QR Code" id="bankqr" class="qr-code" style="display: block;" />
+                                <img src="~/images/momo_qr.png" alt="Momo QR Code" id="momoqr" class="qr-code" style="display: none;" />
+                            </div>
+                            
+                        </div>
+
+                        
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        @*<button type="submit" class="btn btn-success" id="add-btn">Add Question</button>*@
+                    </div>
+
                 </div>
             </div>
+        </div>
+        @*
+        @if (Model.Roadmap.ListCourse != null && Model.Roadmap.ListCourse.Any())
+        {
+        <div class="course-list">
+        <h3>Danh sách các khóa học của Lộ trình:</h3>
+        <ul>
+        @foreach (var course in Model.Roadmap.ListCourse)
+        {
+        <li>
+        <span class="course-name">Tên Khóa Học :</span>
+        <span class="course-name">@course.CourseName</span><br>
+        <span class="course-name">Kiểu học :</span>
+        <span class="course-type">@course.TypeOfLearning</span><br>
+        <span class="course-name">Thông tin Khóa Học :</span>
+        <span class="course-info">@course.CourseInformation</span><br>
+        <span class="course-name">Độ khó :</span>
+        <span class="course-info">@course.Level</span><br>
+        <span class="course-name">Số Module :</span>
+        <span class="course-info">@course.CourseModules</span><br>
+        <!--Thêm các thông tin khác của khóa học nếu cần-->
+        </li>
+        }
+        </ul>
+        </div>
+        }
+        </div>
+        </div>
+        </div>
+        </div>
         </section> *@
         <section class="wrapper-detailCombo" style="padding-top:30px; padding-bottom:30px;">
             <div class="container">
@@ -102,21 +150,21 @@
                         </div>
                     </div>
                     @foreach (var sections in Model.Roadmap.Sections)
-            {
-                <div class="col-6 mb20">
-                    <div class="wrapper-achievement__box d-flex gap50 gap15-m gap15-tl wrapper-achievement__box-hover">
-                        <div class="wrapper-achievement__images">
+                    {
+                        <div class="col-6 mb20">
+                            <div class="wrapper-achievement__box d-flex gap50 gap15-m gap15-tl wrapper-achievement__box-hover">
+                                <div class="wrapper-achievement__images">
                                     <img src="~/images/icon-nguoi.webp" width="120" height="150" class="coverimg" style="aspect-ratio: 120 / 150;">
-                        </div>
-                        <div class="wrapper-achievement__detail flex-1">
-                            <div class="title line-2">
-                                @sections.Description
+                                </div>
+                                <div class="wrapper-achievement__detail flex-1">
+                                    <div class="title line-2">
+                                        @sections.Description
+                                    </div>
+
+                                </div>
                             </div>
-                            
                         </div>
-                    </div>
-                </div>
-            }
+                    }
                 </div>
             </div>
         </section>
@@ -131,16 +179,16 @@
                     </div>
                     <div class="col-12">
                         <div class="wrapper-programme__box d-flex align-items-center justify-content-center">
-                            
-                                <div class="text-center">
-                                    <div class="number">
+
+                            <div class="text-center">
+                                <div class="number">
                                     @Model.TotalModules
-                                    </div>
-                                    <div class="title">
-                                        Check Point
-                                    </div>
                                 </div>
-                            
+                                <div class="title">
+                                    Check Point
+                                </div>
+                            </div>
+
                             <div class="text-center">
                                 <div class="number">
                                     @Model.Roadmap.CountCourse
@@ -156,100 +204,132 @@
         </section>
 
         @* <section class="wrapper-courses">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="row col-12 text-center">
-                        <div class="wrapper-detailCombo__title">
-                            <span>Danh sách khóa học</span>
-                        </div>
+        <div class="container">
+        <div class="row justify-content-center">
+        <div class="row col-12 text-center">
+        <div class="wrapper-detailCombo__title">
+        <span>Danh sách khóa học</span>
+        </div>
 
-                        <div class="col-lg-4 col-4 mb-3">
-                            <div class="product-thumb">
-                                <a href="">
-                                    <img src="~/images/BasicCshap.png" class="img-fluid product-image" alt="">
-                                </a>
+        <div class="col-lg-4 col-4 mb-3">
+        <div class="product-thumb">
+        <a href="">
+        <img src="~/images/BasicCshap.png" class="img-fluid product-image" alt="">
+        </a>
 
-                                <div class="product-top d-flex">
-                                    <span class="product-alert me-auto">Công nghệ mới</span>
+        <div class="product-top d-flex">
+        <span class="product-alert me-auto">Công nghệ mới</span>
 
-                                    <a href="#" class="bi-heart-fill product-icon"></a>
-                                </div>
+        <a href="#" class="bi-heart-fill product-icon"></a>
+        </div>
 
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="" class="product-title-link">Lập trình ngôn ngữ C# cơ bản</a>
-                                        </h5>
-
-
-                                    </div>
-
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">4 Checkpoint</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-4 mb-3">
-                            <div class="product-thumb">
-                                <a href="">
-                                    <img src="~/images/sql.png" class="img-fluid product-image" alt="">
-                                </a>
-
-                                <div class="product-top d-flex">
-                                    <span class="product-alert">Công nghệ mới</span>
-
-                                    <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                                </div>
-
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="" class="product-title-link">Hướng đối tượng và SQL</a>
-                                        </h5>
+        <div class="product-info d-flex">
+        <div>
+        <h5 class="product-title mb-0">
+        <a href="" class="product-title-link">Lập trình ngôn ngữ C# cơ bản</a>
+        </h5>
 
 
-                                    </div>
+        </div>
 
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">7 Checkpoint</small>
-                                </div>
-                            </div>
-                        </div>
+        <small class="product-price text-muted ms-auto mt-auto mb-5">4 Checkpoint</small>
+        </div>
+        </div>
+        </div>
 
-                        <div class="col-lg-4 col-4">
-                            <div class="product-thumb">
-                                <a href="./product-detail">
-                                    <img src="~/images/basicweb.png" class="img-fluid product-image" alt="">
-                                </a>
+        <div class="col-lg-4 col-4 mb-3">
+        <div class="product-thumb">
+        <a href="">
+        <img src="~/images/sql.png" class="img-fluid product-image" alt="">
+        </a>
 
-                                <div class="product-top d-flex">
-                                    <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                                </div>
+        <div class="product-top d-flex">
+        <span class="product-alert">Công nghệ mới</span>
 
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="./product-detail.html" class="product-title-link">Web cơ bản cho người mới</a>
-                                        </h5>
+        <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+        </div>
 
-                                    </div>
+        <div class="product-info d-flex">
+        <div>
+        <h5 class="product-title mb-0">
+        <a href="" class="product-title-link">Hướng đối tượng và SQL</a>
+        </h5>
 
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">3 Checkpoint</small>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-12 text-center">
-                            <a href="" class="view-all">Xem tất cả khóa học</a>
-                        </div>
-                    </div>
+        </div>
 
-                </div>
-            </div>
+        <small class="product-price text-muted ms-auto mt-auto mb-5">7 Checkpoint</small>
+        </div>
+        </div>
+        </div>
+
+        <div class="col-lg-4 col-4">
+        <div class="product-thumb">
+        <a href="./product-detail">
+        <img src="~/images/basicweb.png" class="img-fluid product-image" alt="">
+        </a>
+
+        <div class="product-top d-flex">
+        <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+        </div>
+
+        <div class="product-info d-flex">
+        <div>
+        <h5 class="product-title mb-0">
+        <a href="./product-detail.html" class="product-title-link">Web cơ bản cho người mới</a>
+        </h5>
+
+        </div>
+
+        <small class="product-price text-muted ms-auto mt-auto mb-5">3 Checkpoint</small>
+        </div>
+        </div>
+        </div>
+
+        <div class="col-12 text-center">
+        <a href="" class="view-all">Xem tất cả khóa học</a>
+        </div>
+        </div>
+
+        </div>
+        </div>
         </section> *@
 
         <!-- Các phần còn lại của mã HTML có thể được cập nhật tương tự -->
     </div>
 </div>
+
+
+<script>
+
+    function selectmethod(el) {
+        // Lắng nghe sự kiện thay đổi của select box
+
+        // Hiển thị QR code tương ứng với phương thức thanh toán được chọn
+        if (el.value === "Bank") {
+            document.getElementById("bankqr").style.display = 'block';
+            document.getElementById("momoqr").style.display = 'none';
+        } else if (el.value === "Momo") {
+            document.getElementById("momoqr").style.display = 'block';
+            document.getElementById("bankqr").style.display = 'none';
+        }
+
+    }
+
+
+</script>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+        });
+        function show() {
+            $('#showModal').modal('show');
+        }
+
+    </script>
+}
+
 <style>
     .wrapper-detailCombo__box-detail > info > span {
         color: var(--html-cl-combo);
@@ -309,7 +389,5 @@
             font-size: 48px;
             font-family: var(--raleway-ExtraBold),Arial, Helvetica, sans-serif;
         }
-
-
 
 </style>

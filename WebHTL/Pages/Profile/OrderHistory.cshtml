@@ -1,4 +1,4 @@
-﻿@page 
+﻿@page
 @model WebHTL.Pages.Profile.OrderHistoryModel
 @{
     Layout = "_LayoutProfile";
@@ -31,17 +31,26 @@
                         </tr>
                     </thead>
                     <tbody style="text-align:center ;">
-                        @foreach (var order in Model.Orders)
+                        @if (Model.Orders != null && Model.Orders.Count > 0)
                         {
-                            <tr style="border-top: 1px solid black; margin:20px">
-                                <td>@order.Id</td>
-                                <td>@order.Total</td>
-                                <td>@order.OrderStatus</td>
-                                <td>@order.CreatedTime</td>
-                                <td>@order.LastUpdated</td>
-                                <td style="text-align:center !important;">
-                                    <a class="wrapper-profile__activated-link" href="~/Profile/OrderDetailHistory/@order.Id">Xem chi tiết</a>
-                                </td>
+                            @foreach (var order in Model.Orders)
+                            {
+                                <tr style="border-top: 1px solid black; margin:20px">
+                                    <td>@order.Id</td>
+                                    <td>@order.Total</td>
+                                    <td>@order.OrderStatus</td>
+                                    <td>@order.CreatedTime</td>
+                                    <td>@order.LastUpdated</td>
+                                    <td style="text-align:center !important;">
+                                        <a class="wrapper-profile__activated-link" href="~/Profile/OrderDetailHistory/@order.Id">Xem chi tiết</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr style="border-top: 1px solid black">
+                                <td colspan="5" class="justify-content-center text-center" style="padding-top: 20px; font-size:15px">Bạn chưa có đơn hàng nào hoặc chúng tôi chưa thể cập nhật cho bạn</td>
                             </tr>
                         }
                     </tbody>

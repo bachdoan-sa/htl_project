@@ -5,10 +5,7 @@
 }
 <h2>Checkout</h2>
 
-@if (Model.TotalAmount > 0)
-{
-    <p>Total Amount: @Model.TotalAmount.ToString("C")</p>
-    <p>Please enter your email and the amount to be paid when scanning the QR code.</p>
+@*
     <form method="post">
         <div class="form-group">
             <label>Select Payment Method:</label>
@@ -26,11 +23,6 @@
 
         <button type="submit" class="btn btn-primary">Complete Payment</button>
     </form>
-}
-else
-{
-    <p>Your shopping cart is empty or an error occurred.</p>
-}
 <script>document.addEventListener("DOMContentLoaded", function () {
         // Lắng nghe sự kiện thay đổi của select box
         document.querySelector("select[name='Transaction.PaymentMethod']").addEventListener("change", function () {
@@ -45,4 +37,4 @@ else
                 document.querySelector("img[alt='Momo QR Code']").style.display = 'block';
             }
         });
-    });</script>
+    });</script>*@
