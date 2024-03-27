@@ -76,5 +76,22 @@ namespace Repository.Services
             var entity = await _orderRepository.GetAllByAccountId(id);
             return _mapper.Map<List<OrderModel>>(entity);
         }
+
+        public Task<decimal> GetTotalRevenue()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> GetTotalOrders()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<OrderModel>> GetMonthlyOrders()
+        {
+            var data = _orderRepository.GetMonthlyOrders().Result;
+            var list = _mapper.Map<List<OrderModel>>(data);
+            return Task.FromResult(list);
+        }
     }
 }

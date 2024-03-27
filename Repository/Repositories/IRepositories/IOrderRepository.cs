@@ -20,5 +20,6 @@ namespace Repository.Repositories.IRepositories
         Task<int> GetTotalOrderCount();
         Task<List<OrderModel>> GetRecentOrdersWithUsers(int count);
         Task<List<Order>> GetAllByAccountId(string id);
+        public Task<List<Order>> GetMonthlyOrders();
     }
 }

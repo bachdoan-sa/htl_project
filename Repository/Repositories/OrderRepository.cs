@@ -106,6 +106,13 @@ namespace Repository.Repositories
             var acc = _context.Orders.Where(_ => _.AccountId == id).ToListAsync();
             return acc;
         }
+
+        public Task<List<Order>> GetMonthlyOrders()
+        {
+            var currentMounth = DateTime.Now.Month;
+            var data = _context.Orders.Where(_ => _.CreatedTime.Month == currentMounth).ToList();
+            return Task.FromResult(data);
+        }
     }
 
 }

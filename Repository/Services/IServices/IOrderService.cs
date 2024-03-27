@@ -14,9 +14,15 @@ namespace Repository.Services.IServices
         Task<OrderModel> Add(OrderModel model);
         Task<OrderModel> Update(OrderModel model);
         Task<string> Delete(string id);
+
+        Task<decimal> GetTotalRevenue();
+        Task<int> GetTotalOrders();
+
         Task<decimal> GetTotalRevenueForCurrentMonth();
         Task<int> GetTotalOrdersForCurrentMonth();
         Task<int> GetTotalOrderCount();
+        Task<List<OrderModel>> GetMonthlyOrders();
+
         Task<List<OrderModel>> GetRecentOrdersWithUsers(int count);
         Task<List<OrderModel>> GetAllByAccountId(string id);
     }

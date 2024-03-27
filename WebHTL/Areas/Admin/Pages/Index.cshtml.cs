@@ -23,6 +23,7 @@ namespace WebAppRazorpage.Pages.Areas.Admin
         public int TotalStores { get; set; } = 0;
         public int TotalNewUsers { get; set; } = 0;
         public List<OrderModel> RecentOrdersWithUsers { get; set; } = new List<OrderModel>();
+        public List<OrderModel> MounthlyOrders { get; set; } = new List<OrderModel>();
         public async Task OnGetAsync()
         {
             if (HttpContext.Session.GetString("Admin") == null)
@@ -34,6 +35,7 @@ namespace WebAppRazorpage.Pages.Areas.Admin
             TotalStores = await _orderService.GetTotalOrderCount();
             TotalNewUsers = await _accountService.GetNewUserCountForCurrentMonth();
             RecentOrdersWithUsers = await _orderService.GetRecentOrdersWithUsers(4);
+            MounthlyOrders = await _orderService.GetMonthlyOrders();
         }
 
     }
