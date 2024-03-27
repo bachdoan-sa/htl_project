@@ -10,6 +10,7 @@ namespace Repository.Model
     public class GetRoadmapDetailResDto
     {
         public string? Id { get; set; }
+        public string? KeyId { get; set; }
         public string? Title { get; set; }
         public string? RoadmapGoal { get; set; }
         public string? RoadmapType { get; set; }

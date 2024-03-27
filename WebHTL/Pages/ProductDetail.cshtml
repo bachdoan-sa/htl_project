@@ -2,9 +2,10 @@
 @model WebHTL.Pages.ProductDetailModel
 @{
     Layout = "_Layout";
+    var formatMoney = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 <style>
-    .qr-code{
+    .qr-code {
         height: 250px;
         width: auto;
     }
@@ -43,21 +44,28 @@
                         <div class="form-group">
                             <label>Select Payment Method:</label>
                             <select onchange="selectmethod(this)" class="form-control">
-                                <option value="Bank">Bank Transfer</option>
                                 <option value="Momo">Momo</option>
+                                <option value="Bank">Bank Transfer</option>         
                             </select>
                         </div>
 
                         <div id="qrCode">
                             <div class=" d-flex justify-content-center"><p>Scan the QR code to pay:</p></div>
-                            <div  class=" d-flex justify-content-center">
-                                <img src="~/images/bank_qr.png" alt="Bank QR Code" id="bankqr" class="qr-code" style="display: block;" />
-                                <img src="~/images/momo_qr.png" alt="Momo QR Code" id="momoqr" class="qr-code" style="display: none;" />
+                            <div class=" d-flex justify-content-center">
+                                <img src="~/images/khoaqr-momo.jpg" alt="Momo QR Code" id="momoqr" class="qr-code" style="display: block;" />
+                                <img src="~/images/khoaqr-bank.jpg" alt="Bank QR Code" id="bankqr" class="qr-code" style="display: none;" />
                             </div>
-                            
+                            <div style="padding: 10px">
+                                <span>Nhắn tin theo cú pháp sau:</span> <br />
+                                <span style="color: red">@Model.Roadmap.KeyId - &lt;Email tài khoản đã đăng kí&gt;</span>
+                                <br />
+                                <span>Kèm số tiền chuyển khoản:</span>
+                                <span class="counter-value">@String.Format(formatMoney,"{0:c}", Model.Roadmap.RoadmapPrice)</span>
+                            </div>
+                            <span>Chúng tôi sẽ cập nhật nhanh nhất có thể. <a href="https://www.facebook.com/people/HTL-H%C6%B0%E1%BB%9Bng-T%C6%B0%C6%A1ng-Lai/61555308706582/">Liên hệ ngay</a> </span>
                         </div>
 
-                        
+
 
 
                     </div>
@@ -306,12 +314,12 @@
         // Lắng nghe sự kiện thay đổi của select box
 
         // Hiển thị QR code tương ứng với phương thức thanh toán được chọn
-        if (el.value === "Bank") {
-            document.getElementById("bankqr").style.display = 'block';
-            document.getElementById("momoqr").style.display = 'none';
-        } else if (el.value === "Momo") {
-            document.getElementById("momoqr").style.display = 'block';
+        if (el.value === "Momo") {
             document.getElementById("bankqr").style.display = 'none';
+            document.getElementById("momoqr").style.display = 'block';
+        } else if (el.value === "Bank") {
+            document.getElementById("momoqr").style.display = 'none';
+            document.getElementById("bankqr").style.display = 'block';
         }
 
     }

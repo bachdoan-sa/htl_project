@@ -176,6 +176,7 @@ namespace Repository.Services
                 GetRoadmapDetailResDto resDto = new()
                 {
                     Id = roadmap.Id,
+                    KeyId = roadmap.RoadmapKeyId,
                     CareerId = roadmap.CareerId,
                     CareerName = career.CareerName,
                     Language = roadmap.Language,

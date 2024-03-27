@@ -11,6 +11,7 @@ namespace Repository.Entities
 {
     public class Roadmap : BaseEntity
     {
+        public string RoadmapKeyId { get; set; }
         public string Title { get; set; }
         public string RoadmapGoal { get; set; }
         public string RoadmapType { get; set; }
