@@ -159,22 +159,8 @@
         $(function () {
         "use strict";
 
-        // Fetch data from your services
-        var monthlyOrders = @Html.Raw(Json.Serialize(Model.MounthlyOrders));
-        var monthlyUsers = @Html.Raw(Json.Serialize(Model.MounthlyUsers));
-
         // Prepare data for the chart
         var chartData = @Html.Raw(Json.Serialize(ViewData["ChartData"])); // This will hold our chart data
-
-        // Assuming monthlyOrders and monthlyUsers are lists with Date, OrderCount, and UserCount properties
-        // Loop through the days of the month
-        for (var i = 0; i < monthlyOrders.length; i++) {
-            chartData.push({
-                period: monthlyOrders[i].CreatedTime.substring(0, 10), // Extracting the date part in 'YYYY-MM-DD' format
-                orders: monthlyOrders[i].OrderCount, // Replace with actual property for order count if different
-                users: monthlyUsers[i].UserCount // Replace with actual property for user count if different
-            });
-        }
 
         // Initialize chart with the prepared data
         Morris.Area({
