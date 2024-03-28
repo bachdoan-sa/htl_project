@@ -23,5 +23,6 @@ namespace Repository.Services.IServices
         Task<bool> VerifyResetTokenAsync(string email, string token);
         Task ResetPasswordAsync(string email, string newPassword);
         Task<int> GetNewUserCountForCurrentMonth();
+        Task<List<AccountModel>> GetNewUsersForCurrentMonth();
     }
 }

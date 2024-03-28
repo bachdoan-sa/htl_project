@@ -81,5 +81,15 @@ namespace Repository.Repositories
 
             return newUserCount;
         }
+        public async Task<List<Account>> GetNewUsersForCurrentMonth()
+        {
+            var now = DateTimeOffset.Now;
+            var firstDayOfMonth = new DateTimeOffset(new DateTime(now.Year, now.Month, 1));
+            var newUsers = await _context.Accounts
+                .Where(a => a.CreatedTime >= firstDayOfMonth && a.CreatedTime < firstDayOfMonth.AddMonths(1))
+                .ToListAsync();
+
+            return newUsers;
+        }
     }
 }
