@@ -33,7 +33,7 @@ namespace Repository.Services
         }
         public Task<AccountModel> Add(AccountModel model)
         {
-            var existingAccount = _accountRepository.GetByEmail(model.Email);
+            var existingAccount = _accountRepository.GetByEmail(model.Email).Result;
             if (existingAccount != null)
             {
                 return Task.FromResult<AccountModel>(null);
