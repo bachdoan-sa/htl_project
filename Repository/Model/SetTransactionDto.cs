@@ -13,6 +13,7 @@ namespace Repository.Model
         public OrderDetailModel? OrderDetail { get; set; }
         public DriverModel? Driver { get; set; } 
 
+        public string? RoadmapKeyId { get; set; }
        
     }
 }
