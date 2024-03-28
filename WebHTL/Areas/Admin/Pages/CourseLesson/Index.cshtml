@@ -43,8 +43,8 @@
                                     <td>@item.LessonName</td>
                                     <td>@item.LessonTarget</td>
                                     <td>@item.LessonURL</td>
-                                     <td>@item.CreatedTime.ToString("dd-MM-yyyy")</td>
-                                     <td>@item.LastUpdated.ToString("dd-MM-yyyy")</td>
+                                     <td>@item.CreatedTime?.ToString("dd-MM-yyyy")</td>
+                                     <td>@item.LastUpdated?.ToString("dd-MM-yyyy")</td>
                                      <td>
                                          @if (item.DeleteTime != null)
                                          {

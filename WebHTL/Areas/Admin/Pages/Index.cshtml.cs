@@ -48,8 +48,8 @@ namespace WebAppRazorpage.Pages.Areas.Admin
             // Lặp qua mỗi ngày trong tháng
             for (var date = startDate; date <= endDate; date = date.AddDays(1))
             {
-                var orderCount = MounthlyOrders.Count(order => order.CreatedTime.Date == date);
-                var userCount = MounthlyUsers.Count(user => user.CreatedTime.Date == date);
+                var orderCount = MounthlyOrders.Count(order => order.CreatedTime?.Date == date);
+                var userCount = MounthlyUsers.Count(user => user.CreatedTime?.Date == date);
 
                 chartData.Add(new
                 {

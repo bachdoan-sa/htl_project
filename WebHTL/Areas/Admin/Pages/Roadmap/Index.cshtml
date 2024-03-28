@@ -47,8 +47,8 @@
                                      <td>@item.RoadmapType</td>
                                      <td>@item.Language</td>
                                      <td>@item.CareerId</td>
-                                     <td>@item.CreatedTime.ToString("dd-MM-yyyy")</td>
-                                     <td>@item.LastUpdated.ToString("dd-MM-yyyy")</td>
+                                     <td>@item.CreatedTime?.ToString("dd-MM-yyyy")</td>
+                                     <td>@item.LastUpdated?.ToString("dd-MM-yyyy")</td>
                                      <td>
                                          @if (item.DeleteTime != null)
                                          {

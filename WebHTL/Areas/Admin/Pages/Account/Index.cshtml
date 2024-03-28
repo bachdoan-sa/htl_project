@@ -48,8 +48,8 @@
                                     <td>@item.Birthdate</td>
                                     <td>@item.Role</td>
                                     <td>@item.Work</td>
-                                     <td>@item.CreatedTime.ToString("dd-MM-yyyy")</td>
-                                     <td>@item.LastUpdated.ToString("dd-MM-yyyy")</td>
+                                     <td>@item.CreatedTime?.ToString("dd-MM-yyyy")</td>
+                                     <td>@item.LastUpdated?.ToString("dd-MM-yyyy")</td>
                                      <td>
                                          @if (item.DeleteTime != null)
                                          {
