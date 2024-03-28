@@ -20,5 +20,6 @@ namespace Repository.Repositories.IRepositories
         Task<string> Delete(string id);
         Task SetResetToken(string email, string token);
         Task<int> GetNewUserCountForCurrentMonth();
+        Task<List<Account>> GetNewUsersForCurrentMonth();
     }
 }
