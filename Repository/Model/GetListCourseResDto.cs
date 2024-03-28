@@ -8,12 +8,12 @@ namespace Repository.Model
 {
     public class GetListCourseResDto
     {
-        public string Id { get; set; }
-        public string CourseName { get; set; }
-        public string TypeOfLearning { get; set; }
-        public string CourseInformation { get; set; }
-        public string DefaultImage { get; set; }
-        public string Level { get; set; }
-        public int CourseModules { get; set; }
+        public string? Id { get; set; }
+        public string? CourseName { get; set; }
+        public string? TypeOfLearning { get; set; }
+        public string? CourseInformation { get; set; }
+        public string? DefaultImage { get; set; }
+        public string? Level { get; set; }
+        public int? CourseModules { get; set; }
     }
 }

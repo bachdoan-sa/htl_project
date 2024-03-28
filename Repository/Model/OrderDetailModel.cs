@@ -14,10 +14,10 @@ namespace Repository.Model
         public decimal? Cost { get; set; }
         public string? DriverId { get; set; }
         public string? OrderId { get; set; }
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
-        public DateTimeOffset CreatedTime { get; set; }
-        public DateTimeOffset LastUpdated { get; set; }
-        public DateTimeOffset DeleteTime { get; set; }
+        public int? Quantity { get; set; }
+        public decimal? Price { get; set; }
+        public DateTimeOffset? CreatedTime { get; set; }
+        public DateTimeOffset? LastUpdated { get; set; }
+        public DateTimeOffset? DeleteTime { get; set; }
     }
 }

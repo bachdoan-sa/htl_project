@@ -11,7 +11,7 @@ namespace WebHTL.Pages
 
         public GetRoadmapDetailResDto Roadmap { get; set; }
         [BindProperty]
-        public int TotalModules { get; set; }
+        public int TotalModules { get; set; } = 0 ;
 
         public ProductDetailModel(IRoadmapService roadmapService)
         {
@@ -21,7 +21,7 @@ namespace WebHTL.Pages
         public async Task OnGet(string id)
         {
             Roadmap = await _roadmapService.GetRoadmapDetailResByIdAsync(id);
-            TotalModules = Roadmap.ListCourse.Sum(course => course.CourseModules); 
+            TotalModules = Roadmap.ListCourse.Sum(course => (course.CourseModules ?? 0)); 
         }
     }
 }

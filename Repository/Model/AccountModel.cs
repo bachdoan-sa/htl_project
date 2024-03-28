@@ -10,8 +10,8 @@
         public DateTimeOffset? Birthdate { get; set; }
         public string? Role { get; set; }
         public string? Work { get; set; }
-        public DateTimeOffset CreatedTime { get; set; }
-        public DateTimeOffset LastUpdated { get; set; }
+        public DateTimeOffset? CreatedTime { get; set; }
+        public DateTimeOffset? LastUpdated { get; set; }
         public DateTimeOffset? DeleteTime { get; set; }
     }
 }

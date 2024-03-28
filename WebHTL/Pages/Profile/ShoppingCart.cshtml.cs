@@ -22,7 +22,7 @@ namespace WebHTL.Pages.Profile
             _orderDetailService = service;
         }
 
-        public async Task<IActionResult> OnGetAsync()
+       /* public async Task<IActionResult> OnGetAsync()
         {
             var userId = HttpContext.Session.GetString("customerId");
 
@@ -41,7 +41,7 @@ namespace WebHTL.Pages.Profile
             TotalAmount = OrderDetails.Sum(od => od.Quantity * od.Price);
 
             return Page();
-        }
+        }*/
 
         public async Task<IActionResult> OnPostAsync(string id, OrderDetailModel model)
         {

@@ -43,8 +43,8 @@
                                     <td>@item.ModuleName</td>
                                     <td>@item.Position</td>
                                     <td>@item.ModuleTarget</td>
-                                     <td>@item.CreatedTime.ToString("dd-MM-yyyy")</td>
-                                     <td>@item.LastUpdated.ToString("dd-MM-yyyy")</td>
+                                     <td>@item.CreatedTime?.ToString("dd-MM-yyyy")</td>
+                                     <td>@item.LastUpdated?.ToString("dd-MM-yyyy")</td>
                                      <td>
                                          @if (item.DeleteTime != null)
                                          {
