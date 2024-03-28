@@ -61,6 +61,19 @@ namespace WebAppRazorpage.Pages.Areas.Admin
 
             // Gửi dữ liệu đến view thông qua ViewBag hoặc ViewData
             ViewData["ChartData"] = chartData;
+            var maxOrdersAndUsers = 100; // 100% là 100 đơn hàng hoặc người dùng mới
+
+            // Tính tỷ lệ phần trăm
+            var ordersPercentage = ((float)TotalOrders / maxOrdersAndUsers) * 100;
+            var usersPercentage = ((float)TotalNewUsers / maxOrdersAndUsers) * 100;
+
+            // Làm tròn đến hai chữ số thập phân
+            ordersPercentage = (float)Math.Round(ordersPercentage, 2);
+            usersPercentage = (float)Math.Round(usersPercentage, 2);
+
+            // Gửi dữ liệu đến front-end
+            ViewData["OrdersPercentage"] = ordersPercentage;
+            ViewData["UsersPercentage"] = usersPercentage;
 
             return Page();
         }

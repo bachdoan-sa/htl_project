@@ -74,29 +74,16 @@
     <div class="col-lg-4">
         <div class="card">
             <div class="card-body browser">
-                <p class="f-w-600">iMacs <span class="pull-right">85%</span></p>
+                <!-- Orders Progress Bar -->
+                <p class="f-w-600">Orders <span class="pull-right" id="ordersPercentage">0%</span></p>
                 <div class="progress ">
-                    <div role="progressbar" style="width: 85%; height:8px;" class="progress-bar bg-danger wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                    <div role="progressbar" style="width: 0%; height:8px;" class="progress-bar bg-primary wow animated progress-animated" id="ordersProgressBar"> <span class="sr-only">Orders Complete</span> </div>
                 </div>
-
-                <p class="m-t-30 f-w-600">iBooks<span class="pull-right">90%</span></p>
+    
+                <!-- New Users Progress Bar -->
+                <p class="m-t-30 f-w-600">New Users<span class="pull-right" id="usersPercentage">0%</span></p>
                 <div class="progress">
-                    <div role="progressbar" style="width: 90%; height:8px;" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
-                </div>
-
-                <p class="m-t-30 f-w-600">iPhone<span class="pull-right">65%</span></p>
-                <div class="progress">
-                    <div role="progressbar" style="width: 65%; height:8px;" class="progress-bar bg-success wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
-                </div>
-
-                <p class="m-t-30 f-w-600">Samsung<span class="pull-right">65%</span></p>
-                <div class="progress">
-                    <div role="progressbar" style="width: 65%; height:8px;" class="progress-bar bg-warning wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
-                </div>
-
-                <p class="m-t-30 f-w-600">android<span class="pull-right">65%</span></p>
-                <div class="progress m-b-30">
-                    <div role="progressbar" style="width: 65%; height:8px;" class="progress-bar bg-success wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                    <div role="progressbar" style="width: 0%; height:8px;" class="progress-bar bg-success wow animated progress-animated" id="usersProgressBar"> <span class="sr-only">New Users Complete</span> </div>
                 </div>
             </div>
         </div>
@@ -177,7 +164,7 @@
         var monthlyUsers = @Html.Raw(Json.Serialize(Model.MounthlyUsers));
 
         // Prepare data for the chart
-        var chartData = []; // This will hold our chart data
+        var chartData = @Html.Raw(Json.Serialize(ViewData["ChartData"])); // This will hold our chart data
 
         // Assuming monthlyOrders and monthlyUsers are lists with Date, OrderCount, and UserCount properties
         // Loop through the days of the month
@@ -210,6 +197,21 @@
             dateFormat: function (x) { return new Date(x).toLocaleDateString(); },
             yLabelFormat: function(y) { return y.toFixed(0); }
         });
-     });
-</script>
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Lấy giá trị phần trăm từ ViewData
+            var ordersPercentage = '@ViewData["OrdersPercentage"]%';
+            var usersPercentage = '@ViewData["UsersPercentage"]%';
+    
+            // Cập nhật giao diện cho Orders
+            $('#ordersPercentage').text(ordersPercentage);
+            $('#ordersProgressBar').css('width', ordersPercentage);
+    
+            // Cập nhật giao diện cho New Users
+            $('#usersPercentage').text(usersPercentage);
+            $('#usersProgressBar').css('width', usersPercentage);
+        });
+    </script>
 }
