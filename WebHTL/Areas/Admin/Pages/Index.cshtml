@@ -75,15 +75,31 @@
         <div class="card">
             <div class="card-body browser">
                 <!-- Orders Progress Bar -->
-                <p class="f-w-600">Orders <span class="pull-right" id="ordersPercentage">0%</span></p>
-                <div class="progress ">
-                    <div role="progressbar" style="width: 0%; height:8px;" class="progress-bar bg-primary wow animated progress-animated" id="ordersProgressBar"> <span class="sr-only">Orders Complete</span> </div>
+                <p class="f-w-600">Orders <span class="pull-right" id="ordersPercentage"></span></p>
+                <div class=" ">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-user f-s-40 color-danger"></i></span>
+                        </div>
+                        <div class="media-body media-text-right">
+                            <h2>@Model.MounthlyOrders.Count</h2> <!-- Cập nhật giá trị ở đây -->
+                            <p class="m-b-0">Monthly's New Order</p>
+                        </div>
+                    </div>
                 </div>
     
                 <!-- New Users Progress Bar -->
-                <p class="m-t-30 f-w-600">New Users<span class="pull-right" id="usersPercentage">0%</span></p>
-                <div class="progress">
-                    <div role="progressbar" style="width: 0%; height:8px;" class="progress-bar bg-success wow animated progress-animated" id="usersProgressBar"> <span class="sr-only">New Users Complete</span> </div>
+                <p class="m-t-30 f-w-600">New Users<span class="pull-right" id="usersPercentage"></span></p>
+                <div class="">
+                    <div class="media">
+                        <div class="media-left meida media-middle">
+                            <span><i class="fa fa-user f-s-40 color-danger"></i></span>
+                        </div>
+                        <div class="media-body media-text-right">
+                            <h2>@Model.MounthlyUsers.Count</h2> <!-- Cập nhật giá trị ở đây -->
+                            <p class="m-b-0">Monthly's New User</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
