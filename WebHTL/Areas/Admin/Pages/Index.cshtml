@@ -79,7 +79,7 @@
                 <div class=" ">
                     <div class="media">
                         <div class="media-left meida media-middle">
-                            <span><i class="fa fa-user f-s-40 color-danger"></i></span>
+                            <span><i class="fa fa-archive f-s-40" style="color: #5867dd;"></i></span>
                         </div>
                         <div class="media-body media-text-right">
                             <h2>@Model.MounthlyOrders.Count</h2> <!-- Cập nhật giá trị ở đây -->
@@ -93,7 +93,7 @@
                 <div class="">
                     <div class="media">
                         <div class="media-left meida media-middle">
-                            <span><i class="fa fa-user f-s-40 color-danger"></i></span>
+                            <span><i class="fa fa-user f-s-40" style="color: #00c292;"></i></span>
                         </div>
                         <div class="media-body media-text-right">
                             <h2>@Model.MounthlyUsers.Count</h2> <!-- Cập nhật giá trị ở đây -->
@@ -199,21 +199,6 @@
             dateFormat: function (x) { return new Date(x).toLocaleDateString(); },
             yLabelFormat: function(y) { return y.toFixed(0); }
         });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            // Lấy giá trị phần trăm từ ViewData
-            var ordersPercentage = '@ViewData["OrdersPercentage"]%';
-            var usersPercentage = '@ViewData["UsersPercentage"]%';
-    
-            // Cập nhật giao diện cho Orders
-            $('#ordersPercentage').text(ordersPercentage);
-            $('#ordersProgressBar').css('width', ordersPercentage);
-    
-            // Cập nhật giao diện cho New Users
-            $('#usersPercentage').text(usersPercentage);
-            $('#usersProgressBar').css('width', usersPercentage);
         });
     </script>
 }
