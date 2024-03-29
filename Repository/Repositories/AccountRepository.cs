@@ -91,5 +91,10 @@ namespace Repository.Repositories
 
             return newUsers;
         }
+        public async Task<int> GetTotalNewUserCount()
+        {
+            var totalNewUserCount = await _context.Accounts.CountAsync();
+            return totalNewUserCount;
+        }
     }
 }

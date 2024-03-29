@@ -21,5 +21,6 @@ namespace Repository.Repositories.IRepositories
         Task SetResetToken(string email, string token);
         Task<int> GetNewUserCountForCurrentMonth();
         Task<List<Account>> GetNewUsersForCurrentMonth();
+        Task<int> GetTotalNewUserCount();
     }
 }

@@ -24,5 +24,6 @@ namespace Repository.Services.IServices
         Task ResetPasswordAsync(string email, string newPassword);
         Task<int> GetNewUserCountForCurrentMonth();
         Task<List<AccountModel>> GetNewUsersForCurrentMonth();
+        Task<int> GetTotalNewUserCount();
     }
 }

@@ -183,5 +183,10 @@ namespace Repository.Services
             var newUsersModels = _mapper.Map<List<AccountModel>>(newUsersEntities);
             return newUsersModels;
         }
+
+        public async Task<int> GetTotalNewUserCount()
+        {
+            return await _accountRepository.GetTotalNewUserCount();
+        }
     }
 }

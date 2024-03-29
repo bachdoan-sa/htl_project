@@ -21,6 +21,8 @@ namespace WebAppRazorpage.Pages.Areas.Admin
         public int TotalOrders { get; set; } = 0;
         public int TotalStores { get; set; } = 0;
         public int TotalNewUsers { get; set; } = 0;
+        
+        public int TotalUsers { get; set; } = 0;
         public List<OrderModel> RecentOrdersWithUsers { get; set; } = new List<OrderModel>();
         public List<OrderModel> MounthlyOrders { get; set; } = new List<OrderModel>();
         public List<AccountModel> MounthlyUsers { get; set; } = new List<AccountModel>();
@@ -31,6 +33,8 @@ namespace WebAppRazorpage.Pages.Areas.Admin
             {
                 RedirectToPage("/SignIn");
             }
+
+            TotalUsers = await _accountService.GetTotalNewUserCount();
             TotalRevenue = await _orderService.GetTotalRevenueForCurrentMonth();
             TotalOrders = await _orderService.GetTotalOrdersForCurrentMonth();
             TotalStores = await _orderService.GetTotalOrderCount();
