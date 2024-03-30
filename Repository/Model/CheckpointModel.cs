@@ -14,8 +14,8 @@ namespace Repository.Model
         public DateTimeOffset? Date { get; set; }
         public long? LearningTime { get; set; }
         public string? DriverId { get; set; }
-        public DateTimeOffset CreatedTime { get; set; }
-        public DateTimeOffset LastUpdated { get; set; }
-        public DateTimeOffset DeleteTime { get; set; }
+        public DateTimeOffset? CreatedTime { get; set; }
+        public DateTimeOffset? LastUpdated { get; set; }
+        public DateTimeOffset? DeleteTime { get; set; }
     }
 }

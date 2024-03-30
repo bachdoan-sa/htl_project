@@ -19,10 +19,10 @@ namespace Repository.Model
         public double? RoadmapPrice { get; set; }
         public string? CareerId { get; set; }
         public string? CareerName { get; set; }
-        public int CountCourse { get; set; }
+        public int? CountCourse { get; set; }
         //public ICollection<Section>? Sections { get; set; }
-        public DateTimeOffset CreatedTime { get; set; }
-        public DateTimeOffset LastUpdated { get; set; }
-        public DateTimeOffset DeleteTime { get; set; }
+        public DateTimeOffset? CreatedTime { get; set; }
+        public DateTimeOffset? LastUpdated { get; set; }
+        public DateTimeOffset? DeleteTime { get; set; }
     }
 }

@@ -10,14 +10,14 @@ namespace Repository.Model
 {
     public class CourseModuleModel
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
         public int? Position { get; set; }
         public string? ModuleName { get; set; }
         public string? ModuleTarget { get; set; }
         public string? CourseId { get; set; }
-        public DateTimeOffset CreatedTime { get; set; }
-        public DateTimeOffset LastUpdated { get; set; }
-        public DateTimeOffset DeleteTime { get; set; }
+        public DateTimeOffset? CreatedTime { get; set; }
+        public DateTimeOffset? LastUpdated { get; set; }
+        public DateTimeOffset? DeleteTime { get; set; }
 
         public  ICollection<CourseLesson>? CourseLessons { get; set; }
 

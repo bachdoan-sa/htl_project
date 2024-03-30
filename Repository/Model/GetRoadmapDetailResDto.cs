@@ -19,7 +19,7 @@ namespace Repository.Model
         public double? RoadmapPrice { get; set; }
         public string? CareerId { get; set; }
         public string? CareerName { get; set; }
-        public int CountCourse { get; set; }
+        public int? CountCourse { get; set; }
         public ICollection<Section>? Sections { get; set; }
         public List<GetListCourseResDto>? ListCourse {  get; set; }
     }

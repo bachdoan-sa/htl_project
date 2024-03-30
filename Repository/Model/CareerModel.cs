@@ -11,8 +11,8 @@ namespace Repository.Model
         public string? CareerName { get; set; }
         public string? Major { get; set; }
         public string? CareerStatus { get; set; }
-        public DateTimeOffset CreatedTime { get; set; }
-        public DateTimeOffset LastUpdated { get; set; }
-        public DateTimeOffset DeleteTime { get; set; }
+        public DateTimeOffset? CreatedTime { get; set; }
+        public DateTimeOffset? LastUpdated { get; set; }
+        public DateTimeOffset? DeleteTime { get; set; }
     }
 }

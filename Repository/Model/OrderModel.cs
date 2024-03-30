@@ -15,10 +15,10 @@ namespace Repository.Model
         public decimal? Total { get; set; }
         public string? OrderStatus { get; set; }
         public string? AccountId { get; set; }
-        public AccountModel Account { get; set; }
-        public DateTimeOffset CreatedTime { get; set; }
-        public DateTimeOffset LastUpdated { get; set; }
-        public DateTimeOffset DeleteTime { get; set; }
+        public AccountModel? Account { get; set; }
+        public DateTimeOffset? CreatedTime { get; set; }
+        public DateTimeOffset? LastUpdated { get; set; }
+        public DateTimeOffset? DeleteTime { get; set; }
 
     }
 }
