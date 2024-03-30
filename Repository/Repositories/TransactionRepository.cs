@@ -78,13 +78,18 @@ namespace Repository.Repositories
                 OrderId = order.Id,
             };
 
+            var roadmap = _context.Roadmaps.Where(_ => _.RoadmapKeyId.Equals(model.RoadmapKeyId)).FirstOrDefault();
+            if (roadmap == null)
+            {
+                throw new Exception("Not Found!");
+            }
             var driver = new Driver()
             {
                 StartTime = model.Driver.StartTime ?? DateTimeOffset.Now,
                 ExpectedEndTime = model.Driver.ExpectedEndTime ?? DateTimeOffset.Now,
                 Type = model.Driver.Type,
                 DriverStatus = model.Driver.DriverStatus,
-                RoadmapId = model.Driver.RoadmapId,
+                RoadmapId = roadmap.Id,
             };
 
             var orderDetail = new OrderDetail()
