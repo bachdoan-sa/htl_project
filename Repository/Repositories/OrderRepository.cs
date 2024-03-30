@@ -107,11 +107,14 @@ namespace Repository.Repositories
             return acc;
         }
 
-        public Task<List<Order>> GetMonthlyOrders()
+        public async Task<List<Order>> GetMonthlyOrders()
         {
-            var currentMounth = DateTime.Now.Month;
-            var data = _context.Orders.Where(_ => _.CreatedTime.Month == currentMounth).ToList();
-            return Task.FromResult(data);
+            var now = DateTime.Now;
+            var data = await _context.Orders
+                .Where(o => o.CreatedTime.Month == now.Month && o.CreatedTime.Year == now.Year)
+                .ToListAsync();
+
+            return data;
         }
     }
 

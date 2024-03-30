@@ -12,7 +12,7 @@ namespace Repository.Entities.Base
         protected BaseEntity()
         {
             Id = Guid.NewGuid().ToString("N");
-            CreatedTime = LastUpdated = DateTimeOffset.Now;
+            CreatedTime = LastUpdated = DateTimeOffset.UtcNow;
         }
         [Key]
         public string Id { get; set; }

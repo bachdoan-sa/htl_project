@@ -1,10 +1,5 @@
 ﻿using Repository.Entities;
 using Repository.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository.Repositories.IRepositories
 {
@@ -20,6 +15,6 @@ namespace Repository.Repositories.IRepositories
         Task<int> GetTotalOrderCount();
         Task<List<OrderModel>> GetRecentOrdersWithUsers(int count);
         Task<List<Order>> GetAllByAccountId(string id);
-        public Task<List<Order>> GetMonthlyOrders();
+        Task<List<Order>> GetMonthlyOrders();
     }
 }

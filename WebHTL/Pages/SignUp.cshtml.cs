@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repository.Entities;
 using Repository.Model;
 using Repository.Services.IServices;
+using System.Security.Principal;
 
 namespace WebHTL.Pages
 {
@@ -38,6 +39,8 @@ namespace WebHTL.Pages
                 Work = "student"
                 
             };
+            account.CreatedTime = DateTimeOffset.Now;
+            account.LastUpdated = DateTimeOffset.Now;
             var result = _accountService.Add(account).Result;
 
             if (result == null)

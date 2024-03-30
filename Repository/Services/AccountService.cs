@@ -33,7 +33,7 @@ namespace Repository.Services
         }
         public Task<AccountModel> Add(AccountModel model)
         {
-            var existingAccount = _accountRepository.GetByEmail(model.Email);
+            var existingAccount = _accountRepository.GetByEmail(model.Email).Result;
             if (existingAccount != null)
             {
                 return Task.FromResult<AccountModel>(null);
@@ -176,6 +176,12 @@ namespace Repository.Services
         public async Task<int> GetNewUserCountForCurrentMonth()
         {
             return await _accountRepository.GetNewUserCountForCurrentMonth();
+        }
+        public async Task<List<AccountModel>> GetNewUsersForCurrentMonth()
+        {
+            var newUsersEntities = await _accountRepository.GetNewUsersForCurrentMonth();
+            var newUsersModels = _mapper.Map<List<AccountModel>>(newUsersEntities);
+            return newUsersModels;
         }
     }
 }
