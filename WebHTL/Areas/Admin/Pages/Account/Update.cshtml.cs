@@ -38,10 +38,9 @@ namespace WebHTL.Pages.Areas.Admin.Account
                 return Page();
             }
 
-            // You might want to perform some validation or sanitization before updating
             await _accountService.Update(Account);
 
-            return RedirectToPage("./Index"); // Redirect to some page after successful update
+            return RedirectToPage("./Index"); 
         }
     }
 }

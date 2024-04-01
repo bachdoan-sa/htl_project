@@ -51,19 +51,15 @@
                                     <td>@item.ReponseTime</td>
                                      <td>@item.CreatedTime?.ToString("dd-MM-yyyy")</td>
                                     <td>@item.LastUpdated?.ToString("dd-MM-yyyy")</td>
-                                     <td>
-                                         @if (item.DeleteTime != null)
-                                         {
-                                             <span class="text-danger badge badge-danger text-uppercase fs-6">Deleted</span>
-                                         }
-                                         else
-                                         {
-                                             <span class="text-success badge badge-sucess text-uppercase fs-6">Available</span>
-                                         }
-                                     </td>
-                                     <td>
-                                         <a href="#" class="btn btn-primary">Update</a>
-                                         <a href="#" class="btn btn-danger">Delete</a>
+                                    <td>
+                                        @if (item.DeleteTime != null)
+                                        {
+                                            <span class="text-danger badge badge-danger text-uppercase fs-6">Deleted</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-success badge badge-sucess text-uppercase fs-6">Available</span>
+                                        }
                                     </td>
                                 </tr>
                             }

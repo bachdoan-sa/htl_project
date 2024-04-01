@@ -16,13 +16,12 @@ namespace Repository.Repositories
         }
         public Task<Account> GetById(string id)
         {
-            var acc = _context.Accounts.Where(_ => _.Id == id).FirstOrDefault();
+            var acc = _context.Accounts.FirstOrDefault(a => a.Id == id);
             if (acc != null)
             {
                 return Task.FromResult(acc);
-
             }
-            throw new Exception("NotFound!");
+            return Task.FromResult<Account>(null);
         }
         public Task<List<Account>> GetAll()
         {
