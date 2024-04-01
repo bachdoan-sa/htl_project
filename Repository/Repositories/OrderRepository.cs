@@ -67,7 +67,7 @@ namespace Repository.Repositories
         }
         public async Task<decimal> GetTotalRevenue()
         {
-            var totalRevenue = await _context.Orders
+            var totalRevenue = await _context.Orders.Where(_ => _.DeleteDate == null)
                 .Where(o => (o.OrderStatus != null && o.OrderStatus.ToLower().Equals("done")))
                 .SumAsync(o => o.Total); // Assuming o.Total is of type `decimal`
 
@@ -75,14 +75,14 @@ namespace Repository.Repositories
         }
         public async Task<int> GetTotalOrders()
         {
-            var data = await _context.Orders.Where(o => (o.OrderStatus != null && o.OrderStatus.ToLower().Equals("done"))).CountAsync();
+            var data = await _context.Orders.Where(_ => _.DeleteDate == null).Where(o => (o.OrderStatus != null && o.OrderStatus.ToLower().Equals("done"))).CountAsync();
             return data;
         }
         public async Task<decimal> GetTotalRevenueForCurrentMonth()
         {
             var now = DateTimeOffset.Now;
             var firstDayOfMonth = new DateTimeOffset(new DateTime(now.Year, now.Month, 1));
-            var totalRevenue = await _context.Orders
+            var totalRevenue = await _context.Orders.Where(_ => _.DeleteDate == null)
                 .Where(o => o.CreatedTime >= firstDayOfMonth && o.CreatedTime < firstDayOfMonth.AddMonths(1))
                 .SumAsync(o => o.Total); // Assuming o.Total is of type `decimal`
 
@@ -93,7 +93,7 @@ namespace Repository.Repositories
         {
             var now = DateTimeOffset.Now;
             var firstDayOfMonth = new DateTimeOffset(new DateTime(now.Year, now.Month, 1));
-            var totalOrders = await _context.Orders
+            var totalOrders = await _context.Orders.Where(_ => _.DeleteDate == null)
                 .CountAsync(o => o.CreatedTime >= firstDayOfMonth && o.CreatedTime < firstDayOfMonth.AddMonths(1));
 
             return totalOrders;
@@ -101,11 +101,11 @@ namespace Repository.Repositories
 
         public async Task<int> GetTotalOrderCount()
         {
-            return await _context.Orders.CountAsync();
+            return await _context.Orders.Where(_ => _.DeleteDate == null).CountAsync();
         }
         public async Task<List<OrderModel>> GetRecentOrdersWithUsers(int count)
         {
-            var orderEntities = await _context.Orders
+            var orderEntities = await _context.Orders.Where(_ => _.DeleteDate == null)
                             .OrderByDescending(o => o.CreatedTime)
                             .Take(count)
                             .Include(o => o.Account)
@@ -124,11 +124,11 @@ namespace Repository.Repositories
         public async Task<List<Order>> GetMonthlyOrders(int? month)
         {
             var now = DateTime.Now;
-            if(month == null)
+            if (month == null)
             {
-                month= now.Month;
+                month = now.Month;
             }
-            var data = await _context.Orders
+            var data = await _context.Orders.Where(_ => _.DeleteDate == null)
                 .Where(o => o.CreatedTime.Month == month && o.CreatedTime.Year == now.Year)
                 .ToListAsync();
 

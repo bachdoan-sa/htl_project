@@ -74,14 +74,14 @@ namespace Repository.Repositories
         }
         public async Task<int> GetAllUserCount()
         {
-            var newUserCount = await _context.Accounts.CountAsync();
+            var newUserCount = await _context.Accounts.Where(_ => _.DeleteDate == null).CountAsync();
             return newUserCount;
         }
         public async Task<int> GetNewUserCountForCurrentMonth()
         {
             var now = DateTimeOffset.Now;
             var firstDayOfMonth = new DateTimeOffset(new DateTime(now.Year, now.Month, 1));
-            var newUserCount = await _context.Accounts
+            var newUserCount = await _context.Accounts.Where(_=>_.DeleteDate == null)
                 .CountAsync(a => a.CreatedTime >= firstDayOfMonth && a.CreatedTime < firstDayOfMonth.AddMonths(1));
 
             return newUserCount;
@@ -95,13 +95,13 @@ namespace Repository.Repositories
             {
                 month = now.Month;
             }
-            var newUsers = await _context.Accounts.Where(a => a.CreatedTime.Month == month && a.CreatedTime.Year == now.Year).ToListAsync();
+            var newUsers = await _context.Accounts.Where(_ => _.DeleteDate == null).Where(a => a.CreatedTime.Month == month && a.CreatedTime.Year == now.Year).ToListAsync();
 
             return newUsers;
         }
         public async Task<int> GetTotalNewUserCount()
         {
-            var totalNewUserCount = await _context.Accounts.CountAsync();
+            var totalNewUserCount = await _context.Accounts.Where(_ => _.DeleteDate == null).CountAsync();
             return totalNewUserCount;
         }
     }

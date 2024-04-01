@@ -50,10 +50,10 @@ namespace WebHTL.Pages.Areas.Admin.Transaction
                 Dto.Order.AccountId = account.Id;
                 Dto.Driver.DriverStatus = "Active";
                 Dto.Transaction.Amount = Amount ?? 0;
-                Dto.Transaction.TransactionStatus = "ok";
+                Dto.Transaction.TransactionStatus = "Ok";
                 Dto.Order.Total = (decimal) (Amount ?? 0);
-                Dto.Order.OrderStatus = "done";
-                Dto.OrderDetail.OrderDetailStatus = "done";
+                Dto.Order.OrderStatus = "Done";
+                Dto.OrderDetail.OrderDetailStatus = "Done";
                 Dto.OrderDetail.Cost = (decimal) (Amount ?? 0);
                 // Map DTO to model
                 var result = await _transactionService.AddByhand(Dto);
