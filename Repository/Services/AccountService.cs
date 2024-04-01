@@ -188,5 +188,9 @@ namespace Repository.Services
             var data =  await _accountRepository.GetAllUserCount();
             return data;
         }
+        public async Task<int> GetTotalNewUserCount()
+        {
+            return await _accountRepository.GetTotalNewUserCount();
+        }
     }
 }

@@ -21,6 +21,8 @@ namespace WebAppRazorpage.Pages.Areas.Admin
         public decimal TotalRevenue { get; set; } = 0;
         public int TotalOrders { get; set; } = 0;
         public int TotalStores { get; set; } = 0;
+        public int TotalNewUsers { get; set; } = 0;
+        
         public int TotalUsers { get; set; } = 0;
         public List<OrderModel> RecentOrdersWithUsers { get; set; } = new List<OrderModel>();
         public List<OrderModel> MounthlyOrders { get; set; } = new List<OrderModel>();

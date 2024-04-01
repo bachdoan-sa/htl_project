@@ -22,5 +22,7 @@ namespace Repository.Repositories.IRepositories
         Task<int> GetAllUserCount();
         Task<int> GetNewUserCountForCurrentMonth();
         Task<List<Account>> GetNewUsersForCurrentMonth(int? month = null);
+        
+        Task<int> GetTotalNewUserCount();
     }
 }

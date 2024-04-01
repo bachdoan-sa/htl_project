@@ -25,5 +25,6 @@ namespace Repository.Services.IServices
         Task<int> GetAllUserCount();
         Task<int> GetNewUserCountForCurrentMonth();
         Task<List<AccountModel>> GetNewUsersForCurrentMonth(int? month = null);
+        Task<int> GetTotalNewUserCount();
     }
 }
