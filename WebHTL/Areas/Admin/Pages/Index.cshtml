@@ -2,6 +2,8 @@
 @model WebAppRazorpage.Pages.Areas.Admin.IndexModel
 @{
     Layout = "_AdminLayout";
+    var thisMonth = DateTime.UtcNow.Month;
+    var lastMonth = thisMonth - 1;
 }
 <div class="row">
     <div class="col-md-3">
@@ -50,7 +52,7 @@
                     <span><i class="fa fa-user f-s-40 color-danger"></i></span>
                 </div>
                 <div class="media-body media-text-right">
-                    <h2>@Model.TotalNewUsers</h2> <!-- Cập nhật giá trị ở đây -->
+                    <h2>@Model.TotalUsers</h2> <!-- Cập nhật giá trị ở đây -->
                     <p class="m-b-0">Total User</p>
                 </div>
             </div>
@@ -64,7 +66,17 @@
     <div class="col-lg-8">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Extra Area Chart</h4>
+                <div class="card-title d-flex justify-content-between">
+                    <h4>Biểu đồ người dùng và đơn hàng mới theo tháng:</h4>
+                    <div>
+                        <form method="post">
+                            <select class="form-control" asp-for="MonthChart" id="cars" onchange="this.form.submit()">
+                                <option value="@thisMonth">Tháng này</option>
+                                <option value="@lastMonth">Tháng trước</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
                 <div id="extra-area-chart-mounthly"></div>
             </div>
         </div>
@@ -87,7 +99,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <!-- New Users Progress Bar -->
                 <p class="m-t-30 f-w-600">New Users<span class="pull-right" id="usersPercentage"></span></p>
                 <div class="">
@@ -111,7 +123,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-title">
-                <h4>Recent Orders </h4>
+                <h4>New 4 Orders </h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -173,44 +185,44 @@
     <!-- Chart -->
     <script>
         $(function () {
-        "use strict";
+            "use strict";
 
-        // Prepare data for the chart
-        var chartData = @Html.Raw(Json.Serialize(ViewData["ChartData"])); // This will hold our chart data
+            // Prepare data for the chart
+            var chartData = @Html.Raw(Json.Serialize(ViewData["ChartData"])); // This will hold our chart data
 
-        // Initialize chart with the prepared data
-        Morris.Area({
-            element: 'extra-area-chart-mounthly',
-            data: chartData,
-            xkey: 'period',
-            ykeys: ['orders', 'users'],
-            labels: ['Orders', 'New Users'],
-            pointSize: 0,
-            fillOpacity: 0.8,
-            // pointStrokeColors: ['#b4becb', '#01c0c8'],
-            behaveLikeLine: true,
-            gridLineColor: '#e0e0e0',
-            lineWidth: 0,
-            smooth: true,
-            hideHover: 'auto',
-            lineColors: ['#5867dd', '#00c292'],
-            resize: true,
-            parseTime: false, // Set to false because we are providing dates in 'YYYY-MM-DD' format
-            dateFormat: function (x) { return new Date(x).toLocaleDateString(); },
-            yLabelFormat: function(y) { return y.toFixed(0); }
-        });
+            // Initialize chart with the prepared data
+            Morris.Area({
+                element: 'extra-area-chart-mounthly',
+                data: chartData,
+                xkey: 'period',
+                ykeys: ['orders', 'users'],
+                labels: ['Orders', 'New Users'],
+                pointSize: 0,
+                fillOpacity: 0.8,
+                // pointStrokeColors: ['#b4becb', '#01c0c8'],
+                behaveLikeLine: true,
+                gridLineColor: '#e0e0e0',
+                lineWidth: 0,
+                smooth: true,
+                hideHover: 'auto',
+                lineColors: ['#5867dd', '#00c292'],
+                resize: true,
+                parseTime: false, // Set to false because we are providing dates in 'YYYY-MM-DD' format
+                dateFormat: function (x) { return new Date(x).toLocaleDateString(); },
+                yLabelFormat: function (y) { return y.toFixed(0); }
+            });
         });
     </script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Lấy giá trị phần trăm từ ViewData
             var ordersPercentage = '@ViewData["OrdersPercentage"]%';
             var usersPercentage = '@ViewData["UsersPercentage"]%';
-    
+
             // Cập nhật giao diện cho Orders
             $('#ordersPercentage').text(ordersPercentage);
             $('#ordersProgressBar').css('width', ordersPercentage);
-    
+
             // Cập nhật giao diện cho New Users
             $('#usersPercentage').text(usersPercentage);
             $('#usersProgressBar').css('width', usersPercentage);

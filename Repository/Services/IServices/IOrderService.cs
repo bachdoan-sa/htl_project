@@ -21,7 +21,7 @@ namespace Repository.Services.IServices
         Task<decimal> GetTotalRevenueForCurrentMonth();
         Task<int> GetTotalOrdersForCurrentMonth();
         Task<int> GetTotalOrderCount();
-        Task<List<OrderModel>> GetMonthlyOrders();
+        Task<List<OrderModel>> GetMonthlyOrders(int? month = null);
 
         Task<List<OrderModel>> GetRecentOrdersWithUsers(int count);
         Task<List<OrderModel>> GetAllByAccountId(string id);

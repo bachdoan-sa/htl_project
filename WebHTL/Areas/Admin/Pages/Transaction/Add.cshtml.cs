@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+Ôªøusing Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Repository.Entities;
@@ -19,7 +19,9 @@ namespace WebHTL.Pages.Areas.Admin.Transaction
         }
 
         [BindProperty]
-        public SetTransactionDto Dto { get; set; }
+        public SetTransactionDto Dto { get; set; } = new SetTransactionDto();
+        [BindProperty]
+        public float? Amount { get; set; }
 
         [BindProperty]
         public string Email { get; set; }
@@ -40,12 +42,19 @@ namespace WebHTL.Pages.Areas.Admin.Transaction
                 var account = await _accountService.GetByEmail(Email);
                 if (account == null)
                 {
-                    ModelState.AddModelError(string.Empty, "KhÙng tÏm th?y t‡i kho?n v?i email ?„ nh?p.");
+                    ModelState.AddModelError(string.Empty, "Kh√¥ng t√¨m th·∫•y t√†i kho·∫£n v·ªõi email ƒë√£ nh·∫≠p.");
                     return Page();
                 }
 
-                // G·n ID c?a t‡i kho?n v‡o Order
+                // G√°n ID c?a t√†i kho?n v√†o Order
                 Dto.Order.AccountId = account.Id;
+                Dto.Driver.DriverStatus = "Active";
+                Dto.Transaction.Amount = Amount ?? 0;
+                Dto.Transaction.TransactionStatus = "ok";
+                Dto.Order.Total = (decimal) (Amount ?? 0);
+                Dto.Order.OrderStatus = "done";
+                Dto.OrderDetail.OrderDetailStatus = "done";
+                Dto.OrderDetail.Cost = (decimal) (Amount ?? 0);
                 // Map DTO to model
                 var result = await _transactionService.AddByhand(Dto);
 

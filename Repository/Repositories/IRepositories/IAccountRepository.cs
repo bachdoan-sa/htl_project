@@ -19,7 +19,8 @@ namespace Repository.Repositories.IRepositories
         Task<Account> Update(Account roadmap);
         Task<string> Delete(string id);
         Task SetResetToken(string email, string token);
+        Task<int> GetAllUserCount();
         Task<int> GetNewUserCountForCurrentMonth();
-        Task<List<Account>> GetNewUsersForCurrentMonth();
+        Task<List<Account>> GetNewUsersForCurrentMonth(int? month = null);
     }
 }

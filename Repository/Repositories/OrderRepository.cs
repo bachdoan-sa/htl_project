@@ -6,6 +6,7 @@ using Repository.Model;
 using Repository.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,6 +65,19 @@ namespace Repository.Repositories
             _context.SaveChanges();
             return Task.FromResult(order);
         }
+        public async Task<decimal> GetTotalRevenue()
+        {
+            var totalRevenue = await _context.Orders
+                .Where(o => (o.OrderStatus != null && o.OrderStatus.ToLower().Equals("done")))
+                .SumAsync(o => o.Total); // Assuming o.Total is of type `decimal`
+
+            return totalRevenue;
+        }
+        public async Task<int> GetTotalOrders()
+        {
+            var data = await _context.Orders.Where(o => (o.OrderStatus != null && o.OrderStatus.ToLower().Equals("done"))).CountAsync();
+            return data;
+        }
         public async Task<decimal> GetTotalRevenueForCurrentMonth()
         {
             var now = DateTimeOffset.Now;
@@ -95,7 +109,7 @@ namespace Repository.Repositories
                             .OrderByDescending(o => o.CreatedTime)
                             .Take(count)
                             .Include(o => o.Account)
-        .                   ToListAsync();
+        .ToListAsync();
 
             var orderModels = _mapper.Map<List<OrderModel>>(orderEntities);
             return orderModels;
@@ -107,11 +121,15 @@ namespace Repository.Repositories
             return acc;
         }
 
-        public async Task<List<Order>> GetMonthlyOrders()
+        public async Task<List<Order>> GetMonthlyOrders(int? month)
         {
             var now = DateTime.Now;
+            if(month == null)
+            {
+                month= now.Month;
+            }
             var data = await _context.Orders
-                .Where(o => o.CreatedTime.Month == now.Month && o.CreatedTime.Year == now.Year)
+                .Where(o => o.CreatedTime.Month == month && o.CreatedTime.Year == now.Year)
                 .ToListAsync();
 
             return data;

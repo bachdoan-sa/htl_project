@@ -60,6 +60,17 @@ namespace Repository.Repositories
         }
         public Task<string> AddbyHand(SetTransactionDto model)
         {
+            var roadmap = _context.Roadmaps.Where(_ => _.RoadmapKeyId.Equals(model.RoadmapKeyId)).FirstOrDefault();
+            if (roadmap == null)
+            {
+                throw new Exception("Road Map Key ID khong tim thay!");
+            }
+            var check = _context.OrderDetails.Include(y => y.Order).Include(x => x.Driver).ThenInclude(_ => _.Roadmap)
+                .Where(_ => (_.Driver.RoadmapId == roadmap.Id) && (_.Order.AccountId.Equals(model.Order.AccountId))).Any();
+            if (check)
+            {
+                throw new Exception($"Tai khoan nay da co khoa hoc {model.RoadmapKeyId}");
+            }
             var order = new Order()
             {
                 Total = model.Order.Total ?? 0,
@@ -78,11 +89,7 @@ namespace Repository.Repositories
                 OrderId = order.Id,
             };
 
-            var roadmap = _context.Roadmaps.Where(_ => _.RoadmapKeyId.Equals(model.RoadmapKeyId)).FirstOrDefault();
-            if (roadmap == null)
-            {
-                throw new Exception("Not Found!");
-            }
+            
             var driver = new Driver()
             {
                 StartTime = model.Driver.StartTime ?? DateTimeOffset.Now,

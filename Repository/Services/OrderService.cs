@@ -79,17 +79,19 @@ namespace Repository.Services
 
         public Task<decimal> GetTotalRevenue()
         {
-            throw new NotImplementedException();
+            var data = _orderRepository.GetTotalRevenue();
+            return data;
         }
 
         public Task<int> GetTotalOrders()
         {
-            throw new NotImplementedException();
+            var data = _orderRepository.GetTotalOrders();
+            return data;
         }
 
-        public Task<List<OrderModel>> GetMonthlyOrders()
+        public Task<List<OrderModel>> GetMonthlyOrders(int? month)
         {
-            var data = _orderRepository.GetMonthlyOrders().Result;
+            var data = _orderRepository.GetMonthlyOrders(month).Result;
             var list = _mapper.Map<List<OrderModel>>(data);
             return Task.FromResult(list);
         }

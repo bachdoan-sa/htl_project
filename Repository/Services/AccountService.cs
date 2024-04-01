@@ -177,11 +177,16 @@ namespace Repository.Services
         {
             return await _accountRepository.GetNewUserCountForCurrentMonth();
         }
-        public async Task<List<AccountModel>> GetNewUsersForCurrentMonth()
+        public async Task<List<AccountModel>> GetNewUsersForCurrentMonth(int? month = null)
         {
-            var newUsersEntities = await _accountRepository.GetNewUsersForCurrentMonth();
+            var newUsersEntities = await _accountRepository.GetNewUsersForCurrentMonth(month);
             var newUsersModels = _mapper.Map<List<AccountModel>>(newUsersEntities);
             return newUsersModels;
+        }
+        public async Task<int> GetAllUserCount()
+        {
+            var data =  await _accountRepository.GetAllUserCount();
+            return data;
         }
     }
 }

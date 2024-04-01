@@ -22,7 +22,8 @@ namespace Repository.Services.IServices
         Task SendResetPasswordEmailAsync(string email);
         Task<bool> VerifyResetTokenAsync(string email, string token);
         Task ResetPasswordAsync(string email, string newPassword);
+        Task<int> GetAllUserCount();
         Task<int> GetNewUserCountForCurrentMonth();
-        Task<List<AccountModel>> GetNewUsersForCurrentMonth();
+        Task<List<AccountModel>> GetNewUsersForCurrentMonth(int? month = null);
     }
 }

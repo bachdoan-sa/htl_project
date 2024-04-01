@@ -57,7 +57,7 @@ namespace Repository.Repositories
 
         public async Task<Account?> GetByEmail(string email)
         {
-            return await _context.Accounts.FirstOrDefaultAsync(account => account.Email == email);
+            return await _context.Accounts.FirstOrDefaultAsync(account => account.Email.ToLower() == email.ToLower());
         }
 
         public async Task SetResetToken(string email, string token)
@@ -72,6 +72,11 @@ namespace Repository.Repositories
 
             await _context.SaveChangesAsync();
         }
+        public async Task<int> GetAllUserCount()
+        {
+            var newUserCount = await _context.Accounts.CountAsync();
+            return newUserCount;
+        }
         public async Task<int> GetNewUserCountForCurrentMonth()
         {
             var now = DateTimeOffset.Now;
@@ -81,13 +86,16 @@ namespace Repository.Repositories
 
             return newUserCount;
         }
-        public async Task<List<Account>> GetNewUsersForCurrentMonth()
+        public async Task<List<Account>> GetNewUsersForCurrentMonth(int? month)
         {
+
             var now = DateTimeOffset.Now;
             var firstDayOfMonth = new DateTimeOffset(new DateTime(now.Year, now.Month, 1));
-            var newUsers = await _context.Accounts
-                .Where(a => a.CreatedTime >= firstDayOfMonth && a.CreatedTime < firstDayOfMonth.AddMonths(1))
-                .ToListAsync();
+            if(month == null)
+            {
+                month = now.Month;
+            }
+            var newUsers = await _context.Accounts.Where(a => a.CreatedTime.Month == month && a.CreatedTime.Year == now.Year).ToListAsync();
 
             return newUsers;
         }
