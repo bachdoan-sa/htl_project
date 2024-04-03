@@ -1,29 +1,38 @@
-﻿@page "{CourseId}"
+﻿@page "{CourseId?}"
 @model WebHTL.Pages.Profile.ProfileCourseModel
 @{
     Layout = "_Layout";
+    var data = Model.CourseModules;
 }
-
+<style>
+    .lesson-btn {
+        text-align: left;
+        background-color: #CDE4FF;
+        width: 100%;
+    }
+</style>
 <div class="d-flex gap-8 pb-4 m-5-30" style="margin-top:120px">
     <div class="w-25 hidden d-block card">
         <div class="card-header">
             <p class="card-title">Section</p>
         </div>
         <div class="card-body">
-            @if (Model.CourseModules != null && Model.CourseModules.Any())
+            @if (data != null && data.Any())
             {
-                @foreach (var module in Model.CourseModules)
-                {
-                    <h5>@module.ModuleName</h5>
-                    <ul>
-                        @foreach (var lesson in module.CourseLessons)
-                        {
-                            <li>
-                                <a asp-page="/ProfileCourse" asp-route-CourseLessonId="@lesson.Id" id="CourseLessonId">@lesson.LessonName</a>
-                            </li>
-                        }
-                    </ul>
-                }
+                <form method="post">
+                    @foreach (var module in data)
+                    {
+                        <h5>@module.ModuleName</h5>
+                        <ul style=" padding: 0; margin: 0;">
+                            @foreach (var lesson in module.CourseLessons)
+                            {
+                                <li style=" list-style-type: none; margin:5px">
+                                    <button class="btn lesson-btn" type="submit" name="CourseLessonId" value="@lesson.Id">@lesson.LessonName</button>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </form>
             }
             else
             {
@@ -36,11 +45,11 @@
 
         @if (Model.Lesson != null)
         {
-            <div class="card-header">
+            <div class="card-header" id="lesson-title">
                 <h3>@Model.Lesson.LessonName</h3>
             </div>
-            <div class="card-body">
-                <p>@Model.Lesson.LessonURL</p>
+            <div class="card-body" id="lesson-body">
+                @Html.Raw(Model.Lesson.LessonURL);
             </div>
         }
         else

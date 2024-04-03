@@ -18,37 +18,32 @@ namespace WebHTL.Pages.Profile
             _courseLessonService = courseLessonService;
             _courseService = courseService;
         }
-        public List<CourseModuleModel> CourseModules { get; private set; }
-        public CourseLessonModel Lesson { get; private set; }
+        [BindProperty]
+        public List<CourseModuleModel>? CourseModules { get; set; }
+        [BindProperty]
+        public CourseLessonModel? Lesson { get; set; }
 
-        [BindProperty(Name = "CourseLessonId")]
-        public string CourseLessonId { get; set; }
+        [BindProperty]
+        public string? CourseLessonId { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string CourseId, string CourseLessonId, string CourseModulesId)
+        public IActionResult OnGet(string? CourseId = "")
         {
-            string a = "1"; // can sua sau nay'
-            CourseModules = await _courseModuleService.GetByCourseId(CourseId);
-
-
-            if (CourseId == null)
+            if(string.IsNullOrEmpty(CourseId))
             {
-                CourseId = (await _courseService.GetAll()).FirstOrDefault()?.Id;
+                return Redirect("/Profile/ProfileProduct");
             }
-
-            if (CourseModulesId == null)
-            {
-                CourseModulesId = (await _courseModuleService.GetByCourseId(CourseId)).FirstOrDefault()?.Id;
-            }
-
-            if (CourseLessonId == null)
-            {
-                CourseLessonId = (await _courseLessonService.GetCourseLessonByCourseModuleId(CourseModulesId))?.Id;
-            }
-
-            Lesson = await _courseLessonService.GetById(CourseLessonId);
+            CourseModules =  _courseModuleService.GetByCourseId(CourseId).Result;
             return Page();
         }
-
+        public IActionResult OnPost(string? CourseId = "")
+        {
+            if (CourseLessonId == null)
+            {
+                return OnGet(CourseId);
+            }
+            Lesson = _courseLessonService.GetById(CourseLessonId).Result;
+            return OnGet(CourseId);
+        }
 
     }
 }
