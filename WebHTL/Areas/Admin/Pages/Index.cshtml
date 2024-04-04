@@ -4,16 +4,18 @@
     Layout = "_AdminLayout";
     var thisMonth = DateTime.UtcNow.Month;
     var lastMonth = thisMonth - 1;
+
 }
 <div class="row">
     <div class="col-md-3">
         <div class="card p-30">
             <div class="media">
                 <div class="media-left meida media-middle">
-                    <span><i class="fa fa-usd f-s-40 color-primary"></i></span>
+                    <span><i class="fa fa-money f-s-40 color-primary"></i></span>
                 </div>
                 <div class="media-body media-text-right">
-                    <h2>@Model.TotalRevenue.ToString("C")</h2> <!-- Cập nhật giá trị ở đây -->
+                    <h2 style="font-size: 15px;"><span style="font-size: 23px;color:black;">@Model.TotalRevenue.ToString("#,###")</span> VND</h2>
+                    @*<h2>@Model.TotalRevenue.ToString("C",System.Globalization.CultureInfo.GetCultureInfo("vi-VN"))</h2>*@ <!-- Cập nhật giá trị ở đây -->
                     <p class="m-b-0">Total Revenue</p>
                 </div>
             </div>

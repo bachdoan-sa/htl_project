@@ -33,6 +33,10 @@ namespace WebHTL.Pages.Profile
                 return Redirect("/Profile/ProfileProduct");
             }
             CourseModules =  _courseModuleService.GetByCourseId(CourseId).Result;
+            if(Lesson == null)
+            {
+                Lesson =  CourseModules[0].CourseLessons.FirstOrDefault();
+            }
             return Page();
         }
         public IActionResult OnPost(string? CourseId = "")

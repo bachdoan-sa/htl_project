@@ -4,7 +4,22 @@
     Layout = "_AdminLayout";
     var list = Model.CourseLessons;
 }
-   
+<style>
+    .limit-div {
+        width: 400px;
+        height: 200px;
+        overflow: hidden;
+        border: 1px solid #ccc;
+    }
+
+    .limit-text {
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 33ch;
+        text-overflow: ellipsis;
+    }
+</style>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -27,13 +42,13 @@
                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                 <th>Name</th>
+                                <th>Name</th>
                                 <th>Lesson Target</th>
                                 <th>LessonURL</th>
-                                 <th>Create Date</th>
-                                 <th>Last Update</th>
-                                 <th>Status</th>
-                                 <th>Actions</th>
+                                <th>Create Date</th>
+                                <th>Last Update</th>
+                                <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,22 +56,22 @@
                             {
                                 <tr>
                                     <td>@item.LessonName</td>
-                                    <td>@item.LessonTarget</td>
-                                    <td>@item.LessonURL</td>
-                                     <td>@item.CreatedTime?.ToString("dd-MM-yyyy")</td>
-                                     <td>@item.LastUpdated?.ToString("dd-MM-yyyy")</td>
-                                     <td>
-                                         @if (item.DeleteTime != null)
-                                         {
-                                             <span class="text-danger badge badge-danger text-uppercase fs-6">Deleted</span>
+                                    <td class="limit-text">@item.LessonTarget</td>
+                                    <td><div class="limit-div">@Html.Raw(@item.LessonURL)</div></td>
+                                    <td>@item.CreatedTime?.ToString("dd-MM-yyyy")</td>
+                                    <td>@item.LastUpdated?.ToString("dd-MM-yyyy")</td>
+                                    <td>
+                                        @if (item.DeleteTime != null)
+                                        {
+                                            <span class="text-danger badge badge-danger text-uppercase fs-6">Deleted</span>
                                         }
-                                         else
-                                         {
-                                             <span class="text-success badge badge-sucess text-uppercase fs-6">Available</span>
-                                         }
-                                     </td>
-                                     <td>
-                                         <a href="/Admin/CourseLesson/Update/@item.Id" class="btn btn-primary">Update</a>
+                                        else
+                                        {
+                                            <span class="text-success badge badge-sucess text-uppercase fs-6">Available</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a href="/Admin/CourseLesson/Update/@item.Id" class="btn btn-primary">Update</a>
                                     </td>
                                 </tr>
                             }

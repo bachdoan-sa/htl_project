@@ -19,7 +19,7 @@ namespace Repository.Model
         public DateTimeOffset? LastUpdated { get; set; }
         public DateTimeOffset? DeleteTime { get; set; }
 
-        public  ICollection<CourseLesson>? CourseLessons { get; set; }
+        public  ICollection<CourseLessonModel>? CourseLessons { get; set; }
 
     }
 }
